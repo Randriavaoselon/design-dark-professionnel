@@ -55,21 +55,21 @@ function App() {
       <Stats title="Bienvenue sur mon site" />
       <SolutionTitre />
       <Cooptation />
-      <Recrutement /> 
-      <OnboardingHero /> 
-      <Works /> 
-      <WorkDetails /> 
-      <Opportunity /> 
-      <Overview /> 
-      <OverviewTwo /> 
-      <OverviewTree /> 
-      <WorksTwo /> 
-      <SectionNetwork /> 
+      <Recrutement />
+      <OnboardingHero />
+      <Works />
+      <WorkDetails />
+      <Opportunity />
+      <Overview />
+      <OverviewTwo />
+      <OverviewTree />
+      <WorksTwo />
+      <SectionNetwork />
       <NetworkGraph />
-      <SectionChoose /> 
+      <SectionChoose />
       <Resume />
-      <CopyRight /> 
-      <BoutonUp /> 
+      <CopyRight />
+      <BoutonUp />
     </div>
   );
 }
