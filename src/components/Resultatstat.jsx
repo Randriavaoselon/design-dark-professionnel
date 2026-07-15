@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Resultatstat.css';
 
@@ -18,9 +18,7 @@ function buildConnectorPath(startX, point) {
   return `M ${startX} 0 L ${cornerStartX} 0 Q ${point.x} 0 ${point.x} ${cornerEndY} L ${point.x} ${point.y}`;
 }
 
-function useInViewOnce(
-  options = { threshold: 0.4, rootMargin: '-15% 0px -15% 0px' }
-) {
+function useInViewOnce(options = { threshold: 0.5 }) {
   const ref = useRef(null);
   const [isInView, setIsInView] = useState(false);
 
@@ -53,6 +51,132 @@ function useInViewOnce(
   return [ref, isInView];
 }
 
+/* ==========================================================================
+   Compteur animé pour les valeurs des cards ("1200+", "98%", "15", "4.5%"...)
+   ========================================================================== */
+
+/**
+ * Sépare une valeur affichée en préfixe (texte éventuel avant le nombre),
+ * nombre exploitable, nombre de décimales à conserver, et suffixe
+ * ("+", "%", " ans", etc.).
+ * Retourne null si la valeur ne contient pas de nombre exploitable
+ * (dans ce cas on l'affiche telle quelle, sans animation).
+ */
+function parseStatValue(rawValue) {
+  const str = String(rawValue).trim();
+  const match = str.match(/^([^\d]*)(\d+(?:[.,]\d+)?)(.*)$/);
+
+  if (!match) return null;
+
+  const [, prefix, numberStr, suffix] = match;
+  const normalized = numberStr.replace(',', '.');
+  const decimalPart = normalized.split('.')[1];
+
+  return {
+    prefix,
+    suffix,
+    target: parseFloat(normalized),
+    decimals: decimalPart ? decimalPart.length : 0,
+  };
+}
+
+function easeOutCubic(t) {
+  return 1 - (1 - t) ** 3;
+}
+
+/**
+ * Anime un nombre de 0 jusqu'à `target` une fois `isActive` passé à true.
+ * Ne se relance jamais ensuite (compteur "une seule fois").
+ */
+function useCountUp(target, { isActive, duration = 1500, delay = 0 }) {
+  const [value, setValue] = useState(0);
+  const hasStartedRef = useRef(false);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    if (!isActive || hasStartedRef.current) return undefined;
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (prefersReducedMotion) {
+      hasStartedRef.current = true;
+      setValue(target);
+      return undefined;
+    }
+
+    hasStartedRef.current = true;
+    let startTime = null;
+
+    const tick = (timestamp) => {
+      if (startTime === null) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      setValue(target * easeOutCubic(progress));
+
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    const timeoutId = setTimeout(() => {
+      rafRef.current = requestAnimationFrame(tick);
+    }, delay * 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isActive, target, duration, delay]);
+
+  return value;
+}
+
+function CardValue({ value, color, isActive, delay }) {
+  const parsed = useMemo(() => parseStatValue(value), [value]);
+
+  const animatedValue = useCountUp(parsed ? parsed.target : 0, {
+    isActive: isActive && Boolean(parsed),
+    delay,
+  });
+
+  if (!parsed) {
+    return (
+      <span style={{ color }} className="card-value">
+        {value}
+      </span>
+    );
+  }
+
+  const displayNumber =
+    parsed.decimals > 0
+      ? animatedValue.toFixed(parsed.decimals)
+      : Math.round(animatedValue).toString();
+
+  return (
+    <span style={{ color }} className="card-value">
+      {parsed.prefix}
+      {displayNumber}
+      {parsed.suffix}
+    </span>
+  );
+}
+
+CardValue.propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  color: PropTypes.string,
+  isActive: PropTypes.bool,
+  delay: PropTypes.number,
+};
+
+CardValue.defaultProps = {
+  color: undefined,
+  isActive: false,
+  delay: 0,
+};
+
 const LINE_DRAW_DURATION = 0.55;
 
 const TRUNK_START_DELAY = 0.25;
@@ -64,10 +188,7 @@ const BRANCH_STAGGER = 0.12;
 function ResultatStat({ imageSrc, imageAlt, stats, HubIcon, animate }) {
   const middleIndex = stats.length % 2 === 1 ? (stats.length - 1) / 2 : -1;
 
-  const [sectionRef, selfInView] = useInViewOnce({
-    threshold: 0.4,
-    rootMargin: '-15% 0px -15% 0px',
-  });
+  const [sectionRef, selfInView] = useInViewOnce({ threshold: 0.5 });
   const isInView = animate || selfInView;
 
   const wrapperRef = useRef(null);
@@ -250,9 +371,12 @@ function ResultatStat({ imageSrc, imageAlt, stats, HubIcon, animate }) {
                   <span className="card-icon">
                     <Icon size={28} strokeWidth={2} />
                   </span>
-                  <span style={{ color }} className="card-value">
-                    {value}
-                  </span>
+                  <CardValue
+                    value={value}
+                    color={color}
+                    isActive={isInView}
+                    delay={cardDelay}
+                  />
                 </div>
               );
             })}
