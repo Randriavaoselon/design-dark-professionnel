@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "../../styles/Navbar.css";
 
 function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   const allMenuItems = [...leftMenuItems, ...rightMenuItems];
 
@@ -11,8 +16,73 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
     setIsMenuOpen(false);
   };
 
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const updateNavbar = () => {
+      const currentScrollY = window.scrollY;
+
+      setIsScrolled(currentScrollY > 20);
+
+      if (isMenuOpen) {
+        setIsHidden(false);
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
+        // scroll vers le bas au-delà du seuil -> on masque
+        setIsHidden(true);
+      } else {
+        // scroll vers le haut (ou en haut de page) -> on réaffiche
+        setIsHidden(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+      ticking.current = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking.current = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isMenuOpen]);
+
+  // --- Verrouille le scroll du body quand le panneau mobile est ouvert
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  // --- Ferme le menu mobile avec la touche Échap
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const navbarClasses = [
+    "navbar",
+    isScrolled ? "navbar--scrolled" : "",
+    isHidden ? "navbar--hidden" : "",
+    className || "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <section className={`navbar ${className || ""}`.trim()}>
+    <section className={navbarClasses}>
       <div className="navbar__container">
         <div className="navbar__row">
           {/* Menu gauche */}
@@ -166,18 +236,14 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
 Navbar.propTypes = {
   logo: PropTypes.shape({
     src: PropTypes.string,
-
     alt: PropTypes.string,
-
     text: PropTypes.string,
-
     href: PropTypes.string,
   }).isRequired,
 
   leftMenuItems: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-
       href: PropTypes.string.isRequired,
     })
   ),
@@ -185,16 +251,13 @@ Navbar.propTypes = {
   rightMenuItems: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-
       href: PropTypes.string.isRequired,
     })
   ),
 
   ctaButton: PropTypes.shape({
     label: PropTypes.string.isRequired,
-
     href: PropTypes.string,
-
     onClick: PropTypes.func,
   }),
 
@@ -203,11 +266,8 @@ Navbar.propTypes = {
 
 Navbar.defaultProps = {
   leftMenuItems: [],
-
   rightMenuItems: [],
-
   ctaButton: null,
-
   className: "",
 };
 

@@ -24,13 +24,23 @@
   
     --navbar-gap: clamp(1.5rem, 3vw, 3rem);
   
-    position: sticky;
+    position: fixed;
     top: clamp(0.75rem, 2vw, 1.5rem);
+    left: 0;
+    right: 0;
     z-index: 100;
     width: 100%;
     padding: 0 clamp(0.75rem, 3vw, 1.5rem);
     font-family: var(--navbar-font);
-    transition: top 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+      top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  
+  }
+  
+  /* État masqué : la navbar glisse hors de l'écran vers le haut lors d'un scroll vers le bas */
+  .navbar--hidden {
+    transform: translateY(-140%);
   }
   
   /* ==========================================================================
@@ -62,7 +72,7 @@
   
     -webkit-backdrop-filter: blur(var(--navbar-blur)) saturate(160%);
     backdrop-filter: blur(var(--navbar-blur)) saturate(160%);
-
+  
     transition:
       padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
       background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -162,7 +172,7 @@
     height: clamp(50px, 4vw, 40px);
     width: auto;
     display: block;
-
+  
     transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
   
@@ -454,7 +464,7 @@
       font-size: 1.65rem;
     }
   }
-
+  
   @media (max-width: 768px) {
     .navbar__row {
       padding: 0.65rem 1rem;
@@ -468,7 +478,7 @@
       gap: clamp(1.25rem, 4.5vh, 2.5rem);
     }
   }
- 
+  
   @media (max-width: 600px) {
     .navbar__row {
       padding: 0.6rem 0.9rem;
@@ -479,7 +489,7 @@
       height: 36px;
     }
   }
-
+  
   @media (max-width: 480px) {
     .navbar__container {
       width: 95%;
@@ -507,7 +517,7 @@
       height: 40px;
     }
   }
-
+  
   @media (max-width: 414px) {
     .navbar__container {
       width: 96%;
@@ -517,7 +527,7 @@
       gap: clamp(1.1rem, 3.5vh, 1.75rem);
     }
   }
-
+  
   @media (max-width: 390px) {
     .navbar__row {
       padding: 0.55rem 0.75rem;
@@ -531,7 +541,7 @@
       font-size: 1.3rem;
     }
   }
-
+  
   @media (max-width: 360px) {
     .navbar__container {
       width: 97%;
@@ -555,7 +565,7 @@
       font-size: 0.85rem;
     }
   }
-
+  
   @media (max-width: 344px) {
     .navbar__container {
       width: 98%;
@@ -589,7 +599,7 @@
       font-size: 0.8rem;
     }
   }
-
+  
   @media (max-height: 700px) {
     .navbar__mobile-panel {
       justify-content: flex-start;
@@ -626,14 +636,16 @@
   }
   
   @media (hover: none) and (pointer: coarse) {
+  
     .navbar__burger,
     .navbar__mobile-close {
       min-width: 44px;
       min-height: 44px;
     }
   }
-
+  
   @media (min-width: 1025px) {
+  
     .navbar__mobile-panel,
     .navbar__backdrop,
     .navbar__burger {
@@ -642,6 +654,7 @@
   }
   
   @media (prefers-reduced-motion: reduce) {
+  
     .navbar__mobile-panel,
     .navbar__mobile-item,
     .navbar__mobile-cta,
@@ -649,48 +662,49 @@
       transition: none;
     }
   }
-
+  
   /* ==========================================================================
      ÉTAT SCROLLÉ — navbar
      ========================================================================== */
-
+  
   .navbar--scrolled {
     top: clamp(0.4rem, 1vw, 0.65rem);
   }
-
+  
   .navbar--scrolled .navbar__row {
     padding: 0.55rem clamp(1rem, 2.5vw, 1.75rem);
-
+  
     background: rgba(8, 8, 31, 0.62);
     border-color: rgba(255, 255, 255, 0.14);
-
+  
     -webkit-backdrop-filter: blur(26px) saturate(180%);
     backdrop-filter: blur(26px) saturate(180%);
-
+  
     box-shadow:
       0 12px 34px rgba(0, 0, 0, 0.32),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
-
+  
   .navbar--scrolled .navbar__logo-img {
     height: clamp(38px, 3vw, 32px);
   }
-
+  
   .navbar--scrolled .navbar__cta {
     padding: 0.85rem 2.25rem;
   }
-
+  
   @media (max-width: 1024px) {
     .navbar--scrolled {
       top: clamp(0.3rem, 1vw, 0.5rem);
     }
-
+  
     .navbar--scrolled .navbar__row {
       padding: 0.5rem 0.9rem;
     }
   }
-
+  
   @media (prefers-reduced-motion: reduce) {
+  
     .navbar,
     .navbar__row,
     .navbar__logo-img,
