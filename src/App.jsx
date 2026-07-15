@@ -18,6 +18,7 @@ import SectionChoose from "./components/SectionChoose";
 import Resume from "./components/Resume";
 import CopyRight from "./components/footer/CopyRight";
 import BoutonUp from "./components/BoutonUp";
+import SidebarMenu from "./components/Sidebarmenu";
 
 import "./App.css";
 
@@ -70,6 +71,7 @@ function App() {
       <Resume />
       <CopyRight />
       <BoutonUp />
+      <SidebarMenu />
     </div>
   );
 }
