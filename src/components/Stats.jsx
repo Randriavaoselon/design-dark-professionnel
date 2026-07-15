@@ -9,7 +9,7 @@ import Revolution from "./Revolution";
 import imageStat from "../assets/icon-stat.webp";
 import "../styles/Stats.css";
 
-function useInViewOnce(options = { threshold: 0.3 }) {
+function useInViewOnce(options = { threshold: 0.5 }) {
   const ref = useRef(null);
   const [isInView, setIsInView] = useState(false);
 
@@ -42,19 +42,17 @@ function useInViewOnce(options = { threshold: 0.3 }) {
 }
 
 function Stats({ title }) {
-  const [sectionRef, isInView] = useInViewOnce({ threshold: 0.3 });
+  const [sectionRef, isInView] = useInViewOnce({ threshold: 0.5 });
 
   return (
     <div className="background-stat">
       <section
-        className={`section-stat ${isInView ? "section-stat--visible" : ""}`.trim()}
+        className={`section-stat ${
+          isInView ? "section-stat--visible" : ""
+        }`.trim()}
         ref={sectionRef}
       >
-        <img
-          className="badge-image"
-          src={imageSrc}
-          alt="Icone au centre"
-        />
+        <img className="badge-image" src={imageSrc} alt="Icone au centre" />
         <div className="container-stat">
           <div className="row-stat">
             <h1 className="title">{title}</h1>
