@@ -1,0 +1,47 @@
+/* ==========================================================================
+     Call-to-action button
+     ========================================================================== */
+     .btn-custom {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.5rem;
+        padding: 1.05rem 2.75rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg,
+            #7915ff 0%,
+            #6d39fd 25%,
+            #7e82fe 50%,
+            #6e9afd 75%,
+            #70cffb 100%);
+        color: var(--home-accent-ink);
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.015em;
+        text-decoration: none;
+        white-space: nowrap;
+        box-shadow: 0 4px 14px rgba(212, 175, 55, 0.28);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      }
+      
+      .btn-custom:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(90deg,
+            #8a33ff 0%,
+            #7d53ff 25%,
+            #8f95ff 50%,
+            #7db2ff 75%,
+            #82e0ff 100%);
+        box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+      }
+      
+      .btn-custom:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+      }
+      
+      .hbtn-custom:focus-visible {
+        outline: 2px solid var(--home-accent-ink);
+        outline-offset: 3px;
+      }
+      

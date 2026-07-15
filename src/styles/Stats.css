@@ -1,0 +1,260 @@
+.background-stat {
+  background-color: #0f1216;
+  background-image: url('../assets/backgroundStats2.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section-stat {
+  position: relative;
+  width: 100%;
+  padding: 4rem 0;
+  
+}
+
+.badge-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ffffff1e;
+  box-shadow: 0 4px 12px rgba(47, 91, 159, 0.35);
+
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.4) rotate(-15deg);
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.container-stat {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.row-stat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  margin: 0;
+  margin-top: 30px;
+  background: linear-gradient(90deg,
+      #2f5b9f,
+      #3d7fd0,
+      #4fa8e5,
+      #67d2ee,
+      #7ce0f4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: 0.15s;
+}
+
+.section-stat--visible .badge-image {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+}
+
+.section-stat--visible .title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-image,
+  .title {
+    transition: none;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+
+  .title {
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .section-stat {
+    padding: 3.5rem 0;
+  }
+
+  .container-stat {
+    width: 92%;
+    padding: 0 1.25rem;
+  }
+
+  .title {
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .badge-image {
+    width: 52px;
+    height: 52px;
+  }
+
+  .title {
+    font-size: 1.7rem;
+    margin-top: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-stat {
+    padding: 3rem 0;
+  }
+
+  .container-stat {
+    width: 94%;
+    padding: 0 1rem;
+  }
+
+  .title {
+    font-size: 1.55rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-stat {
+    padding: 2.75rem 0;
+  }
+
+  .badge-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+    margin-top: 22px;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-stat {
+    padding: 2.5rem 0;
+  }
+
+  .container-stat {
+    width: 95%;
+    padding: 0 0.85rem;
+  }
+
+  .badge-image {
+    width: 44px;
+    height: 44px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 414px) {
+  .title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .section-stat {
+    padding: 2.25rem 0;
+  }
+
+  .badge-image {
+    width: 42px;
+    height: 42px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container-stat {
+    width: 96%;
+    padding: 0 0.7rem;
+  }
+
+  .badge-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    font-size: 1.05rem;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 344px) {
+  .section-stat {
+    padding: 2rem 0;
+  }
+
+  .container-stat {
+    width: 97%;
+    padding: 0 0.6rem;
+  }
+
+  .badge-image {
+    width: 36px;
+    height: 36px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+    margin-top: 14px;
+    line-height: 1.25;
+  }
+}
+
+@media (max-height: 700px) {
+  .section-stat {
+    padding: 2rem 0;
+  }
+
+  .title {
+    margin-top: 16px;
+  }
+}
+
+@media (max-height: 620px) {
+  .badge-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+}

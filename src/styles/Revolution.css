@@ -1,0 +1,184 @@
+.revolution-section {
+    --home-font: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --home-text: #1a1a1a;
+    --home-text-muted: rgba(26, 26, 26, 0.68);
+    --home-accent: #d4af37;
+    --home-accent-ink: #ffffff;
+    --home-gap: clamp(2rem, 5vw, 5rem);
+
+    font-family: var(--home-font);
+    padding: 60px 20px 0;
+    margin-top: -70px;
+    overflow-x: hidden;
+}
+
+.revolution-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.revolution-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.revolution-col {
+    flex: 1;
+    min-width: 300px;
+}
+
+.revolution-title {
+    font-size: 2.5rem;
+    color: var(--home-accent-ink);
+    margin-bottom: 20px;
+}
+
+.revolution-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #babac4;
+    margin-bottom: 30px;
+}
+
+/* ==========================================================================
+   Colonne gauche 
+   ========================================================================== */
+.revolution-col-left {
+    position: relative;
+    top: -60px;
+
+    opacity: 0;
+    transform: translateX(64px);
+    transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: 0.15s;
+}
+
+.revolution-section--visible .revolution-col-left {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.revolution-col-left .revolution-title,
+.revolution-col-left .revolution-text,
+.revolution-col-left > a,
+.revolution-col-left > button {
+    opacity: 0;
+    transform: translateX(24px);
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.revolution-section--visible .revolution-col-left .revolution-title {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.4s;
+}
+
+.revolution-section--visible .revolution-col-left .revolution-text {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.65s;
+}
+
+.revolution-section--visible .revolution-col-left > a,
+.revolution-section--visible .revolution-col-left > button {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.9s;
+}
+
+.revolution-col-right {
+    display: flex;
+    justify-content: center;
+}
+
+.revolution-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(48px);
+    opacity: 0;
+    transition: clip-path 1.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.7s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.7s ease-out;
+    transition-delay: 0.3s;
+}
+
+.revolution-section--visible .revolution-image-wrapper {
+    clip-path: inset(0 0 0% 0);
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.revolution-image-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(90deg,
+            #1E2038 0%,
+            #25284B 25%,
+            #2E3761 50%,
+            #394A79 75%,
+            #465B93 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.revolution-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .revolution-col-left,
+    .revolution-col-left .revolution-title,
+    .revolution-col-left .revolution-text,
+    .revolution-col-left > a,
+    .revolution-col-left > button,
+    .revolution-image-wrapper {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        clip-path: none !important;
+    }
+}
+
+/* Responsive : passage en colonne sur mobile */
+@media (max-width: 768px) {
+    .revolution-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .revolution-image {
+        max-width: 360px;
+    }
+
+    .revolution-col-left {
+        transform: translateX(32px);
+    }
+
+    .revolution-section--visible .revolution-col-left {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .revolution-image {
+        height: 320px;
+    }
+}
