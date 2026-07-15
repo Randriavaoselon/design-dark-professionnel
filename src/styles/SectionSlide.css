@@ -1,0 +1,193 @@
+.section-slide {
+  --section-slide-bg: #08081f;
+  --section-slide-card-bg: rgba(255, 255, 255, 0.04);
+  --section-slide-border: rgba(255, 255, 255, 0.08);
+  --section-slide-text: #eef2ff;
+  --section-slide-muted: rgba(238, 242, 255, 0.65);
+  --section-slide-accent: #4f8ef7;
+  --overview-font: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  font-family: var(--overview-font);
+  padding: clamp(48px, 8vw, 96px) 20px;
+  margin-top: -140px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-slide-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-slide__viewport {
+  overflow: hidden;
+}
+
+.section-slide-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: clamp(16px, 2.5vw, 28px);
+  transition: transform 0.45s ease;
+}
+
+.section-slide__card {
+  flex: 0 0 calc((100% - (var(--visible-count, 3) - 1) * clamp(16px, 2.5vw, 28px)) / var(--visible-count, 3));
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--section-slide-card-bg);
+  border: 1px solid var(--section-slide-border);
+  border-radius: 16px;
+  padding: clamp(20px, 2.5vw, 28px);
+  backdrop-filter: blur(6px);
+  box-sizing: border-box;
+}
+
+.section-slide__icon {
+  width: clamp(38px, 4vw, 46px);
+  height: clamp(38px, 4vw, 46px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--section-slide-accent);
+  background-color: rgba(79, 142, 247, 0.12);
+  border-radius: 12px;
+  margin-bottom: clamp(16px, 2vw, 22px);
+}
+
+.section-slide__icon svg {
+  width: 60%;
+  height: 60%;
+}
+
+.section-slide__title {
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-weight: 600;
+  color: var(--section-slide-text);
+  margin: 0 0 10px;
+}
+
+.section-slide__paragraph {
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  line-height: 1.6;
+  color: var(--section-slide-muted);
+  margin: 0;
+}
+
+.section-slide__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: clamp(32px, 5vw, 48px);
+  position: relative;
+  z-index: 1;
+}
+
+.section-slide__control-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--section-slide-border);
+  background-color: var(--section-slide-card-bg);
+  color: var(--section-slide-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  pointer-events: auto;
+}
+
+.section-slide__control-btn svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.section-slide__control-btn:hover {
+  background-color: var(--section-slide-accent);
+  border-color: var(--section-slide-accent);
+}
+
+.section-slide__control-btn:active {
+  transform: scale(0.94);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 1024px) {
+  .section-slide-row {
+    gap: clamp(14px, 2vw, 22px);
+  }
+}
+
+@media (max-width: 900px) {
+  .section-slide {
+    margin-top: -60px;
+  }
+
+  .section-slide-row {
+    --visible-count: 2;
+  }
+
+  .section-slide__card {
+    flex: 0 0 calc((100% - clamp(14px, 2vw, 22px)) / 2) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .section-slide {
+    padding: clamp(32px, 9vw, 56px) 16px clamp(48px, 12vw, 72px);
+    margin-top: -40px;
+    margin-bottom: 24px;
+  }
+
+  .section-slide-row {
+    --visible-count: 1;
+    gap: 0;
+  }
+
+  .section-slide__card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+  }
+
+  .section-slide__controls {
+    margin-top: clamp(24px, 6vw, 36px);
+  }
+}
+
+@media (max-width: 380px) {
+  .section-slide {
+    padding: 24px 12px 40px;
+    margin-bottom: 16px;
+  }
+
+  .section-slide__card {
+    padding: 16px;
+  }
+
+  .section-slide__title {
+    font-size: 1rem;
+  }
+
+  .section-slide__paragraph {
+    font-size: 0.85rem;
+  }
+
+  .section-slide__control-btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-height: 650px) and (min-width: 900px) {
+  .section-slide {
+    padding: 28px 20px;
+    margin-top: -40px;
+  }
+}

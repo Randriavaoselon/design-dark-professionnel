@@ -1,0 +1,60 @@
+.background-resume {
+    background-color: #0f1216;
+    background-image: url('../assets/background-footer.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.resume {
+    --resume-bg: #08081f;
+    --resume-text: #eef2ff;
+    --resume-muted: rgba(238, 242, 255, 0.7);
+    --overview-font: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    font-family: var(--overview-font);
+    padding: clamp(48px, 8vw, 96px) 20px;
+    margin-top: -80px;
+}
+
+.resume-container {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.resume-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.resume__title {
+
+    background: linear-gradient(90deg,
+            #2F5B9F,
+            #3D7FD0,
+            #4FA8E5,
+            #67D2EE,
+            #7CE0F4);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin: 0 0 clamp(16px, 2.5vw, 24px);
+    transition: filter 0.3s ease;
+}
+
+.resume__paragraph {
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.7;
+    color: var(--resume-muted);
+    margin: 0;
+}

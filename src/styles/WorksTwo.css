@@ -1,0 +1,70 @@
+.background-works-two-section {
+  background-color: #0f1216;
+  background-image: url('../assets/background-work-two.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.works-two-section {
+    --works-two-font: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --works-two-bg: #07071f;
+    --works-two-title-color: #ffffff;
+    --works-two-text-color: rgba(253, 255, 250, 0.75);
+  
+    font-family: var(--works-two-font);
+    padding: clamp(48px, 8vw, 80px) 20px;
+  }
+  
+  .works-two-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .works-two-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .works-two__title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--works-two-title-color);
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    max-width: 700px;
+  }
+  
+  .works-two__text {
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    color: var(--works-two-text-color);
+    line-height: 1.6;
+    max-width: 900px;
+  }
+
+  .works-two__title,
+  .works-two__text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .works-two__text {
+    transition-delay: 0.15s;
+  }
+
+  .works-two-section.is-visible .works-two__title,
+  .works-two-section.is-visible .works-two__text {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .works-two__title,
+    .works-two__text {
+      transition: opacity 0.3s ease;
+      transform: none;
+    }
+  }

@@ -1,0 +1,29 @@
+.copyright {
+    --copyright-bg: #08081f;
+    --copyright-color: #0e7fff;
+    --copyright-accent-ink: #ffffff;
+    --home-pargraph: #fdfffa;
+    --home-font: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 
+
+    font-family: var(--home-font);
+    padding: clamp(20px, 3vw, 10px) 20px;
+    background-color: var(--copyright-color);
+  }
+  
+  .copyright-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .copyright-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .copyright__text {
+    font-size: clamp(0.85rem, 4vw, 0.95rem);
+    color: var(--copyright-accent-ink);
+    margin: 0;
+    text-align: center;
+  }

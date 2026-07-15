@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+  }
+  
+  #root {
+    background-color: #090921;
+    overflow-x: hidden;    
+  }
