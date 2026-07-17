@@ -21,7 +21,6 @@
     --sbm-accent-glow: rgba(79, 168, 229, 0.35);
   
     --sbm-radius: 22px;
-    --sbm-width-expanded: clamp(216px, 17vw, 264px);
     --sbm-width-collapsed: 76px;
   
     position: fixed;
@@ -32,9 +31,10 @@
   
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.35rem;
   
-    width: var(--sbm-width-expanded);
+    width: var(--sbm-width-collapsed);
     max-height: min(640px, calc(100vh - 4rem));
     padding: 1.25rem 0.85rem;
   
@@ -49,8 +49,7 @@
     -webkit-backdrop-filter: blur(var(--sbm-blur)) saturate(160%);
     backdrop-filter: blur(var(--sbm-blur)) saturate(160%);
   
-    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
       opacity 0.35s ease;
   }
   
@@ -61,12 +60,7 @@
     box-sizing: border-box;
   }
   
-  .sidebar-menu--collapsed {
-    width: var(--sbm-width-collapsed);
-    align-items: center;
-  }
-  
-  /* État masqué : le panneau glisse hors de l'écran (déclenché par le scroll) */
+  /* État masqué : le panneau glisse hors de l'écran (par défaut, avant scroll) */
   .sidebar-menu--hidden {
     transform: translateY(-50%) translateX(calc(100% + 2rem));
     opacity: 0;
@@ -87,12 +81,11 @@
   
   /* ==========================================================================
      Navigation — liste
+     Pas d'overflow-y ici : ça empêcherait le tooltip de déborder à gauche
      ========================================================================== */
   .sidebar-menu__nav {
     flex: 1;
     min-height: 0;
-    overflow-y: auto;
-    scrollbar-width: thin;
   }
   
   .sidebar-menu__list {
@@ -112,9 +105,10 @@
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.85rem;
     width: 100%;
-    padding: 0.7rem 0.75rem;
+    padding: 0.7rem;
     border-radius: 14px;
     color: var(--sbm-text-muted);
     text-decoration: none;
@@ -122,24 +116,13 @@
     font-weight: 600;
     letter-spacing: 0.01em;
     white-space: nowrap;
-    transition: color 0.2s ease, background 0.2s ease, transform 0.25s ease;
-  }
-  
-  .sidebar-menu--collapsed .sidebar-menu__link {
-    justify-content: center;
-    padding: 0.7rem;
+    transition: color 0.2s ease, background 0.2s ease;
   }
   
   .sidebar-menu__link:hover,
   .sidebar-menu__link:focus-visible {
     color: var(--sbm-text);
     background: rgba(255, 255, 255, 0.06);
-    transform: translateX(-2px);
-  }
-  
-  .sidebar-menu--collapsed .sidebar-menu__link:hover,
-  .sidebar-menu--collapsed .sidebar-menu__link:focus-visible {
-    transform: none;
   }
   
   .sidebar-menu__link:focus-visible {
@@ -157,17 +140,13 @@
   .sidebar-menu__link--active::before {
     content: '';
     position: absolute;
-    left: -0.85rem;
+    left: -0.5rem;
     top: 12%;
     bottom: 12%;
     width: 3px;
     border-radius: 3px;
     background: var(--sbm-accent);
     box-shadow: 0 0 10px var(--sbm-accent-glow);
-  }
-  
-  .sidebar-menu--collapsed .sidebar-menu__link--active::before {
-    left: -0.5rem;
   }
   
   .sidebar-menu__link--active .sidebar-menu__icon {
@@ -197,7 +176,7 @@
   }
   
   /* ==========================================================================
-     Label + badge
+     Label + badge (utilisés uniquement dans le tiroir mobile)
      ========================================================================== */
   .sidebar-menu__label {
     overflow: hidden;
@@ -220,7 +199,7 @@
   }
   
   /* ==========================================================================
-     Tooltip — affiché uniquement en mode réduit, au survol / focus
+     Tooltip — affiché à gauche de l'icône, au survol / focus (panneau desktop)
      ========================================================================== */
   .sidebar-menu__tooltip {
     position: absolute;
@@ -239,7 +218,7 @@
     pointer-events: none;
   
     opacity: 0;
-    transition: opacity 0.18s ease, transform 0.18s ease;
+    transition: opacity 0.15s ease, transform 0.15s ease;
   }
   
   .sidebar-menu__tooltip::after {
@@ -274,44 +253,6 @@
   .sidebar-menu__link--footer:hover {
     color: #ff8a8a;
     background: rgba(255, 100, 100, 0.08);
-  }
-  
-  /* ==========================================================================
-     Bouton bascule (collapse / expand) — pastille ancrée sur le bord gauche
-     ========================================================================== */
-  .sidebar-menu__toggle {
-    position: absolute;
-    top: 1.5rem;
-    left: -14px;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-  
-    background: #12151b;
-    border: 1px solid var(--sbm-border);
-    color: var(--sbm-text-muted);
-    cursor: pointer;
-    padding: 0;
-  
-    transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-  
-  .sidebar-menu__toggle:hover,
-  .sidebar-menu__toggle:focus-visible {
-    color: #ffffff;
-    background: var(--sbm-accent);
-    border-color: transparent;
-    transform: scale(1.08);
-  }
-  
-  .sidebar-menu__toggle:focus-visible {
-    outline: 2px solid var(--sbm-accent-solid);
-    outline-offset: 2px;
   }
   
   /* ==========================================================================
@@ -397,6 +338,7 @@
   }
   
   .sidebar-menu__drawer .sidebar-menu__link {
+    justify-content: flex-start;
     padding: 0.9rem 0.9rem;
     font-size: 1rem;
   }
@@ -456,7 +398,6 @@
   @media (prefers-reduced-motion: reduce) {
     .sidebar-menu,
     .sidebar-menu__link,
-    .sidebar-menu__toggle,
     .sidebar-menu__tooltip,
     .sidebar-menu__mobile-trigger,
     .sidebar-menu__drawer {

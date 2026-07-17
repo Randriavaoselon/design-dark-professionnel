@@ -5,8 +5,6 @@ import {
   BarChart3,
   Users,
   Settings,
-  ChevronLeft,
-  ChevronRight,
   Menu,
   X,
 } from "lucide-react";
@@ -19,31 +17,15 @@ const DEFAULT_ITEMS = [
   { id: "settings", label: "Paramètres", href: "#", Icon: Settings },
 ];
 
-const STORAGE_KEY = "sidebar-menu-collapsed";
-
 const SCROLL_DELTA_THRESHOLD = 6;
-
-function readStoredCollapsed(fallback) {
-  if (typeof window === "undefined") return fallback;
-  try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored === null ? fallback : stored === "true";
-  } catch {
-    return fallback;
-  }
-}
+const SCROLL_TOP_THRESHOLD = 80;
 
 function SidebarMenu({
   items = DEFAULT_ITEMS,
   activeId,
   onItemSelect,
-  defaultCollapsed = false,
-  
   brand = null,
 }) {
-  const [collapsed, setCollapsed] = useState(() =>
-    readStoredCollapsed(defaultCollapsed)
-  );
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [internalActiveId, setInternalActiveId] = useState(
     activeId ?? items[0]?.id ?? null
@@ -54,12 +36,8 @@ function SidebarMenu({
   const currentActiveId = activeId ?? internalActiveId;
 
   useEffect(() => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, String(collapsed));
-    } catch {
-      // stockage indisponible (navigation privée...) — pas bloquant
-    }
-  }, [collapsed]);
+    if (activeId !== undefined) setInternalActiveId(activeId);
+  }, [activeId]);
 
   useEffect(() => {
     document.body.style.overflow = isDrawerOpen ? "hidden" : "";
@@ -77,8 +55,6 @@ function SidebarMenu({
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return undefined;
-
     let lastScrollY = window.scrollY;
     let ticking = false;
 
@@ -86,17 +62,13 @@ function SidebarMenu({
       const currentScrollY = window.scrollY;
       const delta = currentScrollY - lastScrollY;
 
-      if (Math.abs(delta) >= SCROLL_DELTA_THRESHOLD) {
-        if (delta > 0) {
-       
-          setIsHidden(false);
-        } else {
-        
-          setIsHidden(true);
-        }
-        lastScrollY = currentScrollY;
+      if (currentScrollY <= SCROLL_TOP_THRESHOLD) {
+        setIsHidden(false);
+      } else if (Math.abs(delta) >= SCROLL_DELTA_THRESHOLD) {
+        setIsHidden(delta > 0);
       }
 
+      lastScrollY = currentScrollY;
       ticking = false;
     };
 
@@ -121,12 +93,12 @@ function SidebarMenu({
     [onItemSelect]
   );
 
-  const renderLink = (item, { withLabel, extraClassName = "" }) => {
+  const renderLink = (item, { withLabel }) => {
     const isActive = item.id === currentActiveId;
     return (
       <a
         href={item.href || "#"}
-        className={`sidebar-menu__link ${extraClassName} ${
+        className={`sidebar-menu__link ${
           isActive ? "sidebar-menu__link--active" : ""
         }`.trim()}
         aria-current={isActive ? "page" : undefined}
@@ -163,34 +135,17 @@ function SidebarMenu({
 
   return (
     <>
-      {/* Panneau flottant desktop, réductible, masqué/affiché au scroll */}
       <aside
         className={`sidebar-menu ${
-          collapsed ? "sidebar-menu--collapsed" : ""
-        } ${isHidden ? "sidebar-menu--hidden" : ""}`.trim()}
+          isHidden ? "sidebar-menu--hidden" : ""
+        }`.trim()}
         aria-label="Navigation principale"
         aria-hidden={isHidden}
       >
         {brand && <div className="sidebar-menu__brand">{brand}</div>}
-
-        <nav className="sidebar-menu__nav">{renderList(!collapsed)}</nav>
-
-        <button
-          type="button"
-          className="sidebar-menu__toggle"
-          onClick={() => setCollapsed((value) => !value)}
-          aria-label={collapsed ? "Développer le menu" : "Réduire le menu"}
-          aria-expanded={!collapsed}
-        >
-          {collapsed ? (
-            <ChevronLeft size={16} strokeWidth={2.4} />
-          ) : (
-            <ChevronRight size={16} strokeWidth={2.4} />
-          )}
-        </button>
+        <nav className="sidebar-menu__nav">{renderList(false)}</nav>
       </aside>
 
-      {/* Déclencheur mobile (bouton flottant) */}
       <button
         type="button"
         className="sidebar-menu__mobile-trigger"
@@ -200,7 +155,6 @@ function SidebarMenu({
         <Menu size={20} strokeWidth={2.2} />
       </button>
 
-      {/* Tiroir mobile plein écran */}
       <div
         className={`sidebar-menu__drawer ${
           isDrawerOpen ? "sidebar-menu__drawer--open" : ""
@@ -216,9 +170,9 @@ function SidebarMenu({
         </button>
 
         {brand && <div className="sidebar-menu__drawer-brand">{brand}</div>}
-
-        <nav aria-label="Navigation principale (mobile)">{renderList(true)}</nav>
-
+        <nav aria-label="Navigation principale (mobile)">
+          {renderList(true)}
+        </nav>
       </div>
 
       {isDrawerOpen && (
@@ -244,13 +198,6 @@ SidebarMenu.propTypes = {
   ),
   activeId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onItemSelect: PropTypes.func,
-  defaultCollapsed: PropTypes.bool,
-  footerItem: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    label: PropTypes.string.isRequired,
-    href: PropTypes.string,
-    Icon: PropTypes.elementType.isRequired,
-  }),
   brand: PropTypes.node,
 };
 

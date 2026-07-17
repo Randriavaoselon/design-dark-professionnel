@@ -10,6 +10,8 @@
   font-family: var(--overview-font);
   padding: clamp(48px, 8vw, 96px) 20px;
   margin-top: -90px;
+  position: relative;
+  z-index: 130;
 
   opacity: 0;
   transform: translateY(30px);
