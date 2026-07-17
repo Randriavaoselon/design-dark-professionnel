@@ -9,7 +9,6 @@
   --home-accent-ink: #ffffff;
   --home-gap: clamp(2rem, 5vw, 5rem);
 
-  /* Espace réservé sous la navbar flottante (offset + hauteur de la pilule) */
   --home-navbar-clearance: clamp(8rem, 12vw, 10.5rem);
   --home-bottom-clearance: clamp(5rem, 9vh, 7rem);
 
@@ -233,7 +232,6 @@
 .home__cta {
   position: relative;
   z-index: 130;
-  /* au lieu de .home__row */
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.5s ease, transform 0.5s ease;
