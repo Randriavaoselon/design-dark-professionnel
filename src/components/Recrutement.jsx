@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from './Bouton';
+import ModalContact from "./ModalContact"; 
 import '../styles/Recrutement.css';
 import imageRecruit from '../assets/image-recruite.webp'
 
 const Recrutement = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -46,7 +48,7 @@ const Recrutement = () => {
             <div className="recrutement-btn-wrapper">
               <BoutonComponent
                 text="Voir les offres"
-                href="/carrieres"
+                onClick={() => setIsContactOpen(true)}
               />
             </div>
           </div>
@@ -61,6 +63,11 @@ const Recrutement = () => {
           </div>
         </div>
       </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 };

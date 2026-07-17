@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
+import ModalContact from "./ModalContact";
 import '../styles/SectionNetwork.css';
 
 const SectionNetwork = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,12 +44,16 @@ const SectionNetwork = () => {
           </p>
           <BoutonComponent
             text="Commencer"
-            onClick={() => console.log("Action déclenchée")}
+            onClick={() => setIsContactOpen(true)}
             className="btn-works-network"
-            href="/commencer"
           />
         </div>
       </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 };

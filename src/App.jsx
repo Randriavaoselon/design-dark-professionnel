@@ -29,13 +29,13 @@ function App() {
 
   const leftMenuItems = [
     { label: "Accueil", href: "/" },
-    { label: "Services", href: "/services" },
-    { label: "À propos", href: "/a-propos" },
+    { label: "Services", href: "#services" },
+    { label: "À propos", href: "#a-propos" },
   ];
 
   const rightMenuItems = [
-    { label: "Tarifs", href: "/tarifs" },
-    { label: "Contact", href: "/contact" },
+    { label: "FAQS", href: "#faqs" },
+    { label: "Contact", href: "#contact" },
   ];
 
   const ctaButton = {

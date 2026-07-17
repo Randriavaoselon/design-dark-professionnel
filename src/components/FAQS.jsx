@@ -32,7 +32,7 @@ const FAQS = () => {
   };
 
   return (
-    <section ref={sectionRef} className={`faqs ${isVisible ? 'is-visible' : ''}`}>
+    <section ref={sectionRef} className={`faqs ${isVisible ? 'is-visible' : ''}`} id='faqs'>
       <div className="faqs-container">
         <div className="faqs-row">
           <h2 className="faqs__title">FAQS</h2>

@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
+import ModalContact from "./ModalContact";
 import imageCoop from "../assets/photo-coop.webp";
 import "../styles/Cooptation.css";
 
 const Cooptation = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -60,13 +62,18 @@ const Cooptation = () => {
                 <BoutonComponent
                   text="Parrainer un contact"
                   className="btn-cooptation"
-                  href="/coopte"
+                  onClick={() => setIsContactOpen(true)}
                 />
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import ModalContact from "../ModalContact";
 import "../../styles/Navbar.css";
 
 function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
@@ -14,6 +16,13 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleCtaClick = (e) => {
+    e.preventDefault();
+    closeMenu();
+    setIsContactOpen(true);
+    ctaButton?.onClick?.(e);
   };
 
   useEffect(() => {
@@ -27,10 +36,8 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
       if (isMenuOpen) {
         setIsHidden(false);
       } else if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
-        // scroll vers le bas au-delà du seuil -> on masque
         setIsHidden(true);
       } else {
-        // scroll vers le haut (ou en haut de page) -> on réaffiche
         setIsHidden(false);
       }
 
@@ -49,7 +56,6 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isMenuOpen]);
 
-  // --- Verrouille le scroll du body quand le panneau mobile est ouvert
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -137,7 +143,7 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
             {ctaButton && (
               <a
                 href={ctaButton.href || "#"}
-                onClick={ctaButton.onClick}
+                onClick={handleCtaClick}
                 className="navbar__cta"
               >
                 {ctaButton.label}
@@ -207,13 +213,7 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
         {ctaButton && (
           <a
             href={ctaButton.href || "#"}
-            onClick={(e) => {
-              closeMenu();
-
-              if (ctaButton.onClick) {
-                ctaButton.onClick(e);
-              }
-            }}
+            onClick={handleCtaClick}
             className="navbar__mobile-cta"
           >
             {ctaButton.label}
@@ -221,7 +221,7 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
         )}
       </div>
 
-      {/* Overlay */}
+      {/* Overlay du menu mobile */}
       {isMenuOpen && (
         <div
           className="navbar__backdrop"
@@ -229,6 +229,12 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
           aria-hidden="true"
         />
       )}
+
+      {/* Modal de contact */}
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 }
