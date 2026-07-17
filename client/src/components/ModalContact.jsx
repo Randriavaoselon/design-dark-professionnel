@@ -86,26 +86,53 @@ const ModalContact = ({ isOpen, onClose }) => {
     if (e.target === e.currentTarget && status !== "loading") onClose();
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const validationErrors = validate(formData);
+  //   setErrors(validationErrors);
+  //   if (Object.keys(validationErrors).length > 0) return;
+
+  //   setStatus("loading");
+  //   try {
+  //      const response = await fetch("http://localhost:5000/api/contact", {
+  //     // const response = await fetch(
+  //     //   `${import.meta.env.VITE_API_URL}/api/contact`,
+  //     //   {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify(formData),
+  //       }
+  //     );
+
+  //     if (!response.ok) throw new Error("Request failed");
+
+  //     setStatus("success");
+  //     setTimeout(() => {
+  //       onClose();
+  //     }, 1600);
+  //   } catch (error) {
+  //     console.error("Erreur:", error);
+  //     setStatus("error");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate(formData);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
-
+  
     setStatus("loading");
     try {
-      // const response = await fetch("http://localhost:5000/api/contact", {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/contact`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const response = await fetch(`${apiUrl}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
       if (!response.ok) throw new Error("Request failed");
-
+  
       setStatus("success");
       setTimeout(() => {
         onClose();
