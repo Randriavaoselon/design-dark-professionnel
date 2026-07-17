@@ -2,10 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import Solution from "./Solution";
 import "../styles/SolutionTitre.css";
 
-/**
- * Déclenche `true` une seule fois quand au moins 50% de la section
- * est visible dans le viewport. Respecte prefers-reduced-motion.
- */
 function useInViewOnce(options = { threshold: 0.5 }) {
   const ref = useRef(null);
   const [isInView, setIsInView] = useState(false);
@@ -33,7 +29,6 @@ function useInViewOnce(options = { threshold: 0.5 }) {
     observer.observe(node);
 
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [ref, isInView];
@@ -53,11 +48,13 @@ const SolutionTitre = () => {
         <div className="solution-titre-container">
           <div className="solution-titre-row">
             <h2 className="solution-titre-title">
-              A TESTED AND APPROVED SOLUTION
+              UNE EXPERTISE WEB À VOTRE SERVICE
             </h2>
             <p className="solution-titre-subtitle">
-              Découvrez comment notre approche éprouvée garantit des résultats
-              concrets et une fiabilité maximale pour vos projets.
+              Depuis notre création, Avenir Tech accompagne entreprises et
+              entrepreneurs dans la création de sites web modernes, responsives
+              et professionnels — pensés pour convertir vos visiteurs en
+              clients.
             </p>
           </div>
         </div>

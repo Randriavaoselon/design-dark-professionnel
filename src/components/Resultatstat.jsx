@@ -45,7 +45,6 @@ function useInViewOnce(options = { threshold: 0.5 }) {
     observer.observe(node);
 
     return () => observer.disconnect();
-
   }, []);
 
   return [ref, isInView];
@@ -134,7 +133,7 @@ function useCountUp(target, { isActive, duration = 1500, delay = 0 }) {
   return value;
 }
 
-function CardValue({ value, color, isActive, delay }) {
+function CardValue({ value, color = undefined, isActive = false, delay = 0 }) {
   const parsed = useMemo(() => parseStatValue(value), [value]);
 
   const animatedValue = useCountUp(parsed ? parsed.target : 0, {
@@ -171,21 +170,18 @@ CardValue.propTypes = {
   delay: PropTypes.number,
 };
 
-CardValue.defaultProps = {
-  color: undefined,
-  isActive: false,
-  delay: 0,
-};
-
 const LINE_DRAW_DURATION = 0.55;
-
 const TRUNK_START_DELAY = 0.25;
-
 const BRANCH_START_DELAY = TRUNK_START_DELAY + LINE_DRAW_DURATION * 0.6;
-
 const BRANCH_STAGGER = 0.12;
 
-function ResultatStat({ imageSrc, imageAlt, stats, HubIcon, animate }) {
+function ResultatStat({
+  imageSrc,
+  imageAlt = '',
+  stats,
+  HubIcon = null,
+  animate = false,
+}) {
   const middleIndex = stats.length % 2 === 1 ? (stats.length - 1) / 2 : -1;
 
   const [sectionRef, selfInView] = useInViewOnce({ threshold: 0.5 });
@@ -397,15 +393,8 @@ ResultatStat.propTypes = {
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     })
   ).isRequired,
-
   HubIcon: PropTypes.elementType,
   animate: PropTypes.bool,
-};
-
-ResultatStat.defaultProps = {
-  imageAlt: '',
-  HubIcon: null,
-  animate: false,
 };
 
 export default ResultatStat;

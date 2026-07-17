@@ -1,29 +1,33 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
 import { ShieldCheck, Zap, LineChart, Layers } from "lucide-react";
-import photoImage from '../assets/photo-solution.webp'
+import photoImage from "../assets/photo-solution.webp";
 import "../styles/Solution.css";
 
 const cards = [
   {
     icon: ShieldCheck,
-    title: "Sécurité renforcée",
-    subtitle: "Vos données protégées en permanence",
+    title: "Sites sécurisés",
+    subtitle:
+      "Certificat SSL et hébergement fiable inclus",
   },
   {
     icon: Zap,
-    title: "Rapidité d'exécution",
-    subtitle: "Des résultats en quelques secondes",
+    title: "Performance optimale",
+    subtitle:
+      "Chargement rapide, optimisé pour le SEO",
   },
   {
     icon: LineChart,
-    title: "Suivi en temps réel",
-    subtitle: "Visualisez votre progression facilement",
+    title: "Visibilité accrue",
+    subtitle:
+      "Un design qui convertit vos visiteurs",
   },
   {
     icon: Layers,
-    title: "Solution complète",
-    subtitle: "Tous vos outils au même endroit",
+    title: "Solution clé en main",
+    subtitle:
+      "Conception, hébergement et suivi inclus",
   },
 ];
 
@@ -34,7 +38,7 @@ export default function Solution() {
   useEffect(() => {
     const node = sectionRef.current;
     if (!node) return;
-  
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -44,12 +48,12 @@ export default function Solution() {
       },
       {
         threshold: 0,
-        rootMargin: "0px 0px -50% 0px", 
+        rootMargin: "0px 0px -50% 0px",
       }
     );
-  
+
     observer.observe(node);
-  
+
     return () => observer.disconnect();
   }, []);
 
