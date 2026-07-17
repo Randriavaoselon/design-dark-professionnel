@@ -61,13 +61,13 @@ function SidebarMenu({
     const updateVisibility = () => {
       const currentScrollY = window.scrollY;
       const delta = currentScrollY - lastScrollY;
-
+    
       if (currentScrollY <= SCROLL_TOP_THRESHOLD) {
-        setIsHidden(false);
+        setIsHidden(true);
       } else if (Math.abs(delta) >= SCROLL_DELTA_THRESHOLD) {
-        setIsHidden(delta > 0);
+        setIsHidden(delta < 0); 
       }
-
+    
       lastScrollY = currentScrollY;
       ticking = false;
     };
