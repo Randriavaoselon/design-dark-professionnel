@@ -1,46 +1,36 @@
-import express from "express";
-import nodemailer from "nodemailer";
-import cors from "cors";
-import dotenv from "dotenv";
+import express from 'express';
+import nodemailer from 'nodemailer';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST"],
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 
-const requiredEnvVars = ["EMAIL_USER", "EMAIL_PASS"];
-
+const requiredEnvVars = ['EMAIL_USER', 'EMAIL_PASS'];
 for (const key of requiredEnvVars) {
   if (!process.env[key]) {
-    console.error(`Erreur : la variable d'environnement ${key} est manquante`);
+    console.error(`Erreur : la variable d'environnement ${key} est manquante dans .env`);
+    process.exit(1);
   }
 }
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
 });
 
-app.get("/", (req, res) => {
-  res.send("API Contact Avenir-Tech fonctionne !");
-});
-
-app.post("/api/contact", async (req, res) => {
+app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).send("Champs manquants");
+    return res.status(400).send('Champs manquants');
   }
 
   try {
@@ -52,12 +42,12 @@ app.post("/api/contact", async (req, res) => {
       text: message,
     });
 
-    res.status(200).send("Email envoyé");
+    res.status(200).send('Email envoyé');
   } catch (error) {
-    console.error("Erreur envoi email :", error);
-
+    console.error('Erreur envoi email :', error);
     res.status(500).send("Erreur lors de l'envoi de l'email");
   }
 });
 
-export default app;
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Serveur actif sur le port ${PORT}`));
