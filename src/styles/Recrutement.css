@@ -7,7 +7,7 @@
     font-family: var(--home-font);
     padding: 60px 20px;
     background: linear-gradient(90deg, #1A2C42 0%, #121D35 50%, #080820 100%);
-    overflow: hidden; /* évite le débordement horizontal pendant les translateX */
+    overflow: hidden;
 }
 
 .recrutement-container {
@@ -72,6 +72,8 @@
 }
 
 .recrutement-btn-wrapper {
+    position: relative;
+    z-index: 130;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;

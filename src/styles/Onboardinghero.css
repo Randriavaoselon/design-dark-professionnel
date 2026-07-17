@@ -212,7 +212,7 @@
 
 .phone {
     position: relative;
-    z-index: 3;
+    z-index: 130;
     width: var(--phone-w);
     opacity: 0;
     transform: translateY(40px) scale(0.94);
