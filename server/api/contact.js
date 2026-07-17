@@ -1,14 +1,12 @@
 import nodemailer from 'nodemailer';
 
-const ALLOWED_ORIGIN = process.env.CLIENT_URL || '*';
+const ALLOWED_ORIGIN = (process.env.CLIENT_URL || '*').replace(/\/+$/, '');
 
 export default async function handler(req, res) {
-  // Gestion CORS (nécessaire car client et serveur seront sur des domaines différents)
   res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Requête préliminaire du navigateur (préflight CORS)
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
