@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
+import ModalContact from "./ModalContact"; 
 import '../styles/OverviewTree.css';
 import overviewTreeImage from '../assets/overview-three.webp';
 
 const OverviewTree = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,9 +45,8 @@ const OverviewTree = () => {
             </p>
             <BoutonComponent
               text="Commencer"
-              onClick={() => console.log("Action déclenchée")}
+              onClick={() => setIsContactOpen(true)}
               className="btn-overview-three"
-              href="/commencer"
             />
           </div>
 
@@ -58,6 +59,11 @@ const OverviewTree = () => {
           </div>
         </div>
       </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 };

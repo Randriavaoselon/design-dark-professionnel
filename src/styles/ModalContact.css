@@ -1,0 +1,443 @@
+/* ==========================================================================
+   Contact Modal — dark glassmorphism, BEM, section > container > row spirit
+   Tokens
+   ========================================================================== */
+   .contact-modal {
+    --cm-bg-overlay: rgba(4, 4, 16, 0.72);
+    --cm-surface: rgba(16, 17, 38, 0.82);
+    --cm-surface-solid: #0d0e24;
+    --cm-border: rgba(129, 148, 255, 0.16);
+    --cm-border-strong: rgba(129, 148, 255, 0.32);
+    --cm-accent: #3b82f6;
+    --cm-accent-2: #22d3ee;
+    --cm-text: #eef1fb;
+    --cm-muted: #8b93b8;
+    --cm-error: #f87171;
+    --cm-success: #34d399;
+    --cm-radius: 20px;
+    --cm-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--cm-bg-overlay);
+    backdrop-filter: blur(6px) saturate(120%);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    animation: cm-overlay-in 0.28s var(--cm-ease);
+  }
+  
+  @keyframes cm-overlay-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* ==========================================================================
+     Dialog
+     ========================================================================== */
+  .contact-modal__dialog {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: var(--cm-surface);
+    border: 1px solid var(--cm-border);
+    border-radius: var(--cm-radius);
+    padding: 36px 32px 32px;
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    color: var(--cm-text);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    animation: cm-dialog-in 0.38s var(--cm-ease);
+    scrollbar-width: thin;
+    scrollbar-color: var(--cm-border-strong) transparent;
+  }
+  
+  @keyframes cm-dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* Signature element: slow rotating conic glow hugging the card border */
+  .contact-modal__glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0%,
+      var(--cm-accent) 12%,
+      transparent 28%,
+      var(--cm-accent-2) 45%,
+      transparent 60%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.55;
+    animation: cm-glow-spin 7s linear infinite;
+    pointer-events: none;
+  }
+  
+  @keyframes cm-glow-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* ==========================================================================
+     Close button
+     ========================================================================== */
+  .contact-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--cm-border);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--cm-muted);
+    cursor: pointer;
+    transition: color 0.2s var(--cm-ease), background 0.2s var(--cm-ease),
+      transform 0.2s var(--cm-ease), border-color 0.2s var(--cm-ease);
+  }
+  
+  .contact-modal__close:hover {
+    color: var(--cm-text);
+    background: rgba(59, 130, 246, 0.12);
+    border-color: var(--cm-border-strong);
+    transform: rotate(90deg);
+  }
+  
+  .contact-modal__close:focus-visible {
+    outline: 2px solid var(--cm-accent);
+    outline-offset: 2px;
+  }
+  
+  .contact-modal__close:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* ==========================================================================
+     Header
+     ========================================================================== */
+  .contact-modal__header {
+    margin-bottom: 24px;
+  }
+  
+  .contact-modal__eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cm-accent-2);
+    margin-bottom: 10px;
+  }
+  
+  .contact-modal__header h2 {
+    margin: 0 0 6px;
+    font-size: 24px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    font-weight: 650;
+  }
+  
+  .contact-modal__subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: var(--cm-muted);
+  }
+  
+  /* ==========================================================================
+     Form + floating-label fields
+     ========================================================================== */
+  .contact-modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .contact-modal__form--shake {
+    animation: cm-shake 0.42s var(--cm-ease);
+  }
+  
+  @keyframes cm-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(3px); }
+  }
+  
+  .contact-modal__field {
+    position: relative;
+  }
+  
+  .contact-modal__field input,
+  .contact-modal__field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 18px 14px 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--cm-border);
+    border-radius: 12px;
+    color: var(--cm-text);
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color 0.2s var(--cm-ease), background 0.2s var(--cm-ease),
+      box-shadow 0.2s var(--cm-ease);
+  }
+  
+  .contact-modal__field textarea {
+    resize: vertical;
+    min-height: 96px;
+    line-height: 1.5;
+  }
+  
+  .contact-modal__field input:hover,
+  .contact-modal__field textarea:hover {
+    border-color: var(--cm-border-strong);
+  }
+  
+  .contact-modal__field input:focus,
+  .contact-modal__field textarea:focus {
+    outline: none;
+    border-color: var(--cm-accent);
+    background: rgba(59, 130, 246, 0.06);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+  }
+  
+  .contact-modal__field label {
+    position: absolute;
+    left: 15px;
+    top: 16px;
+    font-size: 15px;
+    color: var(--cm-muted);
+    pointer-events: none;
+    transform-origin: left top;
+    transition: transform 0.16s var(--cm-ease), color 0.16s var(--cm-ease), top 0.16s var(--cm-ease);
+  }
+  
+  .contact-modal__field input:focus + label,
+  .contact-modal__field textarea:focus + label,
+  .contact-modal__field--filled input + label,
+  .contact-modal__field--filled textarea + label,
+  .contact-modal__field input:not(:placeholder-shown) + label,
+  .contact-modal__field textarea:not(:placeholder-shown) + label {
+    top: 6px;
+    transform: scale(0.78);
+    color: var(--cm-accent-2);
+  }
+  
+  .contact-modal__field--textarea label {
+    top: 16px;
+  }
+  
+  .contact-modal__field--error input,
+  .contact-modal__field--error textarea {
+    border-color: var(--cm-error);
+  }
+  
+  .contact-modal__field--error input:focus,
+  .contact-modal__field--error textarea:focus {
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.16);
+  }
+  
+  .contact-modal__error {
+    display: block;
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--cm-error);
+    animation: cm-error-in 0.18s var(--cm-ease);
+  }
+  
+  @keyframes cm-error-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .contact-modal__banner {
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
+  }
+  
+  .contact-modal__banner--error {
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.28);
+    color: #fca5a5;
+  }
+  
+  /* ==========================================================================
+     Submit button
+     ========================================================================== */
+  .contact-modal__submit {
+    position: relative;
+    margin-top: 4px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--cm-accent), #6366f1);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.28);
+    transition: transform 0.18s var(--cm-ease), box-shadow 0.18s var(--cm-ease),
+      filter 0.18s var(--cm-ease);
+  }
+  
+  .contact-modal__submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.38);
+    filter: brightness(1.06);
+  }
+  
+  .contact-modal__submit:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  .contact-modal__submit:focus-visible {
+    outline: 2px solid var(--cm-accent-2);
+    outline-offset: 3px;
+  }
+  
+  .contact-modal__submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+  
+  .contact-modal__spinner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    animation: cm-spin 0.7s linear infinite;
+  }
+  
+  @keyframes cm-spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* ==========================================================================
+     Success state
+     ========================================================================== */
+  .contact-modal__result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 8px 12px;
+  }
+  
+  .contact-modal__result-icon {
+    margin-bottom: 18px;
+  }
+  
+  .contact-modal__check-circle {
+    stroke: var(--cm-success);
+    stroke-width: 2.5;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    animation: cm-circle-draw 0.5s var(--cm-ease) forwards;
+  }
+  
+  .contact-modal__check-mark {
+    stroke: var(--cm-success);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: cm-check-draw 0.35s var(--cm-ease) 0.4s forwards;
+  }
+  
+  @keyframes cm-circle-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  
+  @keyframes cm-check-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  
+  .contact-modal__result h3 {
+    margin: 0 0 6px;
+    font-size: 20px;
+  }
+  
+  .contact-modal__result p {
+    margin: 0;
+    color: var(--cm-muted);
+    font-size: 14px;
+  }
+  
+  /* ==========================================================================
+     Responsive
+     ========================================================================== */
+  @media (max-width: 480px) {
+    .contact-modal {
+      padding: 0;
+      align-items: flex-end;
+    }
+  
+    .contact-modal__dialog {
+      max-width: 100%;
+      width: 100%;
+      max-height: 92vh;
+      border-radius: 22px 22px 0 0;
+      padding: 28px 20px 24px;
+      animation: cm-sheet-in 0.32s var(--cm-ease);
+    }
+  
+    @keyframes cm-sheet-in {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+  }
+  
+  /* ==========================================================================
+     Reduced motion
+     ========================================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    .contact-modal,
+    .contact-modal__dialog,
+    .contact-modal__glow,
+    .contact-modal__submit,
+    .contact-modal__spinner,
+    .contact-modal__form--shake,
+    .contact-modal__check-circle,
+    .contact-modal__check-mark {
+      animation: none !important;
+      transition: none !important;
+    }
+  }

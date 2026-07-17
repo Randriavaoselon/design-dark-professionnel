@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
-  LayoutDashboard,
-  BarChart3,
-  Users,
-  Settings,
+  Layers,
+  Info,
+  HelpCircle,
+  Mail,
   Menu,
   X,
 } from "lucide-react";
 import "../styles/Sidebarmenu.css";
 
 const DEFAULT_ITEMS = [
-  { id: "overview", label: "Vue d'ensemble", href: "#", Icon: LayoutDashboard },
-  { id: "stats", label: "Statistiques", href: "#", Icon: BarChart3, badge: 3 },
-  { id: "team", label: "Équipe", href: "#", Icon: Users },
-  { id: "settings", label: "Paramètres", href: "#", Icon: Settings },
+  { id: "services", label: "Services", href: "#services", Icon: Layers },
+  { id: "apropos", label: "À propos", href: "#a-propos", Icon: Info },
+  { id: "faqs", label: "FAQs", href: "#faqs", Icon: HelpCircle },
+  { id: "contact", label: "Contact", href: "#contact", Icon: Mail },
 ];
 
 const SCROLL_DELTA_THRESHOLD = 6;

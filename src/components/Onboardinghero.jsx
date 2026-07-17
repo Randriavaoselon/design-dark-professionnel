@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import ModalContact from "./ModalContact";
 import Simplify from "./Simplify";
 import "../styles/Onboardinghero.css";
 
@@ -18,12 +19,7 @@ function AvatarRail({ avatars, side }) {
       <div className="onboarding__rail-node onboarding__rail-node--start">
         <span className="onboarding__rail-dot onboarding__rail-dot--edge" />
         <div className="onboarding__avatar onboarding__avatar--start">
-          <img
-            src={avatars.start.src}
-            alt=""
-            className="onboarding__avatar-img"
-            loading="lazy"
-          />
+          <img src={avatars.start.src} alt="" className="onboarding__avatar-img" loading="lazy" />
         </div>
       </div>
 
@@ -34,12 +30,7 @@ function AvatarRail({ avatars, side }) {
       <div className="onboarding__rail-node onboarding__rail-node--end">
         <span className="onboarding__rail-dot onboarding__rail-dot--edge" />
         <div className="onboarding__avatar onboarding__avatar--end">
-          <img
-            src={avatars.end.src}
-            alt=""
-            className="onboarding__avatar-img"
-            loading="lazy"
-          />
+          <img src={avatars.end.src} alt="" className="onboarding__avatar-img" loading="lazy" />
         </div>
       </div>
     </div>
@@ -49,6 +40,7 @@ function AvatarRail({ avatars, side }) {
 function OnboardingHero() {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -68,12 +60,11 @@ function OnboardingHero() {
     );
 
     observer.observe(node);
-
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="onboarding-background">
+    <div className="onboarding-background" id="contact">
       <Simplify />
       <section
         className={`onboarding ${isVisible ? "is-visible" : ""}`}
@@ -81,25 +72,9 @@ function OnboardingHero() {
       >
         <div className="onboarding__container">
           {/* Anneaux d'orbite décoratifs */}
-          <svg
-            className="onboarding__orbits"
-            viewBox="0 0 800 800"
-            aria-hidden="true"
-          >
-            <ellipse
-              className="onboarding__orbit-ring onboarding__orbit-ring--outer"
-              cx="400"
-              cy="400"
-              rx="380"
-              ry="260"
-            />
-            <ellipse
-              className="onboarding__orbit-ring onboarding__orbit-ring--inner"
-              cx="400"
-              cy="400"
-              rx="250"
-              ry="340"
-            />
+          <svg className="onboarding__orbits" viewBox="0 0 800 800" aria-hidden="true">
+            <ellipse className="onboarding__orbit-ring onboarding__orbit-ring--outer" cx="400" cy="400" rx="380" ry="260" />
+            <ellipse className="onboarding__orbit-ring onboarding__orbit-ring--inner" cx="400" cy="400" rx="250" ry="340" />
           </svg>
 
           <AvatarRail avatars={LEFT_AVATARS} side="left" />
@@ -109,7 +84,6 @@ function OnboardingHero() {
           <div className="phone">
             <div className="phone__frame">
               <div className="phone__notch" />
-
               <div className="phone__screen">
                 <div className="phone__status-bar">
                   <span className="phone__status-dot" />
@@ -123,38 +97,15 @@ function OnboardingHero() {
                 </h1>
 
                 <div className="phone__illustration">
-                  <svg
-                    viewBox="0 0 220 200"
-                    className="phone__illustration-svg"
-                    aria-hidden="true"
-                  >
-                    {/* Corps isométrique de la boîte / plateau */}
+                  {/* ... Votre SVG reste inchangé ... */}
+                  <svg viewBox="0 0 220 200" className="phone__illustration-svg" aria-hidden="true">
                     <g className="illustration__box">
-                      <polygon
-                        className="illustration__face illustration__face--top"
-                        points="110,30 180,68 110,106 40,68"
-                      />
-                      <polygon
-                        className="illustration__face illustration__face--left"
-                        points="40,68 110,106 110,160 40,122"
-                      />
-                      <polygon
-                        className="illustration__face illustration__face--right"
-                        points="110,106 180,68 180,122 110,160"
-                      />
-                      {/* Fente / accent jaune */}
-                      <polygon
-                        className="illustration__accent"
-                        points="118,116 168,90 168,100 118,126"
-                      />
-                      {/* Bandeau bleu */}
-                      <polygon
-                        className="illustration__stripe"
-                        points="46,80 104,110 104,120 46,90"
-                      />
+                      <polygon className="illustration__face illustration__face--top" points="110,30 180,68 110,106 40,68" />
+                      <polygon className="illustration__face illustration__face--left" points="40,68 110,106 110,160 40,122" />
+                      <polygon className="illustration__face illustration__face--right" points="110,106 180,68 180,122 110,160" />
+                      <polygon className="illustration__accent" points="118,116 168,90 168,100 118,126" />
+                      <polygon className="illustration__stripe" points="46,80 104,110 104,120 46,90" />
                     </g>
-
-                    {/* Enveloppe qui s'envole */}
                     <g className="illustration__envelope">
                       <rect x="128" y="18" width="46" height="32" rx="3" />
                       <polyline points="128,20 151,38 174,20" />
@@ -162,16 +113,25 @@ function OnboardingHero() {
                   </svg>
                 </div>
 
-                <button type="button" className="phone__cta">
-                  Commencer
+                <button 
+                  type="button" 
+                  className="phone__cta" 
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Contactez-nous
                 </button>
               </div>
-
               <div className="phone__home-indicator" />
             </div>
           </div>
         </div>
       </section>
+
+      {/* Le Modal est rendu ici, au niveau du parent */}
+      <ModalContact 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 }

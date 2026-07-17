@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useMemo, useState } from "react";
 
 import BoutonComponent from "./Bouton";
+import ModalContact from "./ModalContact"
 import "../styles/Home.css";
 
 import heroImage from "../assets/Hero.webp";
@@ -181,6 +182,8 @@ function Home({ className }) {
       paragraphLength: PARAGRAPH_TEXT.length,
     });
 
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
   const fullTitleText = "Votre site web moderne et sur mesure";
 
   let consumed = 0;
@@ -227,8 +230,7 @@ function Home({ className }) {
             >
               <BoutonComponent
                 text="Commencer"
-                onClick={() => console.log("Action déclenchée")}
-                href="/commencer"
+                onClick={() => setIsContactOpen(true)}
               />
             </div>
           </div>
@@ -242,6 +244,11 @@ function Home({ className }) {
           </div>
         </div>
       </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 }

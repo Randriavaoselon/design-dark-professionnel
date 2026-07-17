@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Target, Code2, Palette, Wrench, Rocket } from "lucide-react";
 import BoutonComponent from "./Bouton";
+import ModalContact from "./ModalContact";
 import "../styles/WorksList.css";
 
 const leftItems = [
@@ -38,6 +39,7 @@ const rightItems = [
 const WorksList = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -123,12 +125,16 @@ const WorksList = () => {
         <div className="works-list-cta">
           <BoutonComponent
             text="Commencer"
-            onClick={() => console.log("Action déclenchée")}
+            onClick={() => setIsContactOpen(true)}
             className="btn-works-list"
-            href="/commencer"
           />
         </div>
       </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 };

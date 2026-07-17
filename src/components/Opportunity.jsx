@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
+import ModalContact from "./ModalContact";
 import '../styles/Opportunity.css';
 import opportunityImage from '../assets/opportunity-image.webp';
 
 const Opportunity = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,13 +54,17 @@ const Opportunity = () => {
             </p>
             <BoutonComponent
               text="Commencer"
-              onClick={() => console.log("Action déclenchée")}
+              onClick={() => setIsContactOpen(true)}
               className="btn-oppotunity"
-              href="/commencer"
             />
           </div>
         </div>
       </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 };

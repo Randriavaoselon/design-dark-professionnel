@@ -26,7 +26,7 @@ const SectionChoose = () => {
   }, []);
 
   return (
-    <div className="background-section-choose">
+    <div className="background-section-choose" id="a-propos">
       <section
         ref={sectionRef}
         className={`section-choose ${isVisible ? "is-visible" : ""}`}

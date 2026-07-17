@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
+import ModalContact from "./ModalContact";
 import { ShieldCheck, Zap, LineChart, Layers } from "lucide-react";
 import photoImage from "../assets/photo-solution.webp";
 import "../styles/Solution.css";
@@ -34,6 +35,7 @@ const cards = [
 export default function Solution() {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -61,6 +63,7 @@ export default function Solution() {
     <section
       className={`solution-section ${isVisible ? "is-visible" : ""}`}
       ref={sectionRef}
+      id="services"
     >
       <div className="solution-container">
         <div className="solution-row">
@@ -96,13 +99,17 @@ export default function Solution() {
 
             <BoutonComponent
               text="Commencer"
-              onClick={() => console.log("Action déclenchée")}
+              onClick={() => setIsContactOpen(true)}
               className="btn-solution"
-              href="/commencer"
             />
           </div>
         </div>
       </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 }

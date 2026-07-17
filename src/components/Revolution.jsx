@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
+import ModalContact from "./ModalContact" 
 import revolutionImage from "../assets/revolution-image.webp";
 import "../styles/Revolution.css";
 
@@ -37,6 +38,7 @@ function useInViewOnce(options = { threshold: 0.5 }) {
 
 const Revolution = () => {
   const [sectionRef, isInView] = useInViewOnce({ threshold: 0.5 });
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
     <section
@@ -44,6 +46,7 @@ const Revolution = () => {
         isInView ? "revolution-section--visible" : ""
       }`.trim()}
       ref={sectionRef}
+      id="tarifs"
     >
       <div className="revolution-container">
         <div className="revolution-row">
@@ -57,8 +60,7 @@ const Revolution = () => {
             </p>
             <BoutonComponent
               text="Commencer"
-              onClick={() => console.log("Action déclenchée")}
-              href="/commencer"
+              onClick={() => setIsContactOpen(true)}
             />
           </div>
 
@@ -74,6 +76,11 @@ const Revolution = () => {
           </div>
         </div>
       </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   );
 };
