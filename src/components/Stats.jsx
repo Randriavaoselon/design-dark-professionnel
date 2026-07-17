@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Users, TrendingUp, Award } from "lucide-react";
+import { Globe, Smartphone, Rocket } from "lucide-react";
 
 import PropTypes from "prop-types";
 import imageSrc from "../assets/icon-center.webp";
@@ -52,7 +52,7 @@ function Stats({ title }) {
         }`.trim()}
         ref={sectionRef}
       >
-        <img className="badge-image" src={imageSrc} alt="Icone au centre" />
+        <img className="badge-image" src={imageSrc} alt="Icone Avenir Tech" />
         <div className="container-stat">
           <div className="row-stat">
             <h1 className="title">{title}</h1>
@@ -61,16 +61,16 @@ function Stats({ title }) {
       </section>
       <ResultatStat
         imageSrc={imageStat}
-        imageAlt="Logo"
+        imageAlt="Logo Avenir Tech"
         stats={[
           {
             id: 1,
-            Icon: Users,
-            value: "1200+",
+            Icon: Globe,
+            value: "50+",
             color: "#03cf90",
           },
-          { id: 2, Icon: TrendingUp, value: "98%", color: "#6acad6" },
-          { id: 3, Icon: Award, value: "15", color: "#03cf90" },
+          { id: 2, Icon: Smartphone, value: "100%", color: "#6acad6" },
+          { id: 3, Icon: Rocket, value: "5", color: "#03cf90" },
         ]}
         animate={isInView}
       />

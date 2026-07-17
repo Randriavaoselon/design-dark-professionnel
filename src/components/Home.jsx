@@ -10,7 +10,7 @@ import coBadge from "../assets/iconText2.webp";
 import platformBadge from "../assets/iconText3.webp";
 
 const PARAGRAPH_TEXT =
-  "Connectez les meilleurs talents à vos opportunités grâce à un réseau de recommandations professionnelles fiable et efficace.";
+  "Avenir Tech conçoit des sites web modernes, responsives et professionnels, pensés pour propulser votre entreprise vers l'avenir du numérique.";
 
 const PHASES = {
   TITLE: "title",
@@ -22,16 +22,16 @@ const PHASES = {
 function useTitleBlocks() {
   return useMemo(() => {
     const blocks = [
-      { type: "plainText", text: "Professionnal" },
+      { type: "plainText", text: "Votre site web" },
       { type: "badge", key: "badge-pro", src: professionnalBadge },
       { type: "break" },
-      { type: "prefixedWord", key: "word-co", badgeSrc: coBadge, text: "Co" },
-      { type: "plainText", text: "-optation " },
+      { type: "prefixedWord", key: "word-co", badgeSrc: coBadge, text: "moderne et" },
+      { type: "break" },
       {
         type: "suffixedWord",
         key: "word-platform",
         badgeSrc: platformBadge,
-        text: "Platform",
+        text: "sur mesure",
       },
     ];
 
@@ -181,7 +181,7 @@ function Home({ className }) {
       paragraphLength: PARAGRAPH_TEXT.length,
     });
 
-  const fullTitleText = "Professionnal Co-optation Platform";
+  const fullTitleText = "Votre site web moderne et sur mesure";
 
   let consumed = 0;
 

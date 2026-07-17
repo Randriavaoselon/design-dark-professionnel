@@ -53,7 +53,7 @@ function App() {
       />
 
       <Home />
-      <Stats title="Bienvenue sur mon site" />
+      <Stats title="Ce que nous vous offrons" />
       <SolutionTitre />
       <Cooptation />
       <Recrutement />

@@ -19,7 +19,7 @@ const Cooptation = () => {
         }
       },
       {
-        threshold: 0.5, 
+        threshold: 0.5,
       }
     );
 
@@ -40,7 +40,7 @@ const Cooptation = () => {
             <div className="cooptation-col-img">
               <img
                 src={imageCoop}
-                alt="Cooptation professionnelle"
+                alt="Programme de parrainage Avenir Tech"
                 className="cooptation-image"
               />
             </div>
@@ -48,16 +48,17 @@ const Cooptation = () => {
             {/* Colonne Droite : Texte et bouton */}
             <div className="cooptation-col-text">
               <h2 className="cooptation-title">
-                Rejoignez notre réseau de cooptation
+                Recommandez-nous, gagnez des avantages
               </h2>
               <p className="cooptation-paragraph">
-                Partagez les talents de votre entourage et contribuez à
-                construire des équipes d'exception. Votre implication est
-                récompensée à chaque étape du processus.
+                Vous connaissez quelqu'un qui a besoin d'un site web ?
+                Parrainez-le auprès d'Avenir Tech et bénéficiez d'une réduction
+                sur votre prochaine prestation, valable dès la signature de son
+                projet.
               </p>
               <div className="cooptation-btn-wrapper">
                 <BoutonComponent
-                  text="Recommander un talent"
+                  text="Parrainer un contact"
                   className="btn-cooptation"
                   href="/coopte"
                 />
