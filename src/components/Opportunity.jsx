@@ -42,11 +42,13 @@ const Opportunity = () => {
 
           <div className="opportunity-col opportunity-col--content">
             <h2 className="opportunity-col__title">
-              Saisissez chaque opportunité
+              Chaque projet est une opportunité de croissance
             </h2>
             <p className="opportunity-col__text">
-              Rejoignez une communauté de professionnels engagés et transformez
-              vos idées en projets concrets grâce à un accompagnement sur mesure.
+              Que vous lanciez votre activité ou souhaitiez moderniser votre
+              présence en ligne, Avenir-Tech transforme votre vision en un
+              site web performant, avec un accompagnement sur mesure à
+              chaque étape.
             </p>
             <BoutonComponent
               text="Commencer"

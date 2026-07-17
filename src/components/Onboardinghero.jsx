@@ -117,9 +117,9 @@ function OnboardingHero() {
                 </div>
 
                 <h1 className="phone__title">
-                  Your messages,
+                  Votre projet web,
                   <br />
-                  all in one place
+                  suivi en un seul endroit
                 </h1>
 
                 <div className="phone__illustration">
@@ -163,7 +163,7 @@ function OnboardingHero() {
                 </div>
 
                 <button type="button" className="phone__cta">
-                  Get started
+                  Commencer
                 </button>
               </div>
 
