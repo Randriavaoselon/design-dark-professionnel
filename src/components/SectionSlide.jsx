@@ -4,8 +4,8 @@ import '../styles/SectionSlide.css';
 const cards = [
   {
     id: 1,
-    title: 'Connexion rapide',
-    text: 'Trouvez les bons profils et opportunités en quelques clics, sans complexité inutile.',
+    title: 'Livraison rapide',
+    text: 'De la maquette à la mise en ligne, nous livrons des sites web performants dans des délais courts et maîtrisés.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <circle cx="12" cy="8" r="3.2" />
@@ -16,7 +16,7 @@ const cards = [
   {
     id: 2,
     title: 'Sécurité renforcée',
-    text: 'Vos données et vos échanges sont protégés à chaque étape du parcours.',
+    text: 'Certificat SSL, hébergement fiable et bonnes pratiques de sécurité intégrés à chaque site que nous livrons.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z" strokeLinejoin="round" />
@@ -26,8 +26,8 @@ const cards = [
   },
   {
     id: 3,
-    title: 'Suivi en temps réel',
-    text: 'Visualisez l\'évolution de vos échanges et de vos statistiques instantanément.',
+    title: 'Suivi de projet transparent',
+    text: 'Suivez l\'avancement de votre site à chaque étape, avec des points de validation clairs jusqu\'à la mise en ligne.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M4 19V9M12 19V5M20 19v-6" strokeLinecap="round" />
@@ -38,7 +38,7 @@ const cards = [
   {
     id: 4,
     title: 'Support dédié',
-    text: 'Une équipe disponible pour vous accompagner à chaque étape de votre parcours.',
+    text: 'Une équipe disponible avant, pendant et après la mise en ligne pour répondre à vos besoins et faire évoluer votre site.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M4 12a8 8 0 1116 0" strokeLinecap="round" />

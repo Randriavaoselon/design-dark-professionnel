@@ -32,11 +32,12 @@ const SectionNetwork = () => {
       <div className="section-network-container">
         <div className="section-network-row">
           <h2 className="section-network__title">
-            Rejoignez notre réseau
+            Parlons de votre projet
           </h2>
           <p className="section-network__text">
-            Connectez-vous à une communauté de partenaires et de talents
-            engagés, prêts à collaborer sur des projets qui font la
+            Entreprises, indépendants ou startups : notre équipe vous
+            accompagne pour donner vie à un site web à votre image et
+            construire ensemble une présence en ligne qui fait la
             différence.
           </p>
           <BoutonComponent

@@ -38,16 +38,17 @@ const SectionChoose = () => {
                 Pourquoi nous choisir
               </span>
               <h2 className="section-choose__title">
-                Une plateforme pensée pour votre réussite
+                Une agence pensée pour votre réussite
               </h2>
             </div>
 
             <div className="section-choose__col section-choose__col--right">
               <p className="section-choose__paragraph">
-                Avenir-Tech connecte les talents et les opportunités à travers
-                un écosystème simple, transparent et adapté aux réalités
-                locales. Notre approche allie technologie moderne et
-                accompagnement humain pour donner à chacun les moyens d'avancer.
+                Avenir-Tech conçoit des sites web modernes, rapides et
+                responsives, avec une approche simple, transparente et
+                adaptée à vos réalités. Nous allions technologies actuelles
+                et accompagnement humain pour donner à chaque entreprise les
+                moyens d'avancer dans le monde numérique.
               </p>
             </div>
           </div>

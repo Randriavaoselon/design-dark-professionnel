@@ -34,11 +34,12 @@ const Simplify = () => {
       >
         <div className="simplify-container">
           <div className="simplify-row">
-            <h2 className="simplify-title">Simplify Your Workflow</h2>
+            <h2 className="simplify-title">Simplifiez votre présence en ligne</h2>
             <p className="simplify-paragraph">
-              Nous transformons la complexité en simplicité. Notre mission est
-              d'optimiser vos processus pour une productivité accrue et une
-              expérience utilisateur fluide.
+              Avenir-Tech transforme vos idées en un site web clair et
+              efficace. De la conception à la mise en ligne, nous simplifions
+              chaque étape pour vous offrir une expérience fluide, sans
+              complexité technique de votre côté.
             </p>
           </div>
         </div>

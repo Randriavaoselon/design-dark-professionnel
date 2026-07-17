@@ -3,12 +3,12 @@ import '../../styles/Footer.css';
 const footerColumns = [
   {
     id: 1,
-    title: 'Produit',
+    title: 'Services',
     links: [
-      { label: 'Fonctionnalités', href: '#' },
+      { label: 'Création de sites web', href: '#' },
       { label: 'Tarifs', href: '#' },
       { label: 'FAQ', href: '#' },
-      { label: 'Mises à jour', href: '#' }
+      { label: 'Maintenance', href: '#' }
     ]
   },
   {

@@ -2,12 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import '../styles/FAQS.css';
 
 const faqs = [
-  { id: 1, question: 'Comment fonctionne Avenir-Tech ?', answer: 'Avenir-Tech met en relation talents et opportunités à travers une plateforme simple : créez votre profil, explorez les offres correspondantes et échangez directement avec les personnes concernées.' },
-  { id: 2, question: 'La création d\'un compte est-elle gratuite ?', answer: 'Oui, l\'inscription et la création de profil sont entièrement gratuites. Certaines fonctionnalités avancées peuvent être proposées via des offres premium.' },
-  { id: 3, question: 'Mes données sont-elles protégées ?', answer: 'Toutes vos données sont chiffrées et stockées de manière sécurisée. Nous ne partageons jamais vos informations personnelles sans votre consentement explicite.' },
-  { id: 4, question: 'Puis-je modifier mon profil après inscription ?', answer: 'Bien sûr. Vous pouvez mettre à jour vos informations, vos préférences et vos documents à tout moment depuis votre espace personnel.' },
-  { id: 5, question: 'Comment contacter le support ?', answer: 'Notre équipe support est disponible via le formulaire de contact ou par email. Nous répondons généralement sous 24 à 48 heures ouvrées.' },
-  { id: 6, question: 'Puis-je supprimer mon compte à tout moment ?', answer: 'Oui, vous pouvez supprimer votre compte et l\'ensemble de vos données associées à tout moment depuis les paramètres de votre profil.' }
+  { id: 1, question: 'Comment se déroule un projet avec Avenir-Tech ?', answer: 'Après un échange sur vos besoins, nous vous proposons une proposition claire (objectifs, délais, budget). Nous concevons ensuite votre site par étapes, avec des points de validation réguliers, jusqu\'à la mise en ligne.' },
+  { id: 2, question: 'Combien de temps faut-il pour créer un site web ?', answer: 'Cela dépend de la complexité du projet. Un site vitrine peut être livré en 2 à 3 semaines, tandis qu\'une plateforme sur mesure demande généralement de 4 à 8 semaines.' },
+  { id: 3, question: 'Le site sera-t-il adapté aux mobiles et optimisé pour Google ?', answer: 'Oui. Chaque site que nous concevons est entièrement responsive et optimisé pour le référencement (SEO) dès sa conception, afin d\'assurer une bonne visibilité et une expérience fluide sur tous les écrans.' },
+  { id: 4, question: 'Puis-je modifier mon site après sa mise en ligne ?', answer: 'Bien sûr. Selon la solution choisie, vous disposez d\'un espace d\'administration simple pour mettre à jour vos textes et vos images, ou vous pouvez nous confier ces modifications via notre offre de maintenance.' },
+  { id: 5, question: 'Proposez-vous un accompagnement après la livraison ?', answer: 'Oui, nous proposons un suivi technique, des mises à jour de sécurité et une assistance réactive pour garantir la performance de votre site dans la durée.' },
+  { id: 6, question: 'Comment demander un devis pour mon projet ?', answer: 'Il vous suffit de nous contacter via le formulaire du site ou par email en décrivant votre projet. Nous revenons généralement vers vous sous 24 à 48 heures ouvrées avec une proposition adaptée.' }
 ];
 
 const FAQS = () => {
