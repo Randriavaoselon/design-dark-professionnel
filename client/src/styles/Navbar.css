@@ -28,7 +28,14 @@
     top: clamp(0.75rem, 2vw, 1.5rem);
     left: 0;
     right: 0;
-    z-index: 100;
+    /* FIX: la navbar doit rester au-dessus de TOUTE la page, y compris
+       les sections qui définissent leur propre stacking context avec un
+       z-index plus élevé localement (ex: .home__row { z-index: 130 }).
+       Comme .navbar (position: fixed) crée son propre stacking context,
+       tous ses enfants (dont .navbar__mobile-panel à z-index:200) restent
+       "piégés" au niveau 100 vu de l'extérieur. On remonte donc ce niveau
+       très haut pour être sûr qu'il passe devant toutes les autres sections. */
+    z-index: 1000;
     width: 100%;
     padding: 0 clamp(0.75rem, 3vw, 1.5rem);
     font-family: var(--navbar-font);
