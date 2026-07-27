@@ -39,6 +39,7 @@
     width: 100%;
     padding: 0 clamp(0.75rem, 3vw, 1.5rem);
     font-family: var(--navbar-font);
+<<<<<<< HEAD
     transition:
       top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
       transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -48,6 +49,17 @@
   /* État masqué : la navbar glisse hors de l'écran vers le haut lors d'un scroll vers le bas */
   .navbar--hidden {
     transform: translateY(-140%);
+=======
+  
+    /* FIX: .navbar (la <section>) n'a pas de fond propre — seul .navbar__row
+       en a un — mais elle reste une vraie boîte HTML qui couvre toute la
+       largeur de l'écran. Sans ceci, les zones vides autour du pill (marges,
+       padding horizontal) interceptent les clics destinés au contenu situé
+       en dessous, même si rien n'y est visible. On désactive les clics sur
+       le conteneur et on les réactive uniquement sur les zones qui portent
+       réellement du contenu interactif (cf. plus bas). */
+    pointer-events: none;
+>>>>>>> f383a9e (Version-corriger-Dark)
   }
   
   /* ==========================================================================
@@ -57,6 +69,12 @@
     width: 90%;
     max-width: 1280px;
     margin-inline: auto;
+<<<<<<< HEAD
+=======
+  
+    /* FIX: réactive les clics uniquement sur la zone réelle du pill */
+    pointer-events: auto;
+>>>>>>> f383a9e (Version-corriger-Dark)
   }
   
   /* ==========================================================================
@@ -79,6 +97,7 @@
   
     -webkit-backdrop-filter: blur(var(--navbar-blur)) saturate(160%);
     backdrop-filter: blur(var(--navbar-blur)) saturate(160%);
+<<<<<<< HEAD
   
     transition:
       padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -88,6 +107,8 @@
       -webkit-backdrop-filter 0.45s ease,
       backdrop-filter 0.45s ease;
     will-change: padding, background, box-shadow;
+=======
+>>>>>>> f383a9e (Version-corriger-Dark)
   }
   
   /* ==========================================================================
@@ -179,8 +200,11 @@
     height: clamp(50px, 4vw, 40px);
     width: auto;
     display: block;
+<<<<<<< HEAD
   
     transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+=======
+>>>>>>> f383a9e (Version-corriger-Dark)
   }
   
   .navbar__logo-text {
@@ -228,7 +252,10 @@
     white-space: nowrap;
     box-shadow: 0 4px 14px rgba(212, 175, 55, 0.28);
     transition:
+<<<<<<< HEAD
       padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+=======
+>>>>>>> f383a9e (Version-corriger-Dark)
       transform 0.2s ease,
       box-shadow 0.2s ease,
       background 0.2s ease;
@@ -308,6 +335,12 @@
     opacity: 0;
     transform: translateY(-12px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+<<<<<<< HEAD
+=======
+    /* pointer-events:none volontairement gardé ici : le panneau est fermé
+       par défaut, il ne doit rien intercepter tant que --open n'est pas
+       actif (cf. règle .navbar__mobile-panel--open juste en dessous) */
+>>>>>>> f383a9e (Version-corriger-Dark)
     pointer-events: none;
   }
   
@@ -668,6 +701,7 @@
     .navbar__mobile-close {
       transition: none;
     }
+<<<<<<< HEAD
   }
   
   /* ==========================================================================
@@ -718,4 +752,6 @@
     .navbar__cta {
       transition: none;
     }
+=======
+>>>>>>> f383a9e (Version-corriger-Dark)
   }
