@@ -39,17 +39,6 @@
     width: 100%;
     padding: 0 clamp(0.75rem, 3vw, 1.5rem);
     font-family: var(--navbar-font);
-<<<<<<< HEAD
-    transition:
-      top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  
-  }
-  
-  /* État masqué : la navbar glisse hors de l'écran vers le haut lors d'un scroll vers le bas */
-  .navbar--hidden {
-    transform: translateY(-140%);
-=======
   
     /* FIX: .navbar (la <section>) n'a pas de fond propre — seul .navbar__row
        en a un — mais elle reste une vraie boîte HTML qui couvre toute la
@@ -59,7 +48,6 @@
        le conteneur et on les réactive uniquement sur les zones qui portent
        réellement du contenu interactif (cf. plus bas). */
     pointer-events: none;
->>>>>>> f383a9e (Version-corriger-Dark)
   }
   
   /* ==========================================================================
@@ -69,12 +57,9 @@
     width: 90%;
     max-width: 1280px;
     margin-inline: auto;
-<<<<<<< HEAD
-=======
   
     /* FIX: réactive les clics uniquement sur la zone réelle du pill */
     pointer-events: auto;
->>>>>>> f383a9e (Version-corriger-Dark)
   }
   
   /* ==========================================================================
@@ -97,18 +82,6 @@
   
     -webkit-backdrop-filter: blur(var(--navbar-blur)) saturate(160%);
     backdrop-filter: blur(var(--navbar-blur)) saturate(160%);
-<<<<<<< HEAD
-  
-    transition:
-      padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      -webkit-backdrop-filter 0.45s ease,
-      backdrop-filter 0.45s ease;
-    will-change: padding, background, box-shadow;
-=======
->>>>>>> f383a9e (Version-corriger-Dark)
   }
   
   /* ==========================================================================
@@ -200,11 +173,6 @@
     height: clamp(50px, 4vw, 40px);
     width: auto;
     display: block;
-<<<<<<< HEAD
-  
-    transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-=======
->>>>>>> f383a9e (Version-corriger-Dark)
   }
   
   .navbar__logo-text {
@@ -252,10 +220,6 @@
     white-space: nowrap;
     box-shadow: 0 4px 14px rgba(212, 175, 55, 0.28);
     transition:
-<<<<<<< HEAD
-      padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-=======
->>>>>>> f383a9e (Version-corriger-Dark)
       transform 0.2s ease,
       box-shadow 0.2s ease,
       background 0.2s ease;
@@ -335,12 +299,9 @@
     opacity: 0;
     transform: translateY(-12px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
-<<<<<<< HEAD
-=======
     /* pointer-events:none volontairement gardé ici : le panneau est fermé
        par défaut, il ne doit rien intercepter tant que --open n'est pas
        actif (cf. règle .navbar__mobile-panel--open juste en dessous) */
->>>>>>> f383a9e (Version-corriger-Dark)
     pointer-events: none;
   }
   
@@ -701,57 +662,4 @@
     .navbar__mobile-close {
       transition: none;
     }
-<<<<<<< HEAD
-  }
-  
-  /* ==========================================================================
-     ÉTAT SCROLLÉ — navbar
-     ========================================================================== */
-  
-  .navbar--scrolled {
-    top: clamp(0.4rem, 1vw, 0.65rem);
-  }
-  
-  .navbar--scrolled .navbar__row {
-    padding: 0.55rem clamp(1rem, 2.5vw, 1.75rem);
-  
-    background: rgba(8, 8, 31, 0.62);
-    border-color: rgba(255, 255, 255, 0.14);
-  
-    -webkit-backdrop-filter: blur(26px) saturate(180%);
-    backdrop-filter: blur(26px) saturate(180%);
-  
-    box-shadow:
-      0 12px 34px rgba(0, 0, 0, 0.32),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-  
-  .navbar--scrolled .navbar__logo-img {
-    height: clamp(38px, 3vw, 32px);
-  }
-  
-  .navbar--scrolled .navbar__cta {
-    padding: 0.85rem 2.25rem;
-  }
-  
-  @media (max-width: 1024px) {
-    .navbar--scrolled {
-      top: clamp(0.3rem, 1vw, 0.5rem);
-    }
-  
-    .navbar--scrolled .navbar__row {
-      padding: 0.5rem 0.9rem;
-    }
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-  
-    .navbar,
-    .navbar__row,
-    .navbar__logo-img,
-    .navbar__cta {
-      transition: none;
-    }
-=======
->>>>>>> f383a9e (Version-corriger-Dark)
   }
