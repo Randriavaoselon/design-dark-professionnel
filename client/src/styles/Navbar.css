@@ -39,6 +39,7 @@
     width: 100%;
     padding: 0 clamp(0.75rem, 3vw, 1.5rem);
     font-family: var(--navbar-font);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   
     /* FIX: .navbar (la <section>) n'a pas de fond propre — seul .navbar__row
        en a un — mais elle reste une vraie boîte HTML qui couvre toute la
@@ -47,6 +48,19 @@
        en dessous, même si rien n'y est visible. On désactive les clics sur
        le conteneur et on les réactive uniquement sur les zones qui portent
        réellement du contenu interactif (cf. plus bas). */
+    pointer-events: none;
+  }
+  
+  /* État masqué : la navbar glisse hors de l'écran vers le haut lors d'un
+     scroll vers le bas. Le pointer-events:none est redondant avec celui
+     posé sur .navbar (déjà en place), mais on le garde explicite ici pour
+     que ce comportement reste évident indépendamment du fix précédent. */
+  .navbar--hidden {
+    transform: translateY(-140%);
+    pointer-events: none;
+  }
+  
+  .navbar--hidden .navbar__container {
     pointer-events: none;
   }
   
@@ -656,6 +670,7 @@
   
   @media (prefers-reduced-motion: reduce) {
   
+    .navbar,
     .navbar__mobile-panel,
     .navbar__mobile-item,
     .navbar__mobile-cta,
