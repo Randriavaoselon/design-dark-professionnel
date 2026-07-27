@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import ModalContact from "../ModalContact";
 import "../../styles/Navbar.css";
@@ -6,6 +6,10 @@ import "../../styles/Navbar.css";
 function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   const allMenuItems = [...leftMenuItems, ...rightMenuItems];
 
@@ -19,6 +23,36 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
     setIsContactOpen(true);
     ctaButton?.onClick?.(e);
   };
+
+  // --- Masque la navbar en scrollant vers le bas, la révèle vers le haut
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const updateNavbar = () => {
+      const currentScrollY = window.scrollY;
+
+      if (isMenuOpen) {
+        setIsHidden(false);
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+      ticking.current = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateNavbar);
+        ticking.current = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isMenuOpen]);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -42,7 +76,13 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const navbarClasses = ["navbar", className || ""].filter(Boolean).join(" ");
+  const navbarClasses = [
+    "navbar",
+    isHidden ? "navbar--hidden" : "",
+    className || "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <section className={navbarClasses}>
