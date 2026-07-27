@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 import { useState, useEffect, useRef } from "react";
+=======
+import { useState, useEffect } from "react";
+>>>>>>> f383a9e (Version-corriger-Dark)
 import PropTypes from "prop-types";
 import ModalContact from "../ModalContact";
 import "../../styles/Navbar.css";
 
 function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+<<<<<<< HEAD
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -12,6 +17,10 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
 
+=======
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
+>>>>>>> f383a9e (Version-corriger-Dark)
   const allMenuItems = [...leftMenuItems, ...rightMenuItems];
 
   const closeMenu = () => {
@@ -26,6 +35,7 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   };
 
   useEffect(() => {
+<<<<<<< HEAD
     lastScrollY.current = window.scrollY;
 
     const updateNavbar = () => {
@@ -57,6 +67,8 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   }, [isMenuOpen]);
 
   useEffect(() => {
+=======
+>>>>>>> f383a9e (Version-corriger-Dark)
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -78,6 +90,7 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+<<<<<<< HEAD
   const navbarClasses = [
     "navbar",
     isScrolled ? "navbar--scrolled" : "",
@@ -86,6 +99,9 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   ]
     .filter(Boolean)
     .join(" ");
+=======
+  const navbarClasses = ["navbar", className || ""].filter(Boolean).join(" ");
+>>>>>>> f383a9e (Version-corriger-Dark)
 
   return (
     <section className={navbarClasses}>
