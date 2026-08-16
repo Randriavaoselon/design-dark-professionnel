@@ -3,42 +3,49 @@ import '../../styles/Footer.css';
 const footerColumns = [
   {
     id: 1,
-    title: 'Services',
+    title: 'AI Agent',
     links: [
-      { label: 'Création de sites web', href: '#' },
-      { label: 'Tarifs', href: '#' },
-      { label: 'FAQ', href: '#' },
-      { label: 'Maintenance', href: '#' }
+      { label: 'Elisa', href: '/agents/agent-elisa' },
+      { label: 'Benoit', href: '/agents/agent-benoit' },
+      { label: 'Margot', href: '/agents/agent-margot' },
+      { label: 'Ethan', href: '/agents/agent-ethan' },
+      { label: 'Arthur', href: '/agents/agent-arthur' },
+      { label: 'Charlot', href: '/agents/agent-charlotte' },
+      { label: 'Samy', href: '/agents/agent-samy' },
+      { label: 'Amandine', href: '/agents/agent-amandine' }
     ]
   },
   {
     id: 2,
-    title: 'Entreprise',
+    title: 'Nos solutions',
     links: [
-      { label: 'À propos', href: '#' },
-      { label: 'Carrières', href: '#' },
-      { label: 'Blog', href: '#' },
-      { label: 'Partenaires', href: '#' }
+      { label: 'Services', href: '#services' },
+      { label: 'Agents', href: '#agents' },
+      { label: 'FAQs', href: '#faqs' },
+      { label: 'Demo', href: '#demo' }
     ]
   },
+
   {
     id: 3,
-    title: 'Ressources',
+    title: 'Navigation',
     links: [
-      { label: 'Centre d\'aide', href: '#' },
-      { label: 'Documentation', href: '#' },
-      { label: 'Guides', href: '#' },
-      { label: 'Communauté', href: '#' }
+      { label: 'AI Brain', href: 'https://www.agentova.ai/brain-ai' },
+      { label: 'Integrations', href: 'https://www.agentova.ai/integrations' },
+      { label: 'Affiliate', href: 'https://www.agentova.ai/affiliate' },
+      { label: 'Download App', href: 'https://www.agentova.ai/download' },
+      { label: 'Help', href: 'https://agentova.ai/help' },
     ]
   },
   {
     id: 4,
-    title: 'Légal',
+    title: 'Légals',
     links: [
-      { label: 'Conditions d\'utilisation', href: '#' },
-      { label: 'Confidentialité', href: '#' },
-      { label: 'Cookies', href: '#' },
-      { label: 'Mentions légales', href: '#' }
+      { label: 'Mentions légales', href: 'https://www.agentova.ai/legal/legal-notice' },
+      { label: 'Confidentialité', href: 'https://www.agentova.ai/legal/privacy-policy' },
+      { label: 'Cookies', href: 'https://www.agentova.ai/legal/cookie-policy' },
+      { label: 'CGU', href: 'https://www.agentova.ai/legal/terms-of-use' },
+      { label: 'CGV', href: 'https://www.agentova.ai/legal/terms-of-sale' },
     ]
   }
 ];

@@ -1,0 +1,188 @@
+.taches-repetitives {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  position: relative;
+  width: 100%;
+  padding: 4rem 0;
+  margin-top: -60px;
+}
+
+.taches-repetitives__container {
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.taches-repetitives__title {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.taches-repetitives__subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 2.5rem;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out 0.08s, transform 0.5s ease-out 0.08s;
+}
+
+.taches-repetitives--visible .taches-repetitives__title,
+.taches-repetitives--visible .taches-repetitives__subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Grille horizontale : 5 cartes alignées sur une ligne en desktop
+   ========================================================================== */
+.taches-repetitives__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.1rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Carte statique : icône + titre + description toujours visibles
+   ========================================================================== */
+.taches-repetitives__item {
+  flex: 1 1 0;
+  min-width: 170px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1.75rem 1.1rem 1.5rem;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.taches-repetitives--visible .taches-repetitives__item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.taches-repetitives--visible .taches-repetitives__item:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(239, 68, 68, 0.28);
+  box-shadow: 0 10px 26px rgba(239, 68, 68, 0.1);
+}
+
+.taches-repetitives__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.35));
+
+  opacity: 0;
+  transform: scale(0.4) rotate(-25deg);
+  transition: opacity 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.taches-repetitives--visible .taches-repetitives__icon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.taches-repetitives__label {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.taches-repetitives--visible .taches-repetitives__label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.taches-repetitives__description {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.taches-repetitives--visible .taches-repetitives__description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .taches-repetitives__title,
+  .taches-repetitives__subtitle,
+  .taches-repetitives__item,
+  .taches-repetitives__icon,
+  .taches-repetitives__label,
+  .taches-repetitives__description {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .taches-repetitives__item {
+    flex: 1 1 45%;
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 640px) {
+  .taches-repetitives {
+    padding: 3rem 0;
+  }
+
+  .taches-repetitives__item {
+    flex: 1 1 100%;
+    max-width: 360px;
+    padding: 1.5rem 1rem 1.25rem;
+  }
+
+  .taches-repetitives__label {
+    font-size: 0.95rem;
+  }
+}

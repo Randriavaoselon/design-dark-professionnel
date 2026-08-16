@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+.avis-section {
+  position: relative;
+  overflow: hidden;
+  padding: 60px 24px 100px;
+  background: #0a0814;
+  font-family: 'Inter', sans-serif;
+  color: #f5f3ff;
+  margin-top: -90px;
+}
+
+.avis-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.avis-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.avis-row--collapsed {
+  position: relative;
+  max-height: 780px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+}
+
+/* Colonnes */
+.avis-col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cards */
+.avis-card {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 18px 20px;
+  backdrop-filter: blur(14px);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.avis-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+.avis-card__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.avis-card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f5f3ff;
+  margin: 0;
+  flex: 1;
+}
+
+/* Icône User (lucide-react) dans un badge circulaire */
+.avis-card__icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #c4b5fd;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.avis-card__text {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #a49dc9;
+  margin: 0;
+}
+
+/* Image sous la description (cards 5-6 colonne 2, toutes les cards colonne 3) */
+.avis-card__image-wrapper {
+  margin-top: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.avis-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bouton "Voir plus d'avis" */
+.avis-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.avis-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: #ffffff;
+  padding: 13px 26px;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px -8px rgba(139, 92, 246, 0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.avis-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -8px rgba(139, 92, 246, 0.75);
+}
+
+.avis-more-btn:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 3px;
+}
+
+.avis-more-btn__arrow {
+  transition: transform 0.25s ease;
+}
+
+.avis-more-btn:hover .avis-more-btn__arrow {
+  transform: translateY(2px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .avis-row {
+    flex-direction: column;
+  }
+
+  .avis-row--collapsed {
+    max-height: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .avis-section {
+    padding: 40px 16px 72px;
+  }
+}

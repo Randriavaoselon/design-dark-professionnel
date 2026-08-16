@@ -1,0 +1,381 @@
+/* ==========================================================================
+   Hero — Agent Charlotte
+   ========================================================================== */
+
+   .hero-charlotte {
+    position: relative;
+    background: #0a0814;
+    overflow: hidden;
+  }
+  
+  .hero-charlotte::before {
+    content: "";
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(900px, 90vw);
+    height: 600px;
+    background: radial-gradient(50% 50% at 50% 0%, rgba(121, 21, 255, 0.28) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* --------------------------------------------------------------------------
+     Container
+     -------------------------------------------------------------------------- */
+  .hero-charlotte__container {
+    position: relative;
+    width: 90%;
+    max-width: 1280px;
+    margin-inline: auto;
+    z-index: 1;
+  }
+  
+  .hero-charlotte__row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(8rem, 16vh, 11rem) 0 0;
+  }
+  
+  .hero-charlotte__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(245, 245, 247, 0.75);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+  
+  .hero-charlotte__eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #7915FF, #70CFFB);
+  }
+  
+  /* --------------------------------------------------------------------------
+       Stage — zone centrale : personnage détouré + cartes flottantes
+       -------------------------------------------------------------------------- */
+  .hero-charlotte__stage {
+    position: relative;
+    width: 100%;
+    max-width: 1080px;
+    margin-inline: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: clamp(420px, 62vh, 460px);
+  }
+  
+  /* Niveau 2 — lueur légère derrière le personnage */
+  .hero-charlotte__glow {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(480px, 55%);
+    height: min(480px, 55%);
+    background: radial-gradient(circle, rgba(121, 21, 255, 0.22) 0%, transparent 70%);
+    filter: blur(30px);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Niveau 3 — personnage, cutout détouré, pas de cadre */
+  .hero-charlotte__image {
+    position: relative;
+    display: block;
+    width: min(360px, 34vw);
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    z-index: 3;
+
+    image-rendering: auto;
+    image-rendering: -webkit-optimize-contrast;
+    backface-visibility: hidden;
+    will-change: transform;
+    -ms-interpolation-mode: bicubic;
+  
+    margin: 0;
+    vertical-align: bottom;
+  }
+  
+  /* --------------------------------------------------------------------------
+       Card — format horizontal, glassmorphism
+       -------------------------------------------------------------------------- */
+  .hero-charlotte__card {
+    position: absolute;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 260px;
+    height: 100px;
+    max-width: 260px;
+    padding: 0.55rem 1.1rem;
+    border-radius: 16px;
+  
+    background: rgba(28, 28, 32, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  
+  .hero-charlotte__card-icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .hero-charlotte__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+    text-align: left;
+    min-width: 0;
+  }
+  
+  .hero-charlotte__card-title {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  
+  
+  .hero-charlotte__card-text {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    color: rgba(245, 245, 247, 0.6);
+    white-space: nowrap;
+  }
+  
+  /* Positionnement diagonal des 4 cartes ------------------------------------ */
+  
+  /* Carte 1 — Haut gauche, la plus nette, bien visible, isolée du personnage */
+  .hero-charlotte__card--1 {
+    top: 6%;
+    left: 0%;
+    z-index: 6;
+    opacity: 1;
+  }
+  
+  /* Carte 2 — Haut droite, touche le personnage, floutée/estompée */
+  .hero-charlotte__card--2 {
+    top: 20%;
+    right: 14%;
+    opacity: 0.5;
+    filter: blur(1px);
+    z-index: 2;
+  }
+  
+  .hero-charlotte__card--2 .hero-charlotte__card-title {
+    color: rgba(245, 245, 247, 0.55);
+    font-weight: 600;
+  }
+  
+  /* Carte 3 — Bas gauche, presque cachée dans l'ombre, floutée */
+  .hero-charlotte__card--3 {
+    bottom: 10%;
+    left: 15%;
+    opacity: 0.2;
+    filter: blur(3px);
+    z-index: 2;
+  }
+  
+  /* Carte 4 — Bas droite, entièrement visible */
+  .hero-charlotte__card--4 {
+    bottom: 5%;
+    right: 0%;
+    opacity: 1;
+    z-index: 6;
+  }
+  
+
+  /* ==========================================================================
+   Animations d'entrée — chargement de la page
+   ========================================================================== */
+
+@keyframes heroFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroGlowIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes heroImageIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  /* le "to" est géré par carte, via --card-opacity */
+  to {
+    opacity: var(--card-opacity, 1);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Application — éléments existants
+   -------------------------------------------------------------------------- */
+
+.hero-charlotte__eyebrow {
+  opacity: 0;
+  animation: heroFadeInDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+}
+
+.hero-charlotte__glow {
+  opacity: 0;
+  animation: heroGlowIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.hero-charlotte__image {
+  opacity: 0;
+  animation: heroImageIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+.hero-charlotte__card {
+  opacity: 0;
+  animation: heroCardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-charlotte__card--1 {
+  --card-opacity: 1;
+  animation-delay: 0.45s;
+}
+
+.hero-charlotte__card--2 {
+  --card-opacity: 0.5;
+  animation-delay: 0.55s;
+}
+
+.hero-charlotte__card--3 {
+  --card-opacity: 0.2;
+  animation-delay: 0.65s;
+}
+
+.hero-charlotte__card--4 {
+  --card-opacity: 1;
+  animation-delay: 0.75s;
+}
+
+
+/* --------------------------------------------------------------------------
+   Accessibilité — désactive les animations si demandé par l'utilisateur
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-charlotte__eyebrow,
+  .hero-charlotte__glow,
+  .hero-charlotte__image,
+  .hero-charlotte__card {
+    animation: none !important;
+    opacity: 1;
+  }
+  .hero-charlotte__card--2 { opacity: 0.5; }
+  .hero-charlotte__card--3 { opacity: 0.2; }
+}
+
+
+  /* ==========================================================================
+       RESPONSIVE
+       ========================================================================== */
+  @media (max-width: 900px) {
+    .hero-charlotte__stage {
+      flex-direction: column;
+      align-items: center;
+      min-height: auto;
+      gap: 1.25rem;
+    }
+  
+    .hero-charlotte__card {
+      position: static;
+      max-width: 100%;
+      width: 100%;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+  
+    .hero-charlotte__card-title,
+    .hero-charlotte__card--2 .hero-charlotte__card-title {
+      color: #ffffff !important;
+    }
+  
+    .hero-charlotte__cards-row {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+    }
+  
+    .hero-charlotte__cards-row .hero-charlotte__card {
+      flex: 1;
+    }
+  
+    .hero-charlotte__glow {
+      display: none;
+    }
+  
+    .hero-charlotte__image {
+      order: -1;
+      width: min(280px, 60vw);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .hero-charlotte__row {
+      padding: clamp(6rem, 14vh, 8rem) 0 3rem;
+    }
+  
+    .hero-charlotte__cards-row {
+      flex-direction: column;
+    }
+  }

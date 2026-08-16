@@ -8,12 +8,13 @@ const Resume = () => {
       <div className="resume-container">
         <div className="resume-row">
           <h2 className="resume__title">
-            AVENIR-TECH
+            AGENTOVA
           </h2>
           <p className="resume__paragraph">
-            Rejoignez Avenir-Tech dès aujourd'hui et connectez-vous à un
-            réseau de talents et d'opportunités pensé pour vous faire
-            avancer, étape par étape, en toute confiance.
+            Rejoignez Agentova dès aujourd'hui et laissez une équipe de 8
+            agents IA spécialisés automatiser vos tâches du quotidien, pour
+            vous faire gagner du temps et avancer, étape par étape, en toute
+            confiance.
           </p>
         </div>
       </div>

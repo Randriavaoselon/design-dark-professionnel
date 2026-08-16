@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
-import ModalContact from "./ModalContact"; 
 import '../styles/OverviewTwo.css';
 import overviewTwoImage from '../assets/overview-two.webp';
+
+const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
 const OverviewTwo = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,26 +44,24 @@ const OverviewTwo = () => {
 
           <div className="overview-two-col overview-two-col--content">
             <h2 className="overview-two-col__title">
-              Un accompagnement pensé pour durer
+              Des agents IA à l'image de votre entreprise
             </h2>
             <p className="overview-two-col__text">
-              Au-delà de la livraison initiale, nous assurons un suivi
-              continu pour garantir la performance et l'évolution de vos
-              projets dans le temps.
+              Ton, style, valeurs et positionnement, connaissances métier,
+              mémoire des échanges, connexions à vos outils (WhatsApp,
+              Instagram, Notion, CRM...) : chaque agent Agentova se
+              personnalise entièrement pour coller à vos besoins réels.
             </p>
             <BoutonComponent
-              text="Commencer"
-              onClick={() => setIsContactOpen(true)}
+              text="Personnaliser mon agent IA"
+              onClick={() =>
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
+              }
               className="btn-overview-two"
             />
           </div>
         </div>
       </div>
-
-      <ModalContact
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </section>
   );
 };

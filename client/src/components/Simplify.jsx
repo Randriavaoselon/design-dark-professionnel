@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import '../styles/Simplify.css';
+import "../styles/Simplify.css";
 
 const Simplify = () => {
   const sectionRef = useRef(null);
@@ -34,12 +34,13 @@ const Simplify = () => {
       >
         <div className="simplify-container">
           <div className="simplify-row">
-            <h2 className="simplify-title">Simplifiez votre présence en ligne</h2>
+            <h2 className="simplify-title">Est-ce que ça fait trop robot ?</h2>
             <p className="simplify-paragraph">
-              Avenir-Tech transforme vos idées en un site web clair et
-              efficace. De la conception à la mise en ligne, nous simplifions
-              chaque étape pour vous offrir une expérience fluide, sans
-              complexité technique de votre côté.
+              Les agents IA d'Agentova s'adaptent à votre ton et à votre façon
+              de communiquer afin de produire des contenus naturels. Selon les
+              témoignages des utilisateurs, les échanges paraissent authentiques
+              et la différence avec une rédaction humaine est à peine
+              perceptible.
             </p>
           </div>
         </div>

@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Section — Info (bandeau de logos, défilement continu)
+   ========================================================================== */
+
+   .info {
+    position: relative;
+    background: #0a0814;
+    margin-top: -50px;
+    overflow: hidden;
+  }
+  
+  /* --------------------------------------------------------------------------
+     Container
+     -------------------------------------------------------------------------- */
+  .info__container {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+  
+  /* --------------------------------------------------------------------------
+     Marquee — masque les bords + fondu en dégradé
+     -------------------------------------------------------------------------- */
+  .info__marquee {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+  }
+  
+  /* --------------------------------------------------------------------------
+     Track — piste de logos, dupliquée x2 pour boucle infinie
+     -------------------------------------------------------------------------- */
+  .info__track {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+  
+    /* Défilement de droite à gauche, en boucle continue */
+    animation: info-scroll 28s linear infinite;
+  }
+  
+  /* La piste se déplace de 0 à -100% de sa propre largeur ;
+     comme il y a deux pistes identiques bout à bout, la boucle
+     est parfaitement continue et invisible */
+  @keyframes info-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Pause au survol pour laisser le temps de regarder un logo */
+  .info__marquee:hover .info__track {
+    animation-play-state: paused;
+  }
+  
+  /* --------------------------------------------------------------------------
+     Logo
+     -------------------------------------------------------------------------- */
+  .info__logo {
+    flex: 0 0 auto;
+    height: clamp(28px, 4vw, 40px);
+    width: auto;
+    object-fit: contain;
+    opacity: 0.6;
+    filter: grayscale(100%) brightness(1.6);
+    transition: opacity 0.25s ease, filter 0.25s ease;
+  }
+  
+  .info__logo:hover {
+    opacity: 1;
+    filter: grayscale(0%) brightness(1);
+  }
+  
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 640px) {
+    .info__track {
+      gap: clamp(1.75rem, 8vw, 2.5rem);
+      animation-duration: 18s;
+    }
+  
+    .info__logo {
+      height: 24px;
+    }
+  }
+  
+  /* --------------------------------------------------------------------------
+     Accessibilité — réduction des animations
+     -------------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .info__track {
+      animation: none;
+    }
+  
+    .info__marquee {
+      overflow-x: auto;
+    }
+  }

@@ -6,6 +6,7 @@ import avatar4 from '../assets/avatar-4.webp';
 import avatar5 from '../assets/avatar-5.webp';
 import avatar6 from '../assets/avatar-6.webp';
 import avatar7 from '../assets/avatar-7.webp';
+import avatar8 from '../assets/avatar-8.webp';
 
 const VIEWBOX_WIDTH = 760;
 const VIEWBOX_HEIGHT = 260;
@@ -19,13 +20,14 @@ const R = CENTER_X - EDGE_MARGIN;
 const RAY_COUNT = 29;
 
 const nodes = [
-  { id: 1, image: avatar1, xFrac: 0.08, phi: 22, size: 46, ring: '#b5524a' },
-  { id: 2, image: avatar2, xFrac: 0.24, phi: 62, size: 38, ring: '#3a4560' },
-  { id: 3, image: avatar3, xFrac: 0.37, phi: 12, size: 48, ring: '#eef2ff' },
-  { id: 4, image: avatar4, xFrac: 0.50, phi: 78, size: 32, ring: '#4f8ef7' },
-  { id: 5, image: avatar5, xFrac: 0.63, phi: 40, size: 38, ring: '#d6688f' },
-  { id: 6, image: avatar6, xFrac: 0.79, phi: 65, size: 58, ring: '#f0b429', glow: true },
-  { id: 7, image: avatar7, xFrac: 0.91, phi: 18, size: 46, ring: '#a9c6f5' }
+  { id: 1, image: avatar1, xFrac: 0.06, phi: 24, size: 44, ring: '#b5524a' },
+  { id: 2, image: avatar2, xFrac: 0.20, phi: 58, size: 36, ring: '#3a4560' },
+  { id: 3, image: avatar3, xFrac: 0.33, phi: 14, size: 48, ring: '#eef2ff' },
+  { id: 4, image: avatar4, xFrac: 0.46, phi: 74, size: 30, ring: '#4f8ef7' },
+  { id: 5, image: avatar5, xFrac: 0.58, phi: 36, size: 40, ring: '#d6688f' },
+  { id: 6, image: avatar6, xFrac: 0.71, phi: 60, size: 56, ring: '#f0b429', glow: true },
+  { id: 7, image: avatar7, xFrac: 0.84, phi: 20, size: 42, ring: '#a9c6f5' },
+  { id: 8, image: avatar8, xFrac: 0.94, phi: 46, size: 34, ring: '#7bd88f' }
 ];
 
 const rays = Array.from({ length: RAY_COUNT }, (_, i) => {

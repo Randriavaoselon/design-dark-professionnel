@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import BoutonComponent from './Bouton';
-import ModalContact from "./ModalContact"; 
-import '../styles/Recrutement.css';
-import imageRecruit from '../assets/image-recruite.webp'
+import BoutonComponent from "./Bouton";
+import "../styles/Recrutement.css";
+import imageRecruit from "../assets/image-recruite.webp";
+
+const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
 const Recrutement = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -39,16 +39,22 @@ const Recrutement = () => {
         <div className="recrutement-row">
           {/* Colonne Gauche : Texte et Bouton */}
           <div className="recrutement-col-text">
-            <h2 className="recrutement-title">Rejoignez notre équipe</h2>
+            <h2 className="recrutement-title">
+              Votre entreprise évolue, Agentova apprend avec elle
+            </h2>
             <p className="recrutement-paragraph">
-              Nous recherchons des talents passionnés et rigoureux pour relever
-              les défis technologiques de demain. Découvrez nos opportunités
-              et construisez votre avenir avec nous.
+              À mesure que vous utilisez la plateforme, le Cerveau IA enrichit
+              sa compréhension de votre activité. Vos agents deviennent plus
+              performants, plus pertinents et vous accompagnent durablement dans
+              l'automatisation de vos processus et le développement de votre
+              entreprise.
             </p>
             <div className="recrutement-btn-wrapper">
               <BoutonComponent
-                text="Voir les offres"
-                onClick={() => setIsContactOpen(true)}
+                text="Commencer l'essai gratuit"
+                onClick={() =>
+                  window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
+                }
               />
             </div>
           </div>
@@ -63,11 +69,6 @@ const Recrutement = () => {
           </div>
         </div>
       </div>
-
-      <ModalContact
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </section>
   );
 };

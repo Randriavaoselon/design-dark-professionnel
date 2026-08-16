@@ -1,30 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
-import { Target, Code2, Palette, Wrench } from 'lucide-react';
+import { Zap, TrendingUp, SlidersHorizontal, PlugZap } from 'lucide-react';
 import '../styles/WorkDetails.css';
 
 const workItems = [
   {
-    title: "Stratégie",
-    desc: "Analyse approfondie pour définir vos objectifs clairs.",
-    icon: Target,
+    title: "Automatisation des tâches",
+    desc: "Jusqu'à 80% des emails et tâches répétitives automatisés, pour gagner du temps.",
+    icon: Zap,
     iconBg: "#1278f4"
   },
   {
-    title: "Développement",
-    desc: "Création de solutions web performantes et évolutives.",
-    icon: Code2,
+    title: "Amélioration de la productivité",
+    desc: "Une productivité augmentée de 82%, pour plus de chiffre d'affaires et de croissance.",
+    icon: TrendingUp,
     iconBg: "#7208fe"
   },
   {
-    title: "Design UI/UX",
-    desc: "Interfaces intuitives centrées sur l'utilisateur.",
-    icon: Palette,
+    title: "Personnalisation",
+    desc: "Des agents adaptés aux besoins spécifiques de chaque entreprise.",
+    icon: SlidersHorizontal,
     iconBg: "#e80497"
   },
   {
-    title: "Maintenance",
-    desc: "Suivi technique et optimisation continue de vos outils.",
-    icon: Wrench,
+    title: "Intégration avec vos outils",
+    desc: "Connectés à vos CRM, messageries et réseaux sociaux favoris.",
+    icon: PlugZap,
     iconBg: "#fc855b"
   }
 ];

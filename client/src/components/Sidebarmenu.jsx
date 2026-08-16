@@ -4,17 +4,17 @@ import {
   Layers,
   Info,
   HelpCircle,
-  Mail,
+  MonitorPlay,
   Menu,
   X,
 } from "lucide-react";
 import "../styles/Sidebarmenu.css";
 
 const DEFAULT_ITEMS = [
-  { id: "services", label: "Services", href: "#services", Icon: Layers },
-  { id: "apropos", label: "À propos", href: "#a-propos", Icon: Info },
+  { id: "accueil", label: "Accueil", href: "/", Icon: Layers },
+  { id: "services", label: "Services", href: "#services", Icon: Info },
   { id: "faqs", label: "FAQs", href: "#faqs", Icon: HelpCircle },
-  { id: "contact", label: "Contact", href: "#contact", Icon: Mail },
+  { id: "demo", label: "Demo", href: "#demo", Icon: MonitorPlay },
 ];
 
 const SCROLL_DELTA_THRESHOLD = 6;

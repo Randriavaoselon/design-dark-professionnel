@@ -30,8 +30,8 @@ const Works = () => {
     >
       <div className="works-container">
         <div className="works-row">
-          <p className="works-subtitle">NOS RÉALISATIONS</p>
-          <h2 className="works-title">Découvrez nos derniers projets</h2>
+          <p className="works-subtitle">POURQUOI CHOISIR NOS AGENTS IA</p>
+          <h2 className="works-title">Automatisez jusqu'à 80% de vos tâches</h2>
         </div>
       </div>
     </section>

@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+.activiter-ethan {
+    padding: 96px 0;
+    background: #0a0814;
+    margin-top: -130px;
+}
+
+.activiter-ethan__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.activiter-ethan__header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.activiter-ethan__title {
+    font-family: "Source Serif 4", serif;
+    font-size: clamp(28px, 4vw, 40px);
+    color: #f5f5f7;
+    margin-bottom: 12px;
+}
+
+.activiter-ethan__subtitle {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    color: #a1a1aa;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.activiter-ethan__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.activiter-ethan__col {
+    display: flex;
+}
+
+.activiter-ethan__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 32px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.activiter-ethan__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.activiter-ethan__card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+    margin-bottom: 20px;
+}
+
+.activiter-ethan__card-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #f5f5f7;
+    margin-bottom: 8px;
+}
+
+.activiter-ethan__card-description {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #a1a1aa;
+}
+
+@media (max-width: 1024px) {
+    .activiter-ethan__row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   Animation d'entrée au scroll
+   ========================================================================== */
+
+@keyframes activiterEthanCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.activiter-ethan__card {
+    opacity: 0;
+}
+
+.activiter-ethan.is-visible .activiter-ethan__card {
+    animation: activiterEthanCardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--card-delay, 0s);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .activiter-ethan__card {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

@@ -1,17 +1,35 @@
 import PropTypes from "prop-types";
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import BoutonComponent from "./Bouton";
-import ModalContact from "./ModalContact"
+import ImageSlider from "./ImageSlider";
 import "../styles/Home.css";
 
 import heroImage from "../assets/Hero.webp";
+import heroImage2 from "../assets/Hero2.webp";
+import heroImage3 from "../assets/Hero3.webp";
+import heroImage4 from "../assets/Hero4.webp";
+import heroImage5 from "../assets/Hero5.webp";
+import heroImage6 from "../assets/Hero6.webp";
+import heroImage7 from "../assets/Hero7.webp";
+import heroImage8 from "../assets/Hero8.webp";
+
 import professionnalBadge from "../assets/iconText.webp";
 import coBadge from "../assets/iconText2.webp";
-import platformBadge from "../assets/iconText3.webp";
 
 const PARAGRAPH_TEXT =
-  "Avenir Tech conçoit des sites web modernes, responsives et professionnels, pensés pour propulser votre entreprise vers l'avenir du numérique.";
+  "Découvrez comment Agentova met à votre disposition des agents IA spécialisés pour le marketing, les ventes, le SEO et la relation client afin de vous faire gagner du temps, améliorer votre productivité et accélérer votre croissance.";
+
+// Segment du paragraphe qui doit recevoir un fond de couleur.
+// Doit correspondre exactement au début de PARAGRAPH_TEXT.
+const HIGHLIGHT_TEXT =
+  "Découvrez comment Agentova met à votre disposition des agents IA spécialisés";
+const HIGHLIGHT_LENGTH = HIGHLIGHT_TEXT.length;
+
+const HERO_IMAGES = [heroImage, heroImage2, heroImage3, heroImage4, heroImage5, heroImage6, heroImage7, heroImage8];
+
+const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
 const PHASES = {
   TITLE: "title",
@@ -23,16 +41,15 @@ const PHASES = {
 function useTitleBlocks() {
   return useMemo(() => {
     const blocks = [
-      { type: "plainText", text: "Votre site web" },
+      { type: "plainText", text: "Vos agents IA" },
       { type: "badge", key: "badge-pro", src: professionnalBadge },
       { type: "break" },
-      { type: "prefixedWord", key: "word-co", badgeSrc: coBadge, text: "moderne et" },
+      { type: "prefixedWord", key: "word-co", badgeSrc: coBadge, text: "pour automatiser" },
       { type: "break" },
       {
         type: "suffixedWord",
         key: "word-platform",
-        badgeSrc: platformBadge,
-        text: "sur mesure",
+        text: "votre entreprise",
       },
     ];
 
@@ -182,11 +199,27 @@ function Home({ className }) {
       paragraphLength: PARAGRAPH_TEXT.length,
     });
 
-  const [isContactOpen, setIsContactOpen] = useState(false);
-
-  const fullTitleText = "Votre site web moderne et sur mesure";
+  const fullTitleText = "Vos agents IA pour automatiser votre entreprise";
 
   let consumed = 0;
+
+  const highlightVisibleChars = Math.min(paragraphChars, HIGHLIGHT_LENGTH);
+  const restVisibleChars = Math.max(0, paragraphChars - HIGHLIGHT_LENGTH);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      // petit délai pour laisser le DOM se monter avant de scroller
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   return (
     <section className={`home ${className}`.trim()}>
@@ -216,7 +249,10 @@ function Home({ className }) {
 
             <p className="home__paragraph" aria-label={PARAGRAPH_TEXT}>
               <span aria-hidden="true">
-                {PARAGRAPH_TEXT.slice(0, paragraphChars)}
+                <span className="home__paragraph-highlight">
+                  {HIGHLIGHT_TEXT.slice(0, highlightVisibleChars)}
+                </span>
+                {PARAGRAPH_TEXT.slice(HIGHLIGHT_LENGTH, HIGHLIGHT_LENGTH + restVisibleChars)}
                 {phase === PHASES.PARAGRAPH && (
                   <span className="home__cursor home__cursor--paragraph" />
                 )}
@@ -229,26 +265,22 @@ function Home({ className }) {
               }`.trim()}
             >
               <BoutonComponent
-                text="Commencer"
-                onClick={() => setIsContactOpen(true)}
+                text="Découvrir les agents IA"
+                onClick={() =>
+                  window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
+                }
               />
             </div>
           </div>
 
           <div className="home__column home__column--media">
-            <img
-              src={heroImage}
-              alt="Illustration de la plateforme de co-optation"
-              className="home__image home__image--float"
+            <ImageSlider
+              images={HERO_IMAGES}
+              className="home__image-slider home__image--float"
             />
           </div>
         </div>
       </div>
-
-      <ModalContact
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </section>
   );
 }

@@ -1,16 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import ModalContact from "./ModalContact";
+import { Volume2, VolumeX } from "lucide-react";
 import Simplify from "./Simplify";
+import phoneVideo from "../assets/videos/phone-demo.mp4";
+import phonePoster from "../assets/videos/phone-demo.webp";
+import imageAgent1 from "../assets/phone-agent1.webp"
+import imageAgent2 from "../assets/phone-agent2.webp"
+import imageAgent3 from "../assets/phone-agent3.webp"
+import imageAgent4 from "../assets/phone-agent4.webp"
 import "../styles/Onboardinghero.css";
 
+const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
+
 const LEFT_AVATARS = {
-  start: { id: "avatar-1", src: "https://i.pravatar.cc/100?img=12" },
-  end: { id: "avatar-3", src: "https://i.pravatar.cc/100?img=47" },
+  start: { id: "avatar-1", src: imageAgent1 },
+  end: { id: "avatar-3", src: imageAgent2 },
 };
 
 const RIGHT_AVATARS = {
-  start: { id: "avatar-2", src: "https://i.pravatar.cc/100?img=33" },
-  end: { id: "avatar-4", src: "https://i.pravatar.cc/100?img=5" },
+  start: { id: "avatar-2", src: imageAgent3 },
+  end: { id: "avatar-4", src: imageAgent4 },
 };
 
 function AvatarRail({ avatars, side }) {
@@ -39,8 +47,9 @@ function AvatarRail({ avatars, side }) {
 
 function OnboardingHero() {
   const sectionRef = useRef(null);
+  const videoRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -62,6 +71,33 @@ function OnboardingHero() {
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
+
+  // Lance la lecture une fois le téléphone visible, pour donner
+  // l'impression que la démo se déclenche "en direct" à l'écran.
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl || !isVisible) return;
+
+    const playPromise = videoEl.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay bloqué : le poster reste affiché, pas bloquant.
+      });
+    }
+  }, [isVisible]);
+
+  const toggleSound = () => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    const nextMuted = !videoEl.muted;
+    videoEl.muted = nextMuted;
+    setIsMuted(nextMuted);
+
+    if (!nextMuted) {
+      videoEl.play().catch(() => {});
+    }
+  };
 
   return (
     <div className="onboarding-background" id="contact">
@@ -90,35 +126,41 @@ function OnboardingHero() {
                   <span className="phone__status-dot" />
                 </div>
 
-                <h1 className="phone__title">
-                  Votre projet web,
-                  <br />
-                  suivi en un seul endroit
-                </h1>
-
-                <div className="phone__illustration">
-                  {/* ... Votre SVG reste inchangé ... */}
-                  <svg viewBox="0 0 220 200" className="phone__illustration-svg" aria-hidden="true">
-                    <g className="illustration__box">
-                      <polygon className="illustration__face illustration__face--top" points="110,30 180,68 110,106 40,68" />
-                      <polygon className="illustration__face illustration__face--left" points="40,68 110,106 110,160 40,122" />
-                      <polygon className="illustration__face illustration__face--right" points="110,106 180,68 180,122 110,160" />
-                      <polygon className="illustration__accent" points="118,116 168,90 168,100 118,126" />
-                      <polygon className="illustration__stripe" points="46,80 104,110 104,120 46,90" />
-                    </g>
-                    <g className="illustration__envelope">
-                      <rect x="128" y="18" width="46" height="32" rx="3" />
-                      <polyline points="128,20 151,38 174,20" />
-                    </g>
-                  </svg>
+                <div className="phone__video-wrapper">
+                  <video
+                    ref={videoRef}
+                    className="phone__video"
+                    src={phoneVideo}
+                    poster={phonePoster}
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label="Démonstration de l'application en action"
+                  />
+                  <span className="phone__video-shine" aria-hidden="true" />
+                  <button
+                    type="button"
+                    className="phone__sound-toggle"
+                    onClick={toggleSound}
+                    aria-label={isMuted ? "Activer le son" : "Couper le son"}
+                  >
+                    {isMuted ? (
+                      <VolumeX size={13} strokeWidth={2} />
+                    ) : (
+                      <Volume2 size={13} strokeWidth={2} />
+                    )}
+                  </button>
                 </div>
 
                 <button 
                   type="button" 
                   className="phone__cta" 
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() =>
+                    window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
+                  }
                 >
-                  Contactez-nous
+                  Essayer gratuitement
                 </button>
               </div>
               <div className="phone__home-indicator" />
@@ -126,12 +168,6 @@ function OnboardingHero() {
           </div>
         </div>
       </section>
-
-      {/* Le Modal est rendu ici, au niveau du parent */}
-      <ModalContact 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
     </div>
   );
 }
