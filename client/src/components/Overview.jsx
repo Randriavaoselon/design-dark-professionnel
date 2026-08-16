@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
-import ModalContact from "./ModalContact";
 import '../styles/Overview.css';
 import overviewImage from '../assets/overview-image.webp';
+
+const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
 const Overview = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,17 +36,21 @@ const Overview = () => {
         <div className="overview-row">
           <div className="overview-col overview-col--content">
             <h2 className="overview-col__title">
-              Une vue d'ensemble de notre approche
+              Doublez votre productivité, comme Celesty
             </h2>
             <p className="overview-col__text">
-              Nous combinons expertise technique et sens du détail pour livrer
-              des solutions adaptées à vos ambitions, du concept jusqu'au
-              déploiement final.
+              En automatisant les tâches répétitives, Celesty a économisé
+              40 000€ de charges mensuelles tout en doublant sa productivité.
+              Les agents d'Agentova structurent, organisent et vous aident à
+              mieux décider au quotidien, pour libérer du temps et vous
+              recentrer sur votre cœur de métier.
             </p>
 
             <BoutonComponent
-              text="Commencer"
-              onClick={() => setIsContactOpen(true)}
+              text="Booster ma productivité"
+              onClick={() =>
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
+              }
               className="btn-overview"
             />
           </div>
@@ -60,11 +64,6 @@ const Overview = () => {
           </div>
         </div>
       </div>
-
-      <ModalContact
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </section>
   );
 };

@@ -44,17 +44,18 @@ const SolutionTitre = () => {
           isInView ? "solution-titre-section--visible" : ""
         }`.trim()}
         ref={sectionRef}
+        id="demo"
       >
         <div className="solution-titre-container">
           <div className="solution-titre-row">
             <h2 className="solution-titre-title">
-              UNE EXPERTISE WEB À VOTRE SERVICE
+              Passez à la vitesse supérieure avec Agentova
             </h2>
             <p className="solution-titre-subtitle">
-              Depuis notre création, Avenir Tech accompagne entreprises et
-              entrepreneurs dans la création de sites web modernes, responsives
-              et professionnels — pensés pour convertir vos visiteurs en
-              clients.
+              Profitez d'une plateforme IA sécurisée, connectée à plus de 3 000
+              applications, conçue pour faciliter la collaboration de vos
+              équipes et optimiser votre productivité, avec un essai gratuit de
+              7 jours, sans engagement.
             </p>
           </div>
         </div>

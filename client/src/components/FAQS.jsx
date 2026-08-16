@@ -2,12 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import '../styles/FAQS.css';
 
 const faqs = [
-  { id: 1, question: 'Comment se déroule un projet avec Avenir-Tech ?', answer: 'Après un échange sur vos besoins, nous vous proposons une proposition claire (objectifs, délais, budget). Nous concevons ensuite votre site par étapes, avec des points de validation réguliers, jusqu\'à la mise en ligne.' },
-  { id: 2, question: 'Combien de temps faut-il pour créer un site web ?', answer: 'Cela dépend de la complexité du projet. Un site vitrine peut être livré en 2 à 3 semaines, tandis qu\'une plateforme sur mesure demande généralement de 4 à 8 semaines.' },
-  { id: 3, question: 'Le site sera-t-il adapté aux mobiles et optimisé pour Google ?', answer: 'Oui. Chaque site que nous concevons est entièrement responsive et optimisé pour le référencement (SEO) dès sa conception, afin d\'assurer une bonne visibilité et une expérience fluide sur tous les écrans.' },
-  { id: 4, question: 'Puis-je modifier mon site après sa mise en ligne ?', answer: 'Bien sûr. Selon la solution choisie, vous disposez d\'un espace d\'administration simple pour mettre à jour vos textes et vos images, ou vous pouvez nous confier ces modifications via notre offre de maintenance.' },
-  { id: 5, question: 'Proposez-vous un accompagnement après la livraison ?', answer: 'Oui, nous proposons un suivi technique, des mises à jour de sécurité et une assistance réactive pour garantir la performance de votre site dans la durée.' },
-  { id: 6, question: 'Comment demander un devis pour mon projet ?', answer: 'Il vous suffit de nous contacter via le formulaire du site ou par email en décrivant votre projet. Nous revenons généralement vers vous sous 24 à 48 heures ouvrées avec une proposition adaptée.' }
+  { id: 1, question: 'Qu\'est-ce qu\'Agentova ?', answer: 'Agentova est une plateforme qui permet d\'automatiser vos tâches quotidiennes en connectant vos outils à une équipe de 8 agents IA spécialisés.' },
+  { id: 2, question: 'Quels sont les avantages de l\'utilisation d\'Agentova ?', answer: 'Gain de temps, réduction des coûts et augmentation de la productivité sont les principaux bénéfices rapportés par nos utilisateurs.' },
+  { id: 3, question: 'Comment fonctionne le cerveau IA d\'Agentova ?', answer: 'Le cerveau IA d\'Agentova mémorise toutes les données, préférences et échanges pour alimenter chaque agent et connecter les informations entre eux.' },
+  { id: 4, question: 'Puis-je essayer Agentova gratuitement ?', answer: 'Oui, vous pouvez essayer Agentova gratuitement pendant 7 jours.' },
+  { id: 5, question: 'Quels sont les tarifs d\'Agentova ?', answer: 'Les tarifs sont exprimés en euros ou en francs suisses, avec des formules mensuelles, trimestrielles ou annuelles.' },
+  { id: 6, question: 'Quels sont les agents IA disponibles sur Agentova ?', answer: 'Charlotte, Ethan, Benoit, Amandine, Margot, Arthur, Elisa et Samy : 8 agents IA spécialisés, chacun avec sa personnalité.' }
 ];
 
 const FAQS = () => {

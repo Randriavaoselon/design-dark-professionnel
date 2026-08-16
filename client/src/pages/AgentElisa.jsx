@@ -1,0 +1,205 @@
+import { CalendarDays, Scale, Tag, Users } from "lucide-react";
+
+import Navbar from "../components/header/Navbar";
+import CopyRight from "../components/footer/CopyRight";
+import BoutonUp from "../components/BoutonUp";
+import HeroAgent from "../components/agents/HeroAgent";
+import Responsabilite from "../components/agents/Responsabilite";
+import Info from "../components/agents/Info";
+import Difference from "../components/agents/Difference";
+import Potentiel from "../components/agents/Potentiel";
+import PotentielDescription from "../components/agents/PotentielDescription";
+import AvisTitre from "../components/agents/AvisTitre";
+import Avis from "../components/agents/Avis";
+import Question from "../components/agents/Question";
+import Conclusion from "../components/agents/Conclusion";
+import ActiviterAgent from "../components/agents/ActiviterAgents";
+
+import avatar1 from "../assets/avatar-1.webp";
+import avatar2 from "../assets/avatar-2.webp";
+import avatar3 from "../assets/avatar-3.webp";
+import avatar4 from "../assets/avatar-4.webp";
+import avatar5 from "../assets/avatar-5.webp";
+import avatar6 from "../assets/avatar-6.webp";
+import avatar7 from "../assets/avatar-7.webp";
+import avatar8 from "../assets/avatar-8.webp";
+
+import elisaImage from "../assets/agents/elisa-portrait.webp";
+import differenceElisaScreenshot from "../assets/agents/differencie-elisa.png";
+
+import "../styles/AgentCharlotte.css";
+
+function AgentElisa() {
+  const logo = { text: "Agentova", href: "/" };
+
+  const leftMenuItems = [
+    { label: "Accueil", href: "/" },
+    { label: "Services", href: "/#services" },
+    {
+      label: "Agents",
+      href: "/#agents",
+      megaMenu: [
+        {
+          title: "Charlotte",
+          image: avatar1,
+          href: "/agents/agent-charlotte",
+        },
+        { title: "Ethan", image: avatar2, href: "/agents/agent-ethan" },
+        { title: "Benoit", image: avatar3, href: "/agents/agent-benoit" },
+        {
+          title: "Amandine",
+          image: avatar4,
+          href: "/agents/agent-amandine",
+        },
+        {
+          title: "Margot",
+          image: avatar5,
+          href: "/agents/agent-margot",
+        },
+        {
+          title: "Arthur",
+          image: avatar6,
+          href: "/agents/agent-arthur",
+        },
+        { title: "Elisa", image: avatar7, href: "/agents/agent-elisa" },
+        { title: "Samy", image: avatar8, href: "/agents/agent-samy" },
+      ],
+    },
+  ];
+
+  const rightMenuItems = [
+    { label: "FAQS", href: "/#faqs" },
+    { label: "Demo", href: "/#demo" },
+  ];
+
+  const ctaButton = {
+    label: "Essayer Agentova",
+    href: "https://agentova.ai?fpr=selon84",
+  };
+
+  const elisaCards = [
+    {
+      icon: CalendarDays,
+      title: "Agenda structuré",
+      text: "Semaine et priorités claires",
+    },
+    {
+      icon: Scale,
+      title: "Aide décision",
+      text: "Avantages, risques, synthèse",
+    },
+    {
+      icon: Tag,
+      title: "Services Pricing",
+      text: "Agentova, + 2 de plus",
+    },
+    {
+      icon: Users,
+      title: "Coordination",
+      text: "Délègue aux bons agents",
+    },
+  ];
+
+  const elisaActivities = [
+    {
+      icon: CalendarDays,
+      title: "Agenda clair et structuré",
+      description:
+        "Elisa organise ton agenda pour que tes journées soient lisibles, équilibrées et sans surcharge. Tu sais exactement quand travailler, quand décider et quand souffler.",
+    },
+    {
+      icon: Scale,
+      title: "Aide concrète à la décision",
+      description:
+        "Tu lui exposes une situation, elle t'aide à réfléchir, poser les options et choisir. Idéal quand tu dois décider vite sans prendre de mauvaises directions.",
+    },
+    {
+      icon: Users,
+      title: "Coordination des agents",
+      description:
+        "Elisa pilote les autres agents pour toi. Elle sait à qui déléguer quoi et s'assure que les bonnes actions sont lancées.",
+    },
+  ];
+
+  const elisaFaqItems = [
+    {
+        question: "Que puis-je faire avec Agentova ?",
+        answer:
+          "Tout ce qui prend du temps au quotidien, Agentova peut l'automatiser. En connectant vos outils du quotidien à une équipe de 8 agents IA spécialisés, vous pouvez automatiser le service client, les appels téléphoniques, la création de contenu, la gestion des réseaux sociaux, la prospection, le suivi des leads, l'administratif et bien plus encore.",
+      },
+      {
+        question: "Avec quels outils Agentova peut-il s'intégrer ?",
+        answer:
+          "Agentova s'intègre à plus de 3 000 plateformes externes, notamment les CRM, messageries, réseaux sociaux, outils marketing, solutions de comptabilité et bien d'autres. Votre outil favori fait très certainement partie de notre catalogue d'intégrations.",
+      },
+      {
+        question: "Comment Agentova protège-t-il mes données ?",
+        answer:
+          "La sécurité de vos données est une priorité. Agentova applique des standards de sécurité stricts avec la conformité RGPD, le chiffrement SSL/TLS, des certifications comme SOC 2 Type II, CCPA et ISO 27001, une infrastructure cloud sécurisée et un contrôle d'accès avec authentification multi-facteurs (MFA). Vos données restent votre propriété.",
+      },
+      {
+        question: "Puis-je inviter mon équipe sur Agentova ?",
+        answer:
+          "Absolument. Agentova fonctionne avec un système de workspaces collaboratifs. Chaque membre peut disposer de son propre espace de travail ou rejoindre un workspace existant afin de collaborer en temps réel, automatiser des tâches en équipe, suivre les projets et centraliser les échanges.",
+      },
+      {
+        question: "Puis-je tester Agentova avant de m'engager ?",
+        answer:
+          "Oui. Agentova propose 7 jours d'essai gratuit, sans engagement et sans carte bancaire requise. Vous pouvez découvrir les fonctionnalités de la solution et annuler à tout moment si elle ne correspond pas à vos attentes.",
+      },
+      {
+        question: "Y a-t-il un programme d'affiliation ?",
+        answer:
+          "Oui. Agentova propose un programme d'affiliation avec 30 % de commission récurrente à vie sur chaque client parrainé. Vous pouvez ainsi être rémunéré durablement en recommandant Agentova aux entrepreneurs qui souhaitent automatiser leur activité grâce aux agents IA.",
+      },
+  ];
+
+  return (
+    <div className="agent-page">
+      <Navbar
+        logo={logo}
+        leftMenuItems={leftMenuItems}
+        rightMenuItems={rightMenuItems}
+        ctaButton={ctaButton}
+      />
+      <HeroAgent
+        image={elisaImage}
+        imageAlt="Agent Elisa"
+        name="Elisa"
+        cards={elisaCards}
+      />
+      <Info />
+      <Responsabilite
+        title="Prompter sans aucune compétence technique."
+        buttonLabel="Essayer maintenant"
+      />
+      <ActiviterAgent activities={elisaActivities} />
+      <Difference
+        title="Ce qui différencie Agentova des autres “Agents IA”."
+        image={differenceElisaScreenshot}
+        imageAlt="Aperçu du tableau de bord marketing d'Elisa"
+        buttonLabel="Essayer maintenant"
+      />
+      <Potentiel />
+      <PotentielDescription />
+      <AvisTitre />
+      <Avis />
+      <Question
+        title="Les questions fréquentes"
+        description={
+          <>
+            Vous ne trouvez pas la réponse à vos questions ?
+            <br />
+            Contactez-nous ici ou réserver une démo.
+          </>
+        }
+        faqItems={elisaFaqItems}
+      />
+      <Conclusion />
+      <CopyRight />
+      <BoutonUp />
+    </div>
+  );
+}
+
+export default AgentElisa;

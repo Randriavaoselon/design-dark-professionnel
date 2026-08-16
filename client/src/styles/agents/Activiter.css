@@ -1,0 +1,1019 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+.activiter-section {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 24px;
+  background: #0a0814;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Inter', sans-serif;
+  color: #f5f3ff;
+}
+
+.activiter-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.activiter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+.activiter-col-left {
+  flex: 1 1 460px;
+  min-width: 320px;
+}
+
+.activiter-col-right {
+  flex: 1 1 460px;
+  min-width: 320px;
+  position: sticky;
+  top: 48px;
+}
+
+.activiter-eyebrow {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+  margin-bottom: 14px;
+}
+
+.activiter-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+
+.activiter-paragraph {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #a49dc9;
+  margin: 0 0 28px;
+  max-width: 42ch;
+}
+
+.activiter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: #ffffff;
+  padding: 13px 26px;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px -8px rgba(139, 92, 246, 0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-bottom: 44px;
+}
+
+.activiter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -8px rgba(139, 92, 246, 0.75);
+}
+
+.activiter-btn:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 3px;
+}
+
+.activiter-btn__arrow {
+  transition: transform 0.25s ease;
+}
+
+.activiter-btn:hover .activiter-btn__arrow {
+  transform: translateX(3px);
+}
+
+.activiter-cards-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 22px;
+}
+
+.activiter-rail {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+}
+
+.activiter-rail__dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent, #8b5cf6);
+  box-shadow: 0 0 14px 3px var(--accent, #8b5cf6);
+  transform: translate(-50%, calc(var(--active-index, 0) * 128px));
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), background 0.4s ease;
+}
+
+.activiter-card {
+  all: unset;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 18px 20px;
+  backdrop-filter: blur(14px);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  min-height: 96px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.activiter-card:hover {
+  transform: translateX(2px);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.activiter-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.activiter-card.is-active {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, transparent), rgba(255, 255, 255, 0.04));
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.activiter-card__content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.activiter-card__icon {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 2px;
+}
+
+.activiter-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.activiter-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.activiter-card__title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f5f3ff;
+  margin: 0;
+  text-align: left;
+}
+
+.activiter-card__text {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #a49dc9;
+  margin: 0;
+  text-align: left;
+}
+
+.activiter-card__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.activiter-card__progress-bar {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  animation-name: activiterProgress;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes activiterProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.activiter-slide-panel {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  padding: 44px 40px 40px;
+  box-shadow:
+    0 30px 60px -30px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.activiter-slide-panel__glow {
+  position: absolute;
+  inset: -30% -30% auto auto;
+  width: 320px;
+  height: 320px;
+  background: var(--accent);
+  filter: blur(90px);
+  opacity: 0.22;
+  transition: background 0.6s ease;
+  pointer-events: none;
+}
+
+.activiter-slide {
+  position: absolute;
+  inset: 44px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  isolation: isolate;
+}
+
+.activiter-slide.is-active {
+  position: relative;
+  inset: auto;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.activiter-slide__ghost-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 6rem;
+  line-height: 1;
+  opacity: 0.08;
+  filter: blur(0.5px);
+}
+
+.activiter-slide__heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 14px;
+  max-width: 80%;
+}
+
+.activiter-slide__text {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #b8b1d9;
+  margin: 0;
+  max-width: 40ch;
+}
+
+.activiter-slide--custom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding: 2rem 1.5rem;
+}
+
+.activiter-slide__connector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.activiter-slide__connector-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.4s ease;
+}
+
+.activiter-slide__button {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent), #6366f1);
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--accent) 65%, transparent);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.activiter-slide__button:hover {
+  transform: translateY(-2px);
+}
+
+.activiter-slide__button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.activiter-slide__cards-row {
+  display: flex;
+  gap: 1.25rem;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.activiter-slide__mini-card {
+  flex: 1 1 0;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  padding: 14px 12px;
+  text-align: center;
+}
+
+.activiter-slide__mini-card-icon {
+  display: block;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.activiter-slide__mini-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f5f3ff;
+  margin: 0 0 2px;
+}
+
+.activiter-slide__mini-card-text {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: #a49dc9;
+  margin: 0;
+}
+
+.activiter-slide__image-row {
+  display: flex;
+  gap: 1.25rem;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.activiter-slide__image-box {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.activiter-slide__image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.activiter-slide__mini-card.is-center-dna {
+  border-color: color-mix(in srgb, var(--accent) 60%, rgba(255, 255, 255, 0.2));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, rgba(255, 255, 255, 0.04)), rgba(255, 255, 255, 0.04));
+}
+
+.activiter-slide__mini-card.is-center-dna .activiter-slide__mini-card-title {
+  color: var(--accent, #d946ef);
+}
+
+/* ==========================================================================
+   Slide 2 — ADN de marque (URL, génération, couleurs, logo, typo, style)
+   ========================================================================== */
+.activiter-brand__connector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.activiter-brand__connector-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-opacity: 0.55;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 50%, transparent));
+  transition: stroke 0.4s ease;
+}
+
+.activiter-brand__label,
+.activiter-brand__input-wrapper,
+.activiter-brand__generate-btn,
+.activiter-brand__row {
+  position: relative;
+  z-index: 1;
+}
+
+.activiter-brand__label {
+  align-self: flex-start;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f5f3ff;
+  margin-bottom: 8px;
+}
+
+.activiter-brand__input-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.activiter-brand__input-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #a49dc9;
+  pointer-events: none;
+}
+
+.activiter-brand__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px 12px 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #a49dc9;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  cursor: not-allowed;
+}
+
+.activiter-brand__input::placeholder {
+  color: #7a7397;
+}
+
+.activiter-brand__generate-btn {
+  align-self: stretch;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.activiter-brand__row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.activiter-brand__row:last-child {
+  margin-bottom: 0;
+}
+
+.activiter-brand__card {
+  flex: 1 1 0;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.activiter-brand__card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f5f3ff;
+  margin: 0 0 10px;
+}
+
+.activiter-brand__card-text {
+  font-size: 0.88rem;
+  color: #a49dc9;
+  margin: 0;
+}
+
+.activiter-brand__swatches {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.activiter-brand__swatch {
+  flex: 1 1 0;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.activiter-brand__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+
+.activiter-brand__logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 480px) {
+  .activiter-brand__row {
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================================
+   Slide 3 — Aperçu de rédaction IA (image, statut, description, publication)
+   ========================================================================== */
+.activiter-content__image-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 1rem;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.activiter-content__image {
+  display: block;
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.activiter-content__card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 1.5rem;
+  box-sizing: border-box;
+  padding: 18px 20px;
+  border-radius: 16px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.activiter-content__status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.activiter-content__status-label {
+  flex-shrink: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.activiter-content__status-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: #f5f3ff;
+}
+
+.activiter-content__loading-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.activiter-content__loading-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: activiterDotBounce 1.2s ease-in-out infinite;
+}
+
+.activiter-content__loading-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.activiter-content__loading-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes activiterDotBounce {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+.activiter-content__description {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #a49dc9;
+  margin: 0 0 0.6rem;
+}
+
+.activiter-content__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.activiter-content__link:hover {
+  gap: 0.55rem;
+}
+
+.activiter-content__publish-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.activiter-content__icon-col {
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+}
+
+.activiter-content__icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  color: #a49dc9;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.activiter-content__publish-col {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.activiter-content__publish-col .activiter-slide__button {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .activiter-content__publish-row {
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================================
+   Slide 4 — Enrichissement des données + graphique de performance
+   ========================================================================== */
+.activiter-perf__enrich-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  margin-bottom: 1rem;
+}
+
+.activiter-perf__enrich-text {
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #f5f3ff;
+  max-width: 22ch;
+}
+
+.activiter-perf__enrich-logo-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activiter-perf__enrich-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.activiter-perf__enrich-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  animation: activiterRingSpin 1.8s linear infinite;
+}
+
+.activiter-perf__enrich-ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 3;
+}
+
+.activiter-perf__enrich-ring-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 32 75;
+}
+
+@keyframes activiterRingSpin {
+  from { transform: rotate(-90deg); }
+  to { transform: rotate(270deg); }
+}
+
+.activiter-perf__chart-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 20px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.activiter-perf__chart-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.activiter-perf__chart-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f5f3ff;
+  margin: 0;
+}
+
+.activiter-perf__chart-period {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: #a49dc9;
+}
+
+.activiter-perf__chart {
+  display: block;
+  width: 100%;
+  height: 110px;
+}
+
+/* Glow sur le tracé de la courbe pour qu'elle ressorte du fond sombre */
+.activiter-perf__chart-line {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 65%, transparent));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activiter-perf__enrich-ring {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Animation d'entrée au scroll
+   ========================================================================== */
+
+   @keyframes activiterFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes activiterFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes activiterPanelIn {
+    from {
+      opacity: 0;
+      transform: translateY(32px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* État initial : caché tant que .is-visible n'est pas ajouté sur la section */
+  .activiter-eyebrow,
+  .activiter-title,
+  .activiter-paragraph,
+  .activiter-btn,
+  .activiter-cards-group,
+  .activiter-slide-panel {
+    opacity: 0;
+  }
+  
+  /* Déclenchement — cascade colonne gauche puis panel droit */
+  .activiter-section.is-visible .activiter-eyebrow {
+    animation: activiterFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+  }
+  
+  .activiter-section.is-visible .activiter-title {
+    animation: activiterFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+  }
+  
+  .activiter-section.is-visible .activiter-paragraph {
+    animation: activiterFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+  }
+  
+  .activiter-section.is-visible .activiter-btn {
+    animation: activiterFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+  }
+  
+  .activiter-section.is-visible .activiter-cards-group {
+    animation: activiterFadeIn 0.6s ease 0.45s forwards;
+  }
+  
+  .activiter-section.is-visible .activiter-card {
+    opacity: 0;
+    animation: activiterFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  
+  .activiter-section.is-visible .activiter-card:nth-child(1) { animation-delay: 0.5s; }
+  .activiter-section.is-visible .activiter-card:nth-child(2) { animation-delay: 0.6s; }
+  .activiter-section.is-visible .activiter-card:nth-child(3) { animation-delay: 0.7s; }
+  .activiter-section.is-visible .activiter-card:nth-child(4) { animation-delay: 0.8s; }
+  
+  .activiter-section.is-visible .activiter-slide-panel {
+    animation: activiterPanelIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .activiter-eyebrow,
+    .activiter-title,
+    .activiter-paragraph,
+    .activiter-btn,
+    .activiter-cards-group,
+    .activiter-slide-panel,
+    .activiter-section.is-visible .activiter-card {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .activiter-row {
+    flex-direction: column;
+  }
+
+  .activiter-col-right {
+    position: static;
+    width: 100%;
+  }
+
+  .activiter-slide-panel {
+    min-height: 340px;
+    padding: 32px 26px 32px;
+  }
+
+  .activiter-slide {
+    inset: 32px 26px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .activiter-section {
+    padding: 72px 16px;
+  }
+
+  .activiter-cards-group {
+    padding-left: 16px;
+  }
+
+  .activiter-slide__cards-row {
+    flex-wrap: wrap;
+  }
+
+  .activiter-slide__mini-card {
+    flex: 1 1 calc(50% - 6px);
+  }
+
+  .activiter-slide__image-row {
+    gap: 6px;
+  }
+
+  .activiter-slide__image-box {
+    height: 90px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activiter-card,
+  .activiter-btn,
+  .activiter-rail__dot,
+  .activiter-slide,
+  .activiter-card__progress-bar,
+  .activiter-aurora {
+    transition: none !important;
+    animation: none !important;
+  }
+}

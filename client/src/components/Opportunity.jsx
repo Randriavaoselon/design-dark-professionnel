@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
-import ModalContact from "./ModalContact";
 import '../styles/Opportunity.css';
 import opportunityImage from '../assets/opportunity-image.webp';
+
+const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
 const Opportunity = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,27 +44,25 @@ const Opportunity = () => {
 
           <div className="opportunity-col opportunity-col--content">
             <h2 className="opportunity-col__title">
-              Chaque projet est une opportunité de croissance
+              Jusqu'à 35% de chiffre d'affaires en plus grâce à l'automatisation
             </h2>
             <p className="opportunity-col__text">
-              Que vous lanciez votre activité ou souhaitiez moderniser votre
-              présence en ligne, Avenir-Tech transforme votre vision en un
-              site web performant, avec un accompagnement sur mesure à
-              chaque étape.
+              Service client, création de contenu, gestion des réseaux
+              sociaux, prospection, suivi des leads et administratif :
+              Agentova automatise vos tâches du quotidien. Résultat pour nos
+              utilisateurs : 80% d'emails automatisés, 40% de leads
+              qualifiés et 45% de RDV bookés par mois.
             </p>
             <BoutonComponent
-              text="Commencer"
-              onClick={() => setIsContactOpen(true)}
+              text="Automatiser mon activité"
+              onClick={() =>
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
+              }
               className="btn-oppotunity"
             />
           </div>
         </div>
       </div>
-
-      <ModalContact
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </section>
   );
 };

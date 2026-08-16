@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
-import ModalContact from "./ModalContact"; 
 import '../styles/OverviewTree.css';
 import overviewTreeImage from '../assets/overview-three.webp';
+
+const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
 const OverviewTree = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,16 +36,21 @@ const OverviewTree = () => {
         <div className="overview-tree-row">
           <div className="overview-tree-col overview-tree-col--content">
             <h2 className="overview-tree-col__title">
-              Des résultats mesurables à chaque étape
+              Plus de 3 000 outils connectés, en quelques clics
             </h2>
             <p className="overview-tree-col__text">
-              Chaque projet est suivi avec des indicateurs concrets pour
-              s'assurer que les objectifs fixés se traduisent en résultats
-              réels et durables.
+              Notion, WhatsApp, Slack, CRM, messageries, réseaux sociaux,
+              outils marketing, comptabilité : Agentova s'intègre à votre
+              écosystème existant pour que vos agents passent directement à
+              l'action. Résultat pour Sophie Rousseau : sa communauté
+              LinkedIn se gère presque seule, avec un contenu cohérent, des
+              visuels pros et une programmation automatique.
             </p>
             <BoutonComponent
-              text="Commencer"
-              onClick={() => setIsContactOpen(true)}
+              text="Connecter mes outils"
+              onClick={() =>
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
+              }
               className="btn-overview-three"
             />
           </div>
@@ -59,11 +64,6 @@ const OverviewTree = () => {
           </div>
         </div>
       </div>
-
-      <ModalContact
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </section>
   );
 };

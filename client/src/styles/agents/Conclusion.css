@@ -1,0 +1,116 @@
+.conclusion-section {
+    --conclusion-bg: #0a0e1a;
+    --conclusion-text: #ffffff;
+    --conclusion-text-muted: #a49dc9;
+    --conclusion-accent: linear-gradient(90deg,
+        #7915FF 0%,
+        #6D39FD 25%,
+        #7E82FE 50%,
+        #6E9AFD 75%,
+        #70CFFB 100%);
+  
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--conclusion-bg);
+    padding: clamp(64px, 10vw, 110px) 24px 0;
+  }
+  
+  .conclusion-container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  
+  .conclusion-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* --- Note / avis --- */
+  .conclusion__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.75rem;
+  
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .conclusion__rating-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--conclusion-text);
+  }
+  
+  .conclusion__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  .conclusion__star {
+    width: 15px;
+    height: 15px;
+    display: block;
+  }
+  
+  .conclusion__rating-score {
+    font-size: 0.85rem;
+    color: var(--conclusion-text-muted);
+  }
+  
+  /* --- Titre --- */
+  .conclusion__title {
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--conclusion-text);
+    margin: 0 0 1.1rem;
+  }
+  
+  /* --- Description --- */
+  .conclusion__description {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--conclusion-text-muted);
+    max-width: 52ch;
+    margin: 0 0 2rem;
+  }
+  
+  /* --- Bouton --- */
+  .conclusion__btn {
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 480px) {
+    .conclusion__rating {
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+  
+  .conclusion-section .footer {
+    margin-top: clamp(48px, 8vw, 80px);
+  }
+  
+  @media (max-width: 900px) {
+    .conclusion-section .footer {
+      margin-top: clamp(40px, 7vw, 64px);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .conclusion-section .footer {
+      margin-top: 40px;
+    }
+  }
+  
+  @media (max-width: 380px) {
+    .conclusion-section .footer {
+      margin-top: 32px;
+    }
+  }

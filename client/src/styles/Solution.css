@@ -13,13 +13,17 @@
   font-family: var(--home-font);
 
   width: 100%;
-  background-color: radial-gradient(
+  background-image: url('../assets/background-coop.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-color: radial-gradient(
       circle at center,
       #4f4f50 0%,
       #313342 35%,
       #0E1330 70%,
       #0C102B 100%
-  );
+  ); */
   padding: 80px 0;
 }
 
@@ -40,7 +44,7 @@
   flex-wrap: wrap;
 }
 
-/* ===== Colonne gauche : image ===== */
+/* ===== Colonne gauche : vidéo ===== */
 
 .solution-col-left {
   flex: 1 1 45%;
@@ -49,13 +53,47 @@
   min-width: 280px;
 }
 
-.solution-image {
+.solution-video-wrapper {
+  --video-height: 390px;
+  position: relative;
   width: 100%;
-  max-width: 480px;
-  height: auto;
-  object-fit: cover;
+  max-width: 580px;
+  height: var(--video-height);
+  margin-top: -60px;
   border-radius: 16px;
-  margin-top: -100px;
+  overflow: hidden;
+}
+
+.solution-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.solution-sound-toggle {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #ffffff;
+  background: rgba(10, 12, 24, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.solution-sound-toggle:hover {
+  background: rgba(10, 12, 24, 0.75);
+  transform: scale(1.06);
 }
 
 /* ===== Colonne droite : cards + bouton ===== */
@@ -137,7 +175,7 @@
    Animation au scroll (déclenchée à 50% visible)
 =================================== */
 
-.solution-col-left .solution-image {
+.solution-col-left .solution-video-wrapper {
   opacity: 0;
   transform: translateX(-60px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -157,7 +195,7 @@
   transition-delay: 0.7s;
 }
 
-.solution-section.is-visible .solution-image {
+.solution-section.is-visible .solution-video-wrapper {
   opacity: 1;
   transform: translateX(0);
 }
@@ -179,7 +217,7 @@
     padding: 60px 0;
   }
 
-  .solution-image {
+  .solution-video-wrapper {
     margin-top: 0;
   }
 }
@@ -196,7 +234,8 @@
     width: 100%;
   }
 
-  .solution-image {
+  .solution-video-wrapper {
+    --video-height: 220px;
     max-width: 350px;
     margin-top: 0;
   }

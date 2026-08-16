@@ -1,78 +1,83 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/header/Navbar";
-import Home from "./components/Home";
-import Stats from "./components/Stats";
-import SolutionTitre from "./components/SolutionTitre";
-import Cooptation from "./components/Cooptation";
-import Recrutement from "./components/Recrutement";
-import OnboardingHero from "./components/Onboardinghero";
-import Works from "./components/WorksTitre";
-import WorkDetails from "./components/WorkDetails";
-import Opportunity from "./components/Opportunity";
-import Overview from "./components/Overview";
-import OverviewTwo from "./components/OverviewTwo";
-import OverviewTree from "./components/OverviewTree";
-import WorksTwo from "./components/WorksTwo";
-import SectionNetwork from "./components/SectionNetwork";
-import NetworkGraph from "./components/NetworkGraph";
-import SectionChoose from "./components/SectionChoose";
-import Resume from "./components/Resume";
-import CopyRight from "./components/footer/CopyRight";
-import BoutonUp from "./components/BoutonUp";
-import SidebarMenu from "./components/Sidebarmenu";
+import HomePage from "./pages/HomePage";
+import AgentCharlotte from "./pages/AgentCharlotte";
+import AgentEthan from "./pages/AgentEthan";
+import AgentBenoit from "./pages/AgentBenoit";
+import AgentAmandine from "./pages/AgentAmandine";
+import AgentMargot from "./pages/AgentMargot";
+import AgentElisa from "./pages/AgentElisa";
+
+import avatar1 from "./assets/avatar-1.webp";
+import avatar2 from "./assets/avatar-2.webp";
+import avatar3 from "./assets/avatar-3.webp";
+import avatar4 from "./assets/avatar-4.webp";
+import avatar5 from "./assets/avatar-5.webp";
+import avatar6 from "./assets/avatar-6.webp";
+import avatar7 from "./assets/avatar-7.webp";
+import avatar8 from "./assets/avatar-8.webp";
 
 import "./App.css";
+import AgentArthur from "./pages/AgentArthur";
+import AgentSamy from "./pages/AgentSamy";
 
 function App() {
   // =========== Navbar ==========================
 
-  const logo = { text: "Avenir-Tech", href: "/" };
+  const logo = { text: "Agentova", href: "/" };
 
   const leftMenuItems = [
     { label: "Accueil", href: "/" },
-    { label: "Services", href: "#services" },
-    { label: "À propos", href: "#a-propos" },
+    { label: "Services", href: "/#services" },
+    {
+      label: "Agents",
+      href: "/#agents",
+      megaMenu: [
+        { title: "Charlotte", image: avatar1, href: "/agents/agent-charlotte" },
+        { title: "Ethan", image: avatar2, href: "/agents/agent-ethan" },
+        { title: "Benoit", image: avatar3, href: "/agents/agent-benoit" },
+        { title: "Amandine", image: avatar4, href: "/agents/agent-amandine" },
+        { title: "Margot", image: avatar5, href: "/agents/agent-margot" },
+        { title: "Arthur", image: avatar6, href: "/agents/agent-arthur" },
+        { title: "Elisa", image: avatar7, href: "/agents/agent-elisa" },
+        { title: "Samy", image: avatar8, href: "/agents/agent-samy" },
+      ],
+    },
   ];
 
   const rightMenuItems = [
-    { label: "FAQS", href: "#faqs" },
-    { label: "Contact", href: "#contact" },
+    { label: "FAQS", href: "/#faqs" },
+    { label: "Demo", href: "/#demo" },
   ];
 
   const ctaButton = {
-    label: "Commencer",
-    href: "/commencer",
+    label: "Essayer Agentova",
+    href: "https://agentova.ai?fpr=selon84",
   };
 
   return (
-    <div className="app">
-      <Navbar
-        logo={logo}
-        leftMenuItems={leftMenuItems}
-        rightMenuItems={rightMenuItems}
-        ctaButton={ctaButton}
-      />
+    <BrowserRouter>
+      <div className="app">
+        <Navbar
+          logo={logo}
+          leftMenuItems={leftMenuItems}
+          rightMenuItems={rightMenuItems}
+          ctaButton={ctaButton}
+        />
 
-      <Home />
-      <Stats title="Ce que nous vous offrons" />
-      <SolutionTitre />
-      <Cooptation />
-      <Recrutement />
-      <OnboardingHero />
-      <Works />
-      <WorkDetails />
-      <Opportunity />
-      <Overview />
-      <OverviewTwo />
-      <OverviewTree />
-      <WorksTwo />
-      <SectionNetwork />
-      <NetworkGraph />
-      <SectionChoose />
-      <Resume />
-      <CopyRight />
-      <BoutonUp />
-      <SidebarMenu />
-    </div>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/agents/agent-charlotte" element={<AgentCharlotte />} />
+          <Route path="/agents/agent-ethan" element={<AgentEthan />} />
+          <Route path="/agents/agent-benoit" element={<AgentBenoit />} />
+          <Route path="/agents/agent-amandine" element={<AgentAmandine />} />
+          <Route path="/agents/agent-margot" element={<AgentMargot />} />
+          <Route path="/agents/agent-arthur" element={<AgentArthur />} />
+          <Route path="/agents/agent-elisa" element={<AgentElisa />} /> 
+          <Route path="/agents/agent-samy" element={<AgentSamy />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

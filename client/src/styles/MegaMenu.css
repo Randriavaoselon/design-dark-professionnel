@@ -1,0 +1,384 @@
+/* ==========================================================================
+   MEGA MENU — desktop
+   ========================================================================== */
+
+/*
+  .mega-menu est maintenant un conteneur INVISIBLE et CONTINU : il commence
+  pile à top:100% (aucun espace mort entre le lien et lui) et s'étend
+  jusqu'en dessous du panneau visible. Tout le style visuel (fond, bordure,
+  ombre, flou, coins arrondis) est porté par .mega-menu__body, qui a une
+  marge en haut pour recréer l'espace visuel — sans créer de zone morte
+  au survol entre le lien et le panneau.
+*/
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+  
+    /* Largeur calculée à partir du nombre réel de cartes plutôt que fixe :
+       130px par carte (taille d'origine à 4 colonnes) + gaps + padding du
+       bloc principal + la colonne "featured" (240px) uniquement si présente.
+       Le clamp() garde une largeur minimale lisible et un plafond identique
+       à l'ancien comportement (880px / 92vw). */
+    width: clamp(
+      400px,
+      calc(
+        var(--card-count, 4) * 130px +
+        (var(--card-count, 4) - 1) * 1.15rem +
+        4rem +
+        var(--has-featured, 1) * 240px
+      ),
+      min(880px, 92vw)
+    );
+  
+    transform: translateX(-50%) translateY(-8px);
+    padding: 0;
+  
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform-origin: top center;
+    transition: opacity 0.25s ease, transform 0.25s ease,
+      visibility 0s linear 0.25s;
+    z-index: 50;
+  }
+  
+  .mega-menu--open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity 0.25s ease, transform 0.25s ease,
+      visibility 0s linear 0s;
+  }
+  
+  .mega-menu__body {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr calc(var(--has-featured, 1) * 240px);
+    margin-top: 16px;
+    border-radius: 28px;
+    isolation: isolate;
+    overflow: hidden;
+  
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgba(121, 21, 255, 0.24) 0%, transparent 55%),
+      radial-gradient(110% 130% at 100% 0%, rgba(112, 207, 251, 0.16) 0%, transparent 55%),
+      radial-gradient(140% 160% at 50% 100%, rgba(109, 57, 253, 0.18) 0%, transparent 60%),
+      linear-gradient(160deg, rgba(18, 12, 32, 0.97) 0%, rgba(10, 8, 20, 0.97) 100%);
+  
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(121, 21, 255, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(28px) saturate(180%);
+  }
+  
+  .mega-menu__body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 8%;
+    right: 8%;
+    height: 1.5px;
+    background: var(--navbar-accent);
+    opacity: 0.7;
+    z-index: 1;
+  }
+  
+  .mega-menu__main {
+    padding: 2rem 1.75rem 2.25rem 2.25rem;
+  }
+  
+  /* --- En-tête de section --- */
+  .mega-menu__header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mega-menu__heading {
+    margin: 0 0 0.3rem;
+    color: var(--navbar-text);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  
+    background: var(--navbar-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .mega-menu__subheading {
+    margin: 0;
+    color: var(--navbar-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    max-width: 32ch;
+  }
+  
+  /* --- Grille de cartes ---
+     Le nombre de colonnes suit le nombre réel de cartes (--card-count,
+     défini en inline style dans MegaMenu.jsx) plutôt qu'un nombre fixe de 4 :
+     avec moins de 4 cartes, elles s'étirent pour remplir toute la largeur
+     au lieu de laisser des colonnes vides sur la droite. */
+  .mega-menu__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--card-count, 4), 1fr);
+    gap: 1.15rem;
+  }
+  
+  .mega-menu__card {
+    display: block;
+    text-decoration: none;
+    border-radius: 16px;
+  }
+  
+  .mega-menu__card-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: border-color 0.25s ease, transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  
+  .mega-menu__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .mega-menu__card-title {
+    display: block;
+    margin-top: 0.6rem;
+    color: var(--navbar-text);
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+  }
+  
+  .mega-menu__card-badge {
+    position: absolute;
+    top: 0.55rem;
+    left: 0.55rem;
+    padding: 0.22rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--navbar-accent-ink);
+    background: var(--navbar-accent);
+    box-shadow: 0 4px 10px rgba(121, 21, 255, 0.35);
+  }
+  
+  .mega-menu__card:hover .mega-menu__card-image,
+  .mega-menu__card:focus-visible .mega-menu__card-image {
+    border-color: rgba(121, 21, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(121, 21, 255, 0.22);
+  }
+  
+  .mega-menu__card:hover .mega-menu__card-image img,
+  .mega-menu__card:focus-visible .mega-menu__card-image img {
+    transform: scale(1.08);
+  }
+  
+  /* --- Panneau mis en avant (colonne droite) --- */
+  .mega-menu__featured {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.75rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  
+    background:
+      linear-gradient(200deg, rgba(121, 21, 255, 0.18), rgba(112, 207, 251, 0.08) 70%),
+      rgba(255, 255, 255, 0.02);
+  }
+  
+  .mega-menu__featured-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(112, 207, 251, 0.9);
+    margin-bottom: 0.6rem;
+  }
+  
+  .mega-menu__featured-title {
+    margin: 0 0 0.5rem;
+    color: var(--navbar-text);
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  
+  .mega-menu__featured-text {
+    margin: 0 0 1.4rem;
+    color: var(--navbar-text-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  
+  .mega-menu__featured-cta {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--navbar-text);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.25);
+    width: fit-content;
+    transition: border-color 0.2s ease, gap 0.2s ease;
+  }
+  
+  .mega-menu__featured-cta:hover,
+  .mega-menu__featured-cta:focus-visible {
+    border-color: rgba(112, 207, 251, 0.9);
+    gap: 0.6rem;
+  }
+  
+  .mega-menu__featured-arrow {
+    transition: transform 0.2s ease;
+  }
+  
+  .mega-menu__featured-cta:hover .mega-menu__featured-arrow {
+    transform: translateX(2px);
+  }
+  
+  @media (max-width: 1200px) {
+    .mega-menu {
+      width: min(720px, 92vw);
+    }
+  
+    .mega-menu__body {
+      grid-template-columns: 1fr;
+    }
+  
+    .mega-menu__featured {
+      display: none;
+    }
+  
+    .mega-menu__main {
+      padding: 1.75rem;
+    }
+  
+    .mega-menu__grid {
+      gap: 1rem;
+    }
+  }
+  
+  /* ==========================================================================
+     MEGA MENU — mobile (accordéon dans le panneau plein écran)
+     ========================================================================== */
+     .mega-menu-mobile__toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      gap: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      color: var(--navbar-text);
+      padding: 0;
+      width: 100%;   
+      
+      font-family: inherit;
+      font-size: clamp(1.25rem, 3.5vw, 1.85rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+  
+  .mega-menu-mobile__caret {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.25s ease;
+  }
+  
+  .mega-menu-mobile__toggle.is-open .mega-menu-mobile__caret {
+    transform: rotate(-135deg);
+  }
+  
+  .mega-menu-mobile__submenu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: min(360px, 82vw);
+    margin: 0 auto;
+  
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.35s ease;
+  }
+  
+  .mega-menu-mobile__submenu--open {
+    max-height: 900px;
+    opacity: 1;
+    margin-top: 1rem;
+  }
+  
+  .mega-menu-mobile__card {
+    display: block;
+    text-decoration: none;
+  }
+  
+  .mega-menu-mobile__card-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .mega-menu-mobile__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .mega-menu-mobile__card-badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--navbar-accent-ink);
+    background: var(--navbar-accent);
+  }
+  
+  .mega-menu-mobile__card-title {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--navbar-text);
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+  }

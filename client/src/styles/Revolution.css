@@ -1,12 +1,5 @@
 .revolution-section {
-    --home-font: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --home-text: #1a1a1a;
-    --home-text-muted: rgba(26, 26, 26, 0.68);
-    --home-accent: #d4af37;
-    --home-accent-ink: #ffffff;
-    --home-gap: clamp(2rem, 5vw, 5rem);
-
-    font-family: var(--home-font);
+    font-family: var(--font-body);
     padding: 60px 20px 0;
     margin-top: -70px;
     overflow-x: hidden;
@@ -31,15 +24,17 @@
 }
 
 .revolution-title {
+    font-family: var(--font-display);
     font-size: 2.5rem;
-    color: var(--home-accent-ink);
+    font-weight: 600;
+    color: var(--color-text);
     margin-bottom: 20px;
 }
 
 .revolution-text {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #babac4;
+    color: var(--color-text-muted);
     margin-bottom: 30px;
 }
 
@@ -48,7 +43,7 @@
    ========================================================================== */
 .revolution-col-left {
     position: relative;
-    top: -60px;
+    top: -10px;
     z-index: 130;
     opacity: 0;
     transform: translateX(64px);
@@ -95,11 +90,22 @@
     justify-content: center;
 }
 
+.btn-revolution {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Colonne droite — vidéo (ratio fixe 912 x 1174, format portrait)
+   ========================================================================== */
 .revolution-image-wrapper {
     position: relative;
     width: 100%;
     max-width: 400px;
+    aspect-ratio: 912 / 1174;
     margin: 0 auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
     clip-path: inset(0 0 100% 0);
     transform: translateY(48px);
     opacity: 0;
@@ -122,25 +128,50 @@
     left: 0;
     width: 100%;
     height: 25%;
-    background: linear-gradient(90deg,
-            #1E2038 0%,
-            #25284B 25%,
-            #2E3761 50%,
-            #394A79 75%,
-            #465B93 100%);
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(10, 14, 26, 0.35) 35%,
+            var(--color-surface) 70%,
+            var(--color-bg) 100%);
     pointer-events: none;
     z-index: 1;
 }
 
 .revolution-image {
     width: 100%;
-    max-width: 400px;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    aspect-ratio: 912 / 1174;
+    object-fit: cover;
     display: block;
     margin: 0 auto;
     position: relative;
     z-index: 2;
+}
+
+.revolution-sound-toggle {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--color-text);
+    background: rgba(10, 14, 26, 0.55);
+    border: 1px solid var(--color-border);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.revolution-sound-toggle:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+    transform: scale(1.06);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -159,16 +190,27 @@
 
 /* Responsive : passage en colonne sur mobile */
 @media (max-width: 768px) {
+    .revolution-section {
+        margin-top: 0;
+        padding-top: 40px;
+    }
+
     .revolution-row {
         flex-direction: column;
         text-align: center;
     }
 
-    .revolution-image {
-        max-width: 360px;
+    .revolution-col {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .revolution-image-wrapper {
+        max-width: 340px;
     }
 
     .revolution-col-left {
+        top: 0;
         transform: translateX(32px);
     }
 
@@ -178,7 +220,7 @@
 }
 
 @media (max-width: 480px) {
-    .revolution-image {
-        height: 320px;
+    .revolution-image-wrapper {
+        max-width: 260px;
     }
 }

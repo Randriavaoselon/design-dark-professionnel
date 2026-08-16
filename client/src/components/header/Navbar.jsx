@@ -1,30 +1,47 @@
 import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import ModalContact from "../ModalContact";
+import { MegaMenu, MegaMenuMobile } from "./MegaMenu";
 import "../../styles/Navbar.css";
 
 function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [openMegaMenu, setOpenMegaMenu] = useState(null);
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState(null);
 
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+  const megaCloseTimeout = useRef(null);
 
   const allMenuItems = [...leftMenuItems, ...rightMenuItems];
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setOpenMobileSubmenu(null);
   };
 
   const handleCtaClick = (e) => {
-    e.preventDefault();
     closeMenu();
-    setIsContactOpen(true);
     ctaButton?.onClick?.(e);
   };
 
-  // --- Masque la navbar en scrollant vers le bas, la révèle vers le haut
+  const openMega = (label) => {
+    clearTimeout(megaCloseTimeout.current);
+    setOpenMegaMenu(label);
+  };
+
+  const scheduleCloseMega = () => {
+    // 250ms plutôt que 150ms : laisse le temps à la souris de traverser
+    // l'espace visuel entre le lien et le panneau sans fermer par erreur.
+    megaCloseTimeout.current = setTimeout(() => {
+      setOpenMegaMenu(null);
+    }, 250);
+  };
+
+  useEffect(() => {
+    return () => clearTimeout(megaCloseTimeout.current);
+  }, []);
+
   useEffect(() => {
     lastScrollY.current = window.scrollY;
 
@@ -35,6 +52,7 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
         setIsHidden(false);
       } else if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
         setIsHidden(true);
+        setOpenMegaMenu(null);
       } else {
         setIsHidden(false);
       }
@@ -65,11 +83,11 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
     };
   }, [isMenuOpen]);
 
-  // --- Ferme le menu mobile avec la touche Échap
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         closeMenu();
+        setOpenMegaMenu(null);
       }
     };
     document.addEventListener("keydown", handleKeyDown);
@@ -84,27 +102,97 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
     .filter(Boolean)
     .join(" ");
 
+  const renderDesktopItem = (item) => {
+    const hasMega = Array.isArray(item.megaMenu) && item.megaMenu.length > 0;
+
+    return (
+      <li
+        key={item.label}
+        className={`navbar__item ${hasMega ? "navbar__item--has-mega" : ""}`}
+        onMouseEnter={() => hasMega && openMega(item.label)}
+      >
+        <a
+          href={item.href}
+          className="navbar__link"
+          aria-haspopup={hasMega ? "true" : undefined}
+          aria-expanded={hasMega ? openMegaMenu === item.label : undefined}
+          onFocus={() => hasMega && openMega(item.label)}
+          onClick={(e) => {
+            if (hasMega) {
+              e.preventDefault();
+              setOpenMegaMenu((current) =>
+                current === item.label ? null : item.label
+              );
+            }
+          }}
+        >
+          {item.label}
+          {hasMega && <span className="navbar__caret" aria-hidden="true" />}
+        </a>
+
+        {hasMega && (
+          <MegaMenu
+            items={item.megaMenu}
+            isOpen={openMegaMenu === item.label}
+            onMouseEnter={() => openMega(item.label)}
+            onMouseLeave={scheduleCloseMega}
+            onCardClick={() => setOpenMegaMenu(null)}
+            heading={item.megaMenuHeading}
+            subheading={item.megaMenuSubheading}
+            featured={item.megaMenuFeatured}
+          />
+        )}
+      </li>
+    );
+  };
+
+  const renderMobileItem = (item, index) => {
+    const hasMega = Array.isArray(item.megaMenu) && item.megaMenu.length > 0;
+    const isOpen = openMobileSubmenu === item.label;
+
+    return (
+      <li
+        key={item.label}
+        className="navbar__mobile-item"
+        style={{ "--item-index": index }}
+      >
+        {hasMega ? (
+          <MegaMenuMobile
+            items={item.megaMenu}
+            isOpen={isOpen}
+            label={item.label}
+            onToggle={() => setOpenMobileSubmenu(isOpen ? null : item.label)}
+            onCardClick={closeMenu}
+          />
+        ) : (
+          <a
+            href={item.href}
+            className="navbar__mobile-link"
+            onClick={closeMenu}
+          >
+            {item.label}
+          </a>
+        )}
+      </li>
+    );
+  };
+
   return (
     <section className={navbarClasses}>
       <div className="navbar__container">
-        <div className="navbar__row">
-          {/* Menu gauche */}
+        <div
+          className="navbar__row"
+          onMouseLeave={() => openMegaMenu && scheduleCloseMega()}
+        >
           <nav
             className="navbar__menu navbar__menu--left"
             aria-label="Primary navigation"
           >
             <ul className="navbar__list">
-              {leftMenuItems.map((item) => (
-                <li key={item.label} className="navbar__item">
-                  <a href={item.href} className="navbar__link">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {leftMenuItems.map((item) => renderDesktopItem(item))}
             </ul>
           </nav>
 
-          {/* Logo */}
           <div className="navbar__brand">
             <a
               href={logo.href || "/"}
@@ -123,17 +211,10 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
             </a>
           </div>
 
-          {/* Menu droite */}
           <div className="navbar__menu navbar__menu--right">
             <nav aria-label="Secondary navigation">
               <ul className="navbar__list">
-                {rightMenuItems.map((item) => (
-                  <li key={item.label} className="navbar__item">
-                    <a href={item.href} className="navbar__link">
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
+                {rightMenuItems.map((item) => renderDesktopItem(item))}
               </ul>
             </nav>
 
@@ -148,7 +229,6 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
             )}
           </div>
 
-          {/* Burger */}
           <button
             type="button"
             className="navbar__burger"
@@ -163,7 +243,6 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
         </div>
       </div>
 
-      {/* Menu mobile */}
       <div
         className={`navbar__mobile-panel ${
           isMenuOpen ? "navbar__mobile-panel--open" : ""
@@ -187,23 +266,7 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
 
         <nav aria-label="Mobile navigation">
           <ul className="navbar__mobile-list">
-            {allMenuItems.map((item, index) => (
-              <li
-                key={item.label}
-                className="navbar__mobile-item"
-                style={{
-                  "--item-index": index,
-                }}
-              >
-                <a
-                  href={item.href}
-                  className="navbar__mobile-link"
-                  onClick={closeMenu}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {allMenuItems.map((item, index) => renderMobileItem(item, index))}
           </ul>
         </nav>
 
@@ -218,7 +281,6 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
         )}
       </div>
 
-      {/* Overlay du menu mobile */}
       {isMenuOpen && (
         <div
           className="navbar__backdrop"
@@ -226,15 +288,31 @@ function Navbar({ logo, leftMenuItems, rightMenuItems, ctaButton, className }) {
           aria-hidden="true"
         />
       )}
-
-      {/* Modal de contact */}
-      <ModalContact
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </section>
   );
 }
+
+const megaMenuItemShape = PropTypes.shape({
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  href: PropTypes.string,
+  badge: PropTypes.string,
+});
+
+const menuItemShape = PropTypes.shape({
+  label: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  megaMenu: PropTypes.arrayOf(megaMenuItemShape),
+  megaMenuHeading: PropTypes.string,
+  megaMenuSubheading: PropTypes.string,
+  megaMenuFeatured: PropTypes.shape({
+    eyebrow: PropTypes.string,
+    title: PropTypes.string,
+    text: PropTypes.string,
+    href: PropTypes.string,
+    ctaLabel: PropTypes.string,
+  }),
+});
 
 Navbar.propTypes = {
   logo: PropTypes.shape({
@@ -244,19 +322,8 @@ Navbar.propTypes = {
     href: PropTypes.string,
   }).isRequired,
 
-  leftMenuItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      href: PropTypes.string.isRequired,
-    })
-  ),
-
-  rightMenuItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      href: PropTypes.string.isRequired,
-    })
-  ),
+  leftMenuItems: PropTypes.arrayOf(menuItemShape),
+  rightMenuItems: PropTypes.arrayOf(menuItemShape),
 
   ctaButton: PropTypes.shape({
     label: PropTypes.string.isRequired,

@@ -1,51 +1,48 @@
 import { useState, useEffect, useRef } from 'react';
 import '../styles/SectionSlide.css';
 
+const QuoteIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <path d="M7 8.5C5.3 8.5 4 9.9 4 11.6v1.9c0 1.7 1.3 3 3 3h.5v-3H6.5v-1.9c0-.6.4-1.1 1-1.1h.5V8.5H7z" />
+    <path d="M15 8.5c-1.7 0-3 1.4-3 3.1v1.9c0 1.7 1.3 3 3 3h.5v-3h-1v-1.9c0-.6.4-1.1 1-1.1h.5V8.5H15z" />
+  </svg>
+);
+
 const cards = [
   {
     id: 1,
-    title: 'Livraison rapide',
-    text: 'De la maquette à la mise en ligne, nous livrons des sites web performants dans des délais courts et maîtrisés.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="8" r="3.2" />
-        <path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" strokeLinecap="round" />
-      </svg>
-    )
+    title: 'Client Agentova',
+    text: 'Depuis 4 mois que j\'utilise Agentova, j\'ai gagné considérablement du temps. L\'évolution des agents IA est impressionnante.'
   },
   {
     id: 2,
-    title: 'Sécurité renforcée',
-    text: 'Certificat SSL, hébergement fiable et bonnes pratiques de sécurité intégrés à chaque site que nous livrons.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z" strokeLinejoin="round" />
-        <path d="M9.5 12l1.8 1.8L15 10" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )
+    title: 'Xenesy Project',
+    text: 'L\'évolution des agents IA d\'Agentova est impressionnante, et leur support client est réactif.'
   },
   {
     id: 3,
-    title: 'Suivi de projet transparent',
-    text: 'Suivez l\'avancement de votre site à chaque étape, avec des points de validation clairs jusqu\'à la mise en ligne.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M4 19V9M12 19V5M20 19v-6" strokeLinecap="round" />
-        <path d="M4 19h16" strokeLinecap="round" />
-      </svg>
-    )
+    title: 'Closer University',
+    text: 'Nous avons automatisé notre agence grâce à l\'IA d\'Agentova, et réduit nos coûts tout en maintenant une qualité de service.'
   },
   {
     id: 4,
-    title: 'Support dédié',
-    text: 'Une équipe disponible avant, pendant et après la mise en ligne pour répondre à vos besoins et faire évoluer votre site.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M4 12a8 8 0 1116 0" strokeLinecap="round" />
-        <rect x="2.5" y="12" width="4" height="6" rx="1.2" />
-        <rect x="17.5" y="12" width="4" height="6" rx="1.2" />
-      </svg>
-    )
+    title: 'Makers Coiffeur',
+    text: 'Agentova a remplacé mon community manager, automatisé 80% de mes emails, et m\'a rendu ma famille.'
+  },
+  {
+    id: 5,
+    title: 'Mandyben Formation',
+    text: 'Nous avons augmenté notre chiffre d\'affaires de 35% grâce à Agentova.'
+  },
+  {
+    id: 6,
+    title: 'Bullen Soi',
+    text: 'Agentova m\'a aidée à passer de zéro client à un agenda complet, avec une croissance que je n\'imaginais pas atteindre si rapidement.'
+  },
+  {
+    id: 7,
+    title: 'Celesty',
+    text: 'Nous avons économisé 40 000€ de charges mensuelles tout en doublant notre productivité grâce à Agentova.'
   }
 ];
 
@@ -127,7 +124,9 @@ const SectionSlide = () => {
                 ref={(el) => (cardRefs.current[index] = el)}
                 className="section-slide__card"
               >
-                <div className="section-slide__icon">{card.icon}</div>
+                <div className="section-slide__icon">
+                  <QuoteIcon />
+                </div>
                 <h3 className="section-slide__title">{card.title}</h3>
                 <p className="section-slide__paragraph">{card.text}</p>
               </div>

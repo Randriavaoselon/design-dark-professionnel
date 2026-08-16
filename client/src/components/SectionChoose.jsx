@@ -35,20 +35,20 @@ const SectionChoose = () => {
           <div className="section-choose-row">
             <div className="section-choose__col section-choose__col--left">
               <span className="section-choose__subtitle">
-                Pourquoi nous choisir
+                Ils nous font confiance
               </span>
               <h2 className="section-choose__title">
-                Une agence pensée pour votre réussite
+                Des résultats concrets, racontés par nos clients
               </h2>
             </div>
 
             <div className="section-choose__col section-choose__col--right">
               <p className="section-choose__paragraph">
-                Avenir-Tech conçoit des sites web modernes, rapides et
-                responsives, avec une approche simple, transparente et
-                adaptée à vos réalités. Nous allions technologies actuelles
-                et accompagnement humain pour donner à chaque entreprise les
-                moyens d'avancer dans le monde numérique.
+                Gain de temps, productivité en hausse, coûts réduits :
+                d'agences à formateurs en passant par des indépendants, nos
+                clients partagent les mêmes résultats depuis qu'ils utilisent
+                Agentova. Découvrez leurs témoignages, dans leurs propres
+                mots.
               </p>
             </div>
           </div>

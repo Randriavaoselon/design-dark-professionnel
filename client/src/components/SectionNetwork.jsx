@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
-import ModalContact from "./ModalContact";
 import '../styles/SectionNetwork.css';
+
+const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
 const SectionNetwork = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,30 +30,28 @@ const SectionNetwork = () => {
     <section
       ref={sectionRef}
       className={`section-network-section ${isVisible ? "is-visible" : ""}`}
+      id="agents"
     >
       <div className="section-network-container">
         <div className="section-network-row">
           <h2 className="section-network__title">
-            Parlons de votre projet
+            Une équipe d'agents IA, chacun avec sa personnalité
           </h2>
           <p className="section-network__text">
-            Entreprises, indépendants ou startups : notre équipe vous
-            accompagne pour donner vie à un site web à votre image et
-            construire ensemble une présence en ligne qui fait la
-            différence.
+            Charlotte, créative et inspirante. Arthur, vendeur et
+            convaincant. Margot, empathique et à l'écoute. Chaque agent
+            Agentova a sa propre personnalité et sa façon de parler — vos
+            clients ne remarquent même pas qu'ils échangent avec une IA.
           </p>
           <BoutonComponent
-            text="Commencer"
-            onClick={() => setIsContactOpen(true)}
+            text="Découvrir nos agents"
+            onClick={() =>
+              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
+            }
             className="btn-works-network"
           />
         </div>
       </div>
-
-      <ModalContact
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </section>
   );
 };
