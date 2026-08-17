@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
+import { trackClick } from '../utils/trackClick';
 import '../styles/Opportunity.css';
 import opportunityImage from '../assets/opportunity-image.webp';
 
@@ -55,9 +56,10 @@ const Opportunity = () => {
             </p>
             <BoutonComponent
               text="Automatiser mon activité"
-              onClick={() =>
-                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick("home-opportunity");
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+              }}
               className="btn-oppotunity"
             />
           </div>

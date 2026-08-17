@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import WorksList from "./WorksList";
 import BoutonComponent from "./Bouton";
+import { trackClick } from "../utils/trackClick";
 import "../styles/WorksTwo.css";
 
 const DOWNLOAD_LINK = "https://www.agentova.ai/download";
@@ -45,9 +46,10 @@ const WorksTwo = () => {
 
             <BoutonComponent
               text="Télécharger l'application"
-              onClick={() =>
-                window.open(DOWNLOAD_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick("home-works-two");
+                window.open(DOWNLOAD_LINK, "_blank", "noopener,noreferrer");
+              }}
               className="btn-works-list"
             />
           </div>

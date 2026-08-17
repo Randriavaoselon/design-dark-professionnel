@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
+import { trackClick } from '../utils/trackClick';
 import '../styles/OverviewTwo.css';
 import overviewTwoImage from '../assets/overview-two.webp';
 
@@ -54,9 +55,10 @@ const OverviewTwo = () => {
             </p>
             <BoutonComponent
               text="Personnaliser mon agent IA"
-              onClick={() =>
-                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick("home-overview-two");
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+              }}
               className="btn-overview-two"
             />
           </div>

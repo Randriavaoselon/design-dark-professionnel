@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
+import { trackClick } from '../utils/trackClick';
 import '../styles/Overview.css';
 import overviewImage from '../assets/overview-image.webp';
 
@@ -48,9 +49,10 @@ const Overview = () => {
 
             <BoutonComponent
               text="Booster ma productivité"
-              onClick={() =>
-                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick("home-overview");
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+              }}
               className="btn-overview"
             />
           </div>

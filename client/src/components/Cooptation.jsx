@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import BoutonComponent from "./Bouton";
 import imageCoop from "../assets/photo-solution.gif";
+import { trackClick } from "../utils/trackClick";
 import "../styles/Cooptation.css";
 
 const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
@@ -143,9 +144,10 @@ const Cooptation = () => {
                 <BoutonComponent
                   text="Découvrir Agentova"
                   className="btn-cooptation"
-                  onClick={() =>
-                    window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-                  }
+                  onClick={() => {
+                    trackClick("cooptation");
+                    window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+                  }}
                 />
               </div>
             </div>
