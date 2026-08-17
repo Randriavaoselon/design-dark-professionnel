@@ -1,0 +1,220 @@
+/* ===================================
+   Styles complets du composant Solution
+=================================== */
+
+.solution-section {
+  --home-font: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --home-text: #1a1a1a;
+  --home-text-muted: rgba(26, 26, 26, 0.68);
+  --home-accent: #d4af37;
+  --home-accent-ink: #ffffff;
+  --home-gap: clamp(2rem, 5vw, 5rem);
+
+  font-family: var(--home-font);
+
+  width: 100%;
+  background-color: radial-gradient(
+      circle at center,
+      #4f4f50 0%,
+      #313342 35%,
+      #0E1330 70%,
+      #0C102B 100%
+  );
+  padding: 80px 0;
+}
+
+.solution-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+  margin-top: -100px
+}
+
+.solution-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+/* ===== Colonne gauche : image ===== */
+
+.solution-col-left {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: center;
+  min-width: 280px;
+}
+
+.solution-image {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-top: -100px;
+}
+
+/* ===== Colonne droite : cards + bouton ===== */
+
+.solution-col-right {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 280px;
+}
+
+.solution-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.solution-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid #1d3b5d;
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: 0 4px 16px rgba(47, 91, 159, 0.12);
+
+  border: 1px solid #234052;
+  border-radius: 12px;
+  padding: 28px 20px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.solution-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.solution-card-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #e0e7ff;
+  margin-bottom: 16px;
+}
+
+.solution-card-icon {
+  width: 24px;
+  height: 24px;
+  color: #4f46e5;
+}
+
+.solution-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--home-accent-ink);
+  margin: 0 0 6px 0;
+}
+
+.solution-card-subtitle {
+  font-size: 14px;
+  color: #b5b8c7;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.btn-solution {
+  width: 520px;
+}
+
+/* ===================================
+   Animation au scroll (déclenchée à 50% visible)
+=================================== */
+
+.solution-col-left .solution-image {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.solution-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: var(--card-delay, 0s);
+}
+
+.btn-solution {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease, width 0s;
+  transition-delay: 0.7s;
+}
+
+.solution-section.is-visible .solution-image {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.solution-section.is-visible .solution-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.solution-section.is-visible .btn-solution {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .solution-section {
+    padding: 60px 0;
+  }
+
+  .solution-image {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .solution-row {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .solution-col-left,
+  .solution-col-right {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .solution-image {
+    max-width: 350px;
+    margin-top: 0;
+  }
+
+  .btn-solution {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .solution-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .solution-container {
+    padding: 0 16px;
+  }
+}

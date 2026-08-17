@@ -1,0 +1,61 @@
+import { useEffect, useRef, useState } from "react";
+import BoutonComponent from "./Bouton";
+import ModalContact from "./ModalContact";
+import '../styles/SectionNetwork.css';
+
+const SectionNetwork = () => {
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className={`section-network-section ${isVisible ? "is-visible" : ""}`}
+    >
+      <div className="section-network-container">
+        <div className="section-network-row">
+          <h2 className="section-network__title">
+            Parlons de votre projet
+          </h2>
+          <p className="section-network__text">
+            Entreprises, indépendants ou startups : notre équipe vous
+            accompagne pour donner vie à un site web à votre image et
+            construire ensemble une présence en ligne qui fait la
+            différence.
+          </p>
+          <BoutonComponent
+            text="Commencer"
+            onClick={() => setIsContactOpen(true)}
+            className="btn-works-network"
+          />
+        </div>
+      </div>
+
+      <ModalContact
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
+    </section>
+  );
+};
+
+export default SectionNetwork;

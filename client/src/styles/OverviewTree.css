@@ -1,0 +1,138 @@
+.overview-tree-section {
+  --overview-tree-font: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --overview-tree-bg: #07071f;
+  --overview-tree-title-color: #ffffff;
+  --overview-tree-text-color: rgba(253, 255, 250, 0.75);
+  --overview-tree-gap: clamp(2rem, 5vw, 4rem);
+
+  font-family: var(--overview-tree-font);
+  padding: clamp(48px, 8vw, 80px) 20px;
+  background-color: var(--overview-tree-bg);
+  margin-top: -100px;
+}
+
+.overview-tree-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.overview-tree-row {
+  display: flex;
+  align-items: center;
+  gap: var(--overview-tree-gap);
+}
+
+.overview-tree-col {
+  flex: 1 1 0;
+  width: 100%;
+}
+
+.overview-tree-col--content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-top: -110px;
+}
+
+.overview-tree-col__title {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  color: var(--overview-tree-title-color);
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.overview-tree-col__text {
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  color: var(--overview-tree-text-color);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.btn-overview-three {
+  color: var(--overview-tree-title-color);
+}
+
+.overview-tree-col--image {
+  display: flex;
+  justify-content: center;
+}
+
+.overview-tree-col__image {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* --- Animation au scroll --- */
+.overview-tree-col--content > * {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.overview-tree-col__title {
+  transition-delay: 0.1s;
+}
+
+.overview-tree-col__text {
+  transition-delay: 0.25s;
+}
+
+.btn-overview-three {
+  transition-delay: 0.4s;
+}
+
+.overview-tree-col--image {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition-delay: 0.15s;
+}
+
+.overview-tree-section.is-visible .overview-tree-col--content > *,
+.overview-tree-section.is-visible .overview-tree-col--image {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .overview-tree-section {
+    margin-top: 0;
+    padding-top: 40px;
+  }
+
+  .overview-tree-row {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .overview-tree-col--content {
+    align-items: center;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .overview-tree-col--content > *,
+  .overview-tree-col--image {
+    transform: translateY(30px);
+  }
+
+  .overview-tree-section.is-visible .overview-tree-col--content > *,
+  .overview-tree-section.is-visible .overview-tree-col--image {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overview-tree-col--content > *,
+  .overview-tree-col--image {
+    transition: opacity 0.3s ease;
+    transform: none;
+  }
+}
