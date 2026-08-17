@@ -86,53 +86,22 @@ const ModalContact = ({ isOpen, onClose }) => {
     if (e.target === e.currentTarget && status !== "loading") onClose();
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const validationErrors = validate(formData);
-  //   setErrors(validationErrors);
-  //   if (Object.keys(validationErrors).length > 0) return;
-
-  //   setStatus("loading");
-  //   try {
-  //      const response = await fetch("http://localhost:5000/api/contact", {
-  //     // const response = await fetch(
-  //     //   `${import.meta.env.VITE_API_URL}/api/contact`,
-  //     //   {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify(formData),
-  //       }
-  //     );
-
-  //     if (!response.ok) throw new Error("Request failed");
-
-  //     setStatus("success");
-  //     setTimeout(() => {
-  //       onClose();
-  //     }, 1600);
-  //   } catch (error) {
-  //     console.error("Erreur:", error);
-  //     setStatus("error");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate(formData);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
-  
+
     setStatus("loading");
     try {
-      const apiUrl = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/+$/, "");
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      const response = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-  
+
       if (!response.ok) throw new Error("Request failed");
-  
+
       setStatus("success");
       setTimeout(() => {
         onClose();
@@ -178,19 +147,8 @@ const ModalContact = ({ isOpen, onClose }) => {
         {status === "success" ? (
           <div className="contact-modal__result contact-modal__result--success">
             <div className="contact-modal__result-icon">
-              <svg
-                viewBox="0 0 52 52"
-                width="56"
-                height="56"
-                aria-hidden="true"
-              >
-                <circle
-                  className="contact-modal__check-circle"
-                  cx="26"
-                  cy="26"
-                  r="24"
-                  fill="none"
-                />
+              <svg viewBox="0 0 52 52" width="56" height="56" aria-hidden="true">
+                <circle className="contact-modal__check-circle" cx="26" cy="26" r="24" fill="none" />
                 <path
                   className="contact-modal__check-mark"
                   fill="none"
@@ -218,11 +176,7 @@ const ModalContact = ({ isOpen, onClose }) => {
               onSubmit={handleSubmit}
               noValidate
             >
-              <div
-                className={`contact-modal__field${
-                  formData.name ? " contact-modal__field--filled" : ""
-                }${errors.name ? " contact-modal__field--error" : ""}`}
-              >
+              <div className={`contact-modal__field${formData.name ? " contact-modal__field--filled" : ""}${errors.name ? " contact-modal__field--error" : ""}`}>
                 <input
                   id="cm-name"
                   ref={firstFieldRef}
@@ -242,11 +196,7 @@ const ModalContact = ({ isOpen, onClose }) => {
                 )}
               </div>
 
-              <div
-                className={`contact-modal__field${
-                  formData.email ? " contact-modal__field--filled" : ""
-                }${errors.email ? " contact-modal__field--error" : ""}`}
-              >
+              <div className={`contact-modal__field${formData.email ? " contact-modal__field--filled" : ""}${errors.email ? " contact-modal__field--error" : ""}`}>
                 <input
                   id="cm-email"
                   type="email"
@@ -265,11 +215,7 @@ const ModalContact = ({ isOpen, onClose }) => {
                 )}
               </div>
 
-              <div
-                className={`contact-modal__field contact-modal__field--textarea${
-                  formData.message ? " contact-modal__field--filled" : ""
-                }${errors.message ? " contact-modal__field--error" : ""}`}
-              >
+              <div className={`contact-modal__field contact-modal__field--textarea${formData.message ? " contact-modal__field--filled" : ""}${errors.message ? " contact-modal__field--error" : ""}`}>
                 <textarea
                   id="cm-message"
                   placeholder=" "
@@ -278,9 +224,7 @@ const ModalContact = ({ isOpen, onClose }) => {
                   onChange={handleChange("message")}
                   disabled={status === "loading"}
                   aria-invalid={Boolean(errors.message)}
-                  aria-describedby={
-                    errors.message ? "cm-message-error" : undefined
-                  }
+                  aria-describedby={errors.message ? "cm-message-error" : undefined}
                 />
                 <label htmlFor="cm-message">Message</label>
                 {errors.message && (
@@ -291,10 +235,7 @@ const ModalContact = ({ isOpen, onClose }) => {
               </div>
 
               {status === "error" && (
-                <div
-                  className="contact-modal__banner contact-modal__banner--error"
-                  role="alert"
-                >
+                <div className="contact-modal__banner contact-modal__banner--error" role="alert">
                   Une erreur est survenue. Merci de réessayer.
                 </div>
               )}
@@ -305,9 +246,7 @@ const ModalContact = ({ isOpen, onClose }) => {
                 disabled={status === "loading"}
               >
                 <span className="contact-modal__submit-label">
-                  {status === "loading"
-                    ? "Envoi en cours…"
-                    : "Envoyer le message"}
+                  {status === "loading" ? "Envoi en cours…" : "Envoyer le message"}
                 </span>
                 {status === "loading" && (
                   <span className="contact-modal__spinner" aria-hidden="true" />
