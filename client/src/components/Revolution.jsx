@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import BoutonComponent from "./Bouton";
+import { trackClick } from "../utils/trackClick";
 import revolutionVideo from "../assets/videos/revolution-video.mp4";
 import revolutionPoster from "../assets/videos/revolution-image.webp";
 import "../styles/Revolution.css";
@@ -101,9 +102,10 @@ const Revolution = () => {
             </p>
             <BoutonComponent
               text="Découvrir les agents IA"
-              onClick={() =>
-                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick("home-revolution");
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+              }}
               className="btn-revolution"
             />
           </div>

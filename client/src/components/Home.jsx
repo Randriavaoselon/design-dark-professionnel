@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import BoutonComponent from "./Bouton";
 import ImageSlider from "./ImageSlider";
+import { trackClick } from "../utils/trackClick";
 import "../styles/Home.css";
 
 import heroImage from "../assets/Hero.webp";
@@ -266,9 +267,10 @@ function Home({ className }) {
             >
               <BoutonComponent
                 text="Découvrir les agents IA"
-                onClick={() =>
-                  window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-                }
+                onClick={() => {
+                  trackClick("home-hero");
+                  window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+                }}
               />
             </div>
           </div>

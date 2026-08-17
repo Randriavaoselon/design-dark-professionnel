@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
+import { trackClick } from "../utils/trackClick";
 import {
   PlugZap,
   ShieldCheck,
@@ -157,9 +158,10 @@ export default function Solution() {
 
             <BoutonComponent
               text="Lancer mon essai"
-              onClick={() =>
-                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick("home-solution");
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+              }}
               className="btn-solution"
             />
           </div>

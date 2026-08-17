@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import Simplify from "./Simplify";
+import { trackClick } from "../utils/trackClick";
 import phoneVideo from "../assets/videos/phone-demo.mp4";
 import phonePoster from "../assets/videos/phone-demo.webp";
 import imageAgent1 from "../assets/phone-agent1.webp"
@@ -156,9 +157,10 @@ function OnboardingHero() {
                 <button 
                   type="button" 
                   className="phone__cta" 
-                  onClick={() =>
-                    window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-                  }
+                  onClick={() => {
+                    trackClick("home-onboarding-phone");
+                    window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+                  }}
                 >
                   Essayer gratuitement
                 </button>

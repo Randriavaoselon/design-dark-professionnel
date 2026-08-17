@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import BoutonComponent from './Bouton';
+import { trackClick } from '../utils/trackClick';
 import '../styles/OverviewTree.css';
 import overviewTreeImage from '../assets/overview-three.webp';
 
@@ -48,9 +49,10 @@ const OverviewTree = () => {
             </p>
             <BoutonComponent
               text="Connecter mes outils"
-              onClick={() =>
-                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick("home-overview-tree");
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+              }}
               className="btn-overview-three"
             />
           </div>

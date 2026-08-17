@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
+import { trackClick } from "../utils/trackClick";
 import '../styles/SectionNetwork.css';
 
 const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
@@ -45,9 +46,10 @@ const SectionNetwork = () => {
           </p>
           <BoutonComponent
             text="Découvrir nos agents"
-            onClick={() =>
-              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-            }
+            onClick={() => {
+              trackClick("home-section-network");
+              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+            }}
             className="btn-works-network"
           />
         </div>

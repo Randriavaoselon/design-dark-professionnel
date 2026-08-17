@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import BoutonComponent from "./Bouton";
+import { trackClick } from "../utils/trackClick";
 import "../styles/Recrutement.css";
 import imageRecruit from "../assets/image-recruite.webp";
 
@@ -52,9 +53,10 @@ const Recrutement = () => {
             <div className="recrutement-btn-wrapper">
               <BoutonComponent
                 text="Commencer l'essai gratuit"
-                onClick={() =>
-                  window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-                }
+                onClick={() => {
+                  trackClick("home-recrutement");
+                  window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+                }}
               />
             </div>
           </div>
