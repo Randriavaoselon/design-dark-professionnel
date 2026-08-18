@@ -24,6 +24,8 @@ import avatar6 from "../assets/avatar-6.webp";
 import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
+import { trackClick } from "../utils/trackClick"; 
+
 import margotImage from "../assets/agents/margot-portrait.webp";
 import differenceMargotScreenshot from "../assets/agents/differencie-margot.png";
 
@@ -71,6 +73,7 @@ function AgentMargot() {
   const ctaButton = {
     label: "Essayer Agentova",
     href: "https://agentova.ai?fpr=selon84",
+    onClick: () => trackClick("navbar"),
   };
 
   const margotCards = [
@@ -196,6 +199,7 @@ function AgentMargot() {
           </>
         }
         faqItems={margotFaqItems}
+        trackingSource="agent-margot-question"
       />
       <Conclusion />
       <CopyRight />

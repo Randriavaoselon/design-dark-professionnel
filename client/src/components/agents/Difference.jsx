@@ -1,3 +1,4 @@
+import { trackClick } from "../../utils/trackClick";
 import defaultDifferenceScreenshot from "../../assets/agents/difference-charlotte.webp";
 import "../../styles/agents/Difference.css";
 
@@ -6,6 +7,7 @@ export default function Difference({
   image = defaultDifferenceScreenshot,
   imageAlt = "Aperçu de la plateforme Agentova",
   buttonLabel = "Commencer maintenant",
+  trackingSource = "section-difference",
 }) {
   const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
@@ -23,9 +25,10 @@ export default function Difference({
           <button
             type="button"
             className="difference-btn"
-            onClick={() =>
-              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-            }
+            onClick={() => {
+              trackClick(trackingSource);
+              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+            }}
           >
             {buttonLabel}
             <span className="difference-btn__arrow" aria-hidden="true">

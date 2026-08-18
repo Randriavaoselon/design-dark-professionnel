@@ -24,6 +24,8 @@ import avatar6 from "../assets/avatar-6.webp";
 import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
+import { trackClick } from "../utils/trackClick";
+
 import ethanImage from "../assets/agents/ethan-portrait.webp";
 import differenceEthanScreenshot from "../assets/agents/differencie-ethan.png";
 
@@ -63,6 +65,7 @@ function AgentEthan() {
   const ctaButton = {
     label: "Essayer Agentova",
     href: "https://agentova.ai?fpr=selon84",
+    onClick: () => trackClick("navbar"),
   };
 
   const ethanCards = [
@@ -178,6 +181,7 @@ function AgentEthan() {
           </>
         }
         faqItems={ethanFaqItems}
+        trackingSource="agent-ethan-question"
       />
       <Conclusion />
       <CopyRight />

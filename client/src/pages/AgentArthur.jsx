@@ -27,12 +27,16 @@ import avatar6 from "../assets/avatar-6.webp";
 import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
+import { trackClick } from "../utils/trackClick";
+
 import arthurImage from "../assets/agents/arthur-portrait.webp";
 import differenceArthurScreenshot from "../assets/agents/differencie-arthur.png";
 
 import "../styles/AgentCharlotte.css";
 
 function AgentArthur() {
+  // =========== Navbar ==========================
+
   const logo = { text: "Agentova", href: "/" };
 
   const leftMenuItems = [
@@ -42,28 +46,12 @@ function AgentArthur() {
       label: "Agents",
       href: "/#agents",
       megaMenu: [
-        {
-          title: "Charlotte",
-          image: avatar1,
-          href: "/agents/agent-charlotte",
-        },
+        { title: "Charlotte", image: avatar1, href: "/agents/agent-charlotte" },
         { title: "Ethan", image: avatar2, href: "/agents/agent-ethan" },
         { title: "Benoit", image: avatar3, href: "/agents/agent-benoit" },
-        {
-          title: "Amandine",
-          image: avatar4,
-          href: "/agents/agent-amandine",
-        },
-        {
-          title: "Margot",
-          image: avatar5,
-          href: "/agents/agent-margot",
-        },
-        {
-          title: "Arthur",
-          image: avatar6,
-          href: "/agents/agent-arthur",
-        },
+        { title: "Amandine", image: avatar4, href: "/agents/agent-amandine" },
+        { title: "Margot", image: avatar5, href: "/agents/agent-margot" },
+        { title: "Arthur", image: avatar6, href: "/agents/agent-arthur" },
         { title: "Elisa", image: avatar7, href: "/agents/agent-elisa" },
         { title: "Samy", image: avatar8, href: "/agents/agent-samy" },
       ],
@@ -78,6 +66,7 @@ function AgentArthur() {
   const ctaButton = {
     label: "Essayer Agentova",
     href: "https://agentova.ai?fpr=selon84",
+    onClick: () => trackClick("navbar"),
   };
 
   const arthurCards = [
@@ -136,7 +125,8 @@ function AgentArthur() {
         "Arthur fonctionne sur WhatsApp, Instagram, Facebook Messenger et bientôt LinkedIn via les APIs officielles de Meta. Vous gérez tous vos leads depuis une seule interface, que ce soit pour vos funnels publicitaires, vos posts organiques, vos commentaires ou vos DMs directs. Bonus : Arthur peut aussi démarcher automatiquement les prospects qui interagissent avec vos publications (commentaires, likes, partages) en leur envoyant un message personnalisé.",
     },
     {
-      question: "Y a-t-il un risque de se faire bannir par Instagram, WhatsApp ou Facebook ?",
+      question:
+        "Y a-t-il un risque de se faire bannir par Instagram, WhatsApp ou Facebook ?",
       answer:
         "Aucun risque. Agentova est partenaire officiel Meta Business. Nous utilisons exclusivement les APIs officielles et respectons toutes les directives de Meta pour garantir la sécurité de vos comptes.",
     },
@@ -146,7 +136,8 @@ function AgentArthur() {
         "La mise en place initiale prend entre 15 et 30 minutes. Vous connectez vos comptes, définissez vos critères de qualification et votre style de conversation. Arthur commence à travailler immédiatement et apprend en continu de vos échanges pour s'améliorer.",
     },
     {
-      question: "Mes prospects vont-ils se rendre compte qu'ils parlent à une IA ?",
+      question:
+        "Mes prospects vont-ils se rendre compte qu'ils parlent à une IA ?",
       answer:
         "Non, c'est justement notre expertise. Arthur répond avec des délais variables (pas instantanément comme un robot), fait des pauses naturelles dans la conversation, utilise votre ton et peut même envoyer des messages vocaux pré-enregistrés avec votre vraie voix. Tout est pensé pour que l'échange soit naturel et indiscernable d'une vraie conversation avec vous.",
     },
@@ -161,7 +152,8 @@ function AgentArthur() {
         "Oui, vous avez un contrôle complet. Vous pouvez désactiver Arthur manuellement sur n'importe quelle conversation en 1 clic. Vous pouvez aussi lui donner des instructions pour qu'il se mette en pause automatiquement dans certaines situations (par exemple après un rendez-vous pris, ou si le prospect demande à parler à un humain). Et vous pouvez reprendre la main à tout moment en écrivant directement dans la conversation.",
     },
     {
-      question: "Arthur peut-il automatiser des actions suite à des déclencheurs précis ?",
+      question:
+        "Arthur peut-il automatiser des actions suite à des déclencheurs précis ?",
       answer:
         "Oui. Arthur peut mettre en place des séquences d'actions automatisées suite à des événements précis : envoi automatique d'un e-book quand quelqu'un commente \"GO\", message de bienvenue pour chaque nouvel abonné, relance automatique après 48h sans réponse, notification d'équipe quand un lead est qualifié, et bien plus selon vos besoins. Vous créez ces automatisations simplement, sans code ni complexité technique.",
     },
@@ -212,6 +204,7 @@ function AgentArthur() {
           </>
         }
         faqItems={arthurFaqItems}
+        trackingSource="agent-arthur-question"
       />
       <Conclusion />
       <CopyRight />

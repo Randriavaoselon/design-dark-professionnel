@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { trackClick } from "../../utils/trackClick";
 import "../../styles/agents/Question.css";
 
 const defaultFaqItems = [
@@ -95,6 +96,7 @@ export default function Question({
   ),
   buttonLabel = "Commencer maintenant",
   faqItems = defaultFaqItems,
+  trackingSource = "question",
 }) {
   const [openIndex, setOpenIndex] = useState(0);
 
@@ -116,9 +118,10 @@ export default function Question({
             <button
               type="button"
               className="question-btn"
-              onClick={() =>
-                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick(trackingSource);
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+              }}
             >
               {buttonLabel}
               <span className="question-btn__arrow" aria-hidden="true">

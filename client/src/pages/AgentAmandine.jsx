@@ -24,12 +24,17 @@ import avatar6 from "../assets/avatar-6.webp";
 import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
+import { trackClick } from "../utils/trackClick";
+
 import amandineImage from "../assets/agents/amandine-portrait.webp";
 import differenceAmandineScreenshot from "../assets/agents/differencie-amandine.png";
 
 import "../styles/AgentCharlotte.css";
 
 function AgentAmandine() {
+
+ // =========== Navbar ==========================
+
   const logo = { text: "Agentova", href: "/" };
 
   const leftMenuItems = [
@@ -39,18 +44,10 @@ function AgentAmandine() {
       label: "Agents",
       href: "/#agents",
       megaMenu: [
-        {
-          title: "Charlotte",
-          image: avatar1,
-          href: "/agents/agent-charlotte",
-        },
+        { title: "Charlotte", image: avatar1, href: "/agents/agent-charlotte" },
         { title: "Ethan", image: avatar2, href: "/agents/agent-ethan" },
         { title: "Benoit", image: avatar3, href: "/agents/agent-benoit" },
-        {
-          title: "Amandine",
-          image: avatar4,
-          href: "/agents/agent-amandine",
-        },
+        { title: "Amandine", image: avatar4, href: "/agents/agent-amandine" },
         { title: "Margot", image: avatar5, href: "/agents/agent-margot" },
         { title: "Arthur", image: avatar6, href: "/agents/agent-arthur" },
         { title: "Elisa", image: avatar7, href: "/agents/agent-elisa" },
@@ -67,7 +64,9 @@ function AgentAmandine() {
   const ctaButton = {
     label: "Essayer Agentova",
     href: "https://agentova.ai?fpr=selon84",
+    onClick: () => trackClick("navbar"),
   };
+
 
   const amandineCards = [
     {
@@ -182,6 +181,7 @@ function AgentAmandine() {
           </>
         }
         faqItems={amandineFaqItems}
+        trackingSource="agent-amandine-question"
       />
       <Conclusion />
       <CopyRight />
