@@ -1,5 +1,13 @@
 import nodemailer from "nodemailer";
 
+// =========================
+// Config
+// =========================
+
+// Liste des origines autorisées. Ajoute ici tes domaines de prod,
+// tes URLs de preview Vercel, et localhost pour le dev.
+// Tu peux aussi fournir une liste via la variable d'env ALLOWED_ORIGINS
+// (séparées par des virgules), en plus de celles codées ici.
 const DEFAULT_ALLOWED_ORIGINS = [
   "http://localhost:5173",
 ];
