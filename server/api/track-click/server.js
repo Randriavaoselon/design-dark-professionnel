@@ -1,56 +1,39 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 
-// Charger les variables d'environnement
-dotenv.config({ path: "../../.env" });
-
-// Vérification des variables nécessaires
-const requiredEnv = [
-  "EMAIL_USER",
-  "EMAIL_PASS",
-  "NOTIFY_EMAIL",
+const DEFAULT_ALLOWED_ORIGINS = [
+  "http://localhost:5173",
 ];
+
+const envOrigins = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+const ALLOWED_ORIGINS = [...DEFAULT_ALLOWED_ORIGINS, ...envOrigins];
+
+// Détermine l'origine à autoriser pour CETTE requête précise
+function resolveAllowedOrigin(req) {
+  const requestOrigin = req.headers.origin;
+
+  if (!requestOrigin) return null;
+
+  // Autorise les domaines/sous-domaines Vercel du projet automatiquement
+  // (utile pour les URLs de preview générées à chaque déploiement)
+  const isVercelPreview = /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(requestOrigin);
+
+  if (ALLOWED_ORIGINS.includes(requestOrigin) || isVercelPreview) {
+    return requestOrigin;
+  }
+
+  return null;
+}
+
+// Variables requises pour que l'API fonctionne
+const requiredEnv = ["EMAIL_USER", "EMAIL_PASS", "NOTIFY_EMAIL"];
 
 const missingEnv = requiredEnv.filter(
   (key) => !process.env[key] || process.env[key].trim() === ""
 );
-
-if (missingEnv.length > 0) {
-  console.error(
-    `❌ Variables d'environnement manquantes : ${missingEnv.join(", ")}`
-  );
-  process.exit(1);
-}
-
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-const ALLOWED_ORIGIN =
-  process.env.ALLOWED_ORIGIN || "http://localhost:5173";
-
-// =========================
-// CORS
-// =========================
-
-app.use(
-  cors({
-    origin: ALLOWED_ORIGIN,
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
-
-// =========================
-// Middleware
-// =========================
-
-app.use(express.json());
-
-// =========================
-// Nodemailer / Gmail
-// =========================
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -60,31 +43,52 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Vérifier la connexion SMTP au démarrage
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("❌ Erreur de connexion Gmail :", error.message);
-  } else {
-    console.log("✅ Connexion Gmail/Nodemailer réussie");
+// =========================
+// Handler Vercel (format attendu : export default)
+// =========================
+
+export default async function handler(req, res) {
+  // CORS — origine résolue dynamiquement selon la requête entrante
+  const allowedOrigin = resolveAllowedOrigin(req);
+
+  if (allowedOrigin) {
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   }
-});
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-// =========================
-// Route principale
-// =========================
+  // Préflight CORS
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
 
-app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "Serveur Agentova opérationnel",
-  });
-});
+  // Route racine simple (ping)
+  if (req.method === "GET") {
+    return res.status(200).json({
+      success: true,
+      message: "Serveur Agentova opérationnel",
+    });
+  }
 
-// =========================
-// Tracking CTA
-// =========================
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      success: false,
+      error: "Méthode non autorisée",
+    });
+  }
 
-app.post("/api/track-click", async (req, res) => {
+  // Vérification des variables d'environnement (on ne peut pas faire
+  // process.exit() en serverless : on renvoie une erreur claire à la place)
+  if (missingEnv.length > 0) {
+    console.error(
+      `❌ Variables d'environnement manquantes : ${missingEnv.join(", ")}`
+    );
+    return res.status(500).json({
+      success: false,
+      error: "Configuration serveur incomplète (variables d'environnement manquantes)",
+    });
+  }
+
   try {
     const source = req.body?.source || "inconnu";
 
@@ -100,57 +104,14 @@ app.post("/api/track-click", async (req, res) => {
       from: `"Agentova Tracker" <${process.env.EMAIL_USER}>`,
       to: process.env.NOTIFY_EMAIL,
       subject: `🔔 Nouveau clic CTA — ${source}`,
-
       html: `
-        <div
-          style="
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 24px;
-            color: #1a1a1a;
-            background-color: #ffffff;
-          "
-        >
-
-          <h2 style="margin-bottom: 20px;">
-            🔔 Nouveau clic sur le bouton CTA
-          </h2>
-
-          <div
-            style="
-              padding: 16px;
-              background-color: #f5f5f5;
-              border-radius: 8px;
-            "
-          >
-            <p style="margin: 0 0 10px;">
-              <strong>Page source :</strong>
-              ${source}
-            </p>
-
-            <p
-              style="
-                margin: 0;
-                color: #777;
-                font-size: 13px;
-              "
-            >
-              <strong>Date :</strong>
-              ${currentDate}
-            </p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #1a1a1a; background-color: #ffffff;">
+          <h2 style="margin-bottom: 20px;">🔔 Nouveau clic sur le bouton CTA</h2>
+          <div style="padding: 16px; background-color: #f5f5f5; border-radius: 8px;">
+            <p style="margin: 0 0 10px;"><strong>Page source :</strong> ${source}</p>
+            <p style="margin: 0; color: #777; font-size: 13px;"><strong>Date :</strong> ${currentDate}</p>
           </div>
-
-          <p
-            style="
-              margin-top: 24px;
-              color: #999;
-              font-size: 12px;
-            "
-          >
-            Notification automatique — Agentova Tracker
-          </p>
-
+          <p style="margin-top: 24px; color: #999; font-size: 12px;">Notification automatique — Agentova Tracker</p>
         </div>
       `,
     });
@@ -169,33 +130,4 @@ app.post("/api/track-click", async (req, res) => {
       error: "Erreur lors de l'envoi de la notification",
     });
   }
-});
-
-// =========================
-// Gestion des erreurs JSON
-// =========================
-
-app.use((err, req, res, next) => {
-  console.error("❌ Erreur serveur :", err);
-
-  res.status(500).json({
-    success: false,
-    error: "Erreur serveur",
-  });
-});
-
-// =========================
-// Démarrage du serveur
-// =========================
-
-app.listen(PORT, () => {
-  console.log("");
-  console.log("======================================");
-  console.log("🚀 Agentova Tracker");
-  console.log("======================================");
-  console.log(`🌐 API : http://localhost:${PORT}`);
-  console.log(`📩 Tracking : http://localhost:${PORT}/api/track-click`);
-  console.log(`🔐 CORS : ${ALLOWED_ORIGIN}`);
-  console.log("======================================");
-  console.log("");
-});
+}
