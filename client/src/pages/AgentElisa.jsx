@@ -24,6 +24,8 @@ import avatar6 from "../assets/avatar-6.webp";
 import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
+import { trackClick } from "../utils/trackClick";
+
 import elisaImage from "../assets/agents/elisa-portrait.webp";
 import differenceElisaScreenshot from "../assets/agents/differencie-elisa.png";
 
@@ -75,6 +77,7 @@ function AgentElisa() {
   const ctaButton = {
     label: "Essayer Agentova",
     href: "https://agentova.ai?fpr=selon84",
+    onClick: () => trackClick("navbar"),
   };
 
   const elisaCards = [
@@ -194,6 +197,7 @@ function AgentElisa() {
           </>
         }
         faqItems={elisaFaqItems}
+        trackingSource="agent-elisa-question"
       />
       <Conclusion />
       <CopyRight />

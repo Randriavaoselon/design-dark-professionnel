@@ -24,6 +24,8 @@ import avatar6 from "../assets/avatar-6.webp";
 import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
+import { trackClick } from "../utils/trackClick";
+
 import benoitImage from "../assets/agents/benoit-portrait.webp";
 import differenceBenoitScreenshot from "../assets/agents/differencie-benoit.png";
 
@@ -63,6 +65,7 @@ function AgentBenoit() {
   const ctaButton = {
     label: "Essayer Agentova",
     href: "https://agentova.ai?fpr=selon84",
+    onClick: () => trackClick("navbar"),
   };
 
   const benoitCards = [
@@ -178,6 +181,7 @@ function AgentBenoit() {
           </>
         }
         faqItems={benoitFaqItems}
+        trackingSource="agent-benoit-question"
       />
       <Conclusion />
       <CopyRight />

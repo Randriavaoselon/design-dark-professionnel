@@ -1,6 +1,7 @@
+import { trackClick } from "../../utils/trackClick";
 import "../../styles/agents/AvisTitre.css";
 
-export default function AvisTitre() {
+export default function AvisTitre({ trackingSource = "avis-titre" }) {
   const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
   return (
     <section className="avis-titre-section">
@@ -16,9 +17,10 @@ export default function AvisTitre() {
           <button
             type="button"
             className="avis-titre-btn"
-            onClick={() =>
-              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-            }
+            onClick={() => {
+              trackClick(trackingSource);
+              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+            }}
           >
             Commencer maintenant
             <span className="avis-titre-btn__arrow" aria-hidden="true">

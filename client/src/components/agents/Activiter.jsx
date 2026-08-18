@@ -7,6 +7,7 @@ import {
 } from "react";
 import { Globe } from "lucide-react";
 import { FaInstagram, FaLinkedin, FaYoutube, FaTiktok } from "react-icons/fa6";
+import { trackClick } from "../../utils/trackClick";
 import charlotteImage1 from "../../assets/agents/charlotte-pub1.avif";
 import charlotteImage2 from "../../assets/agents/charlotte-pub2.avif";
 import charlotteImage3 from "../../assets/agents/charlotte-pub3.avif";
@@ -517,9 +518,10 @@ export default function Activiter() {
             <button
               type="button"
               className="activiter-btn"
-              onClick={() =>
-                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-              }
+              onClick={() => {
+                trackClick("section-activiter");
+                window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+              }}
             >
               Commencer maintenant
               <span className="activiter-btn__arrow" aria-hidden="true">

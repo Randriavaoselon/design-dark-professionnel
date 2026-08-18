@@ -24,6 +24,8 @@ import avatar6 from "../assets/avatar-6.webp";
 import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
+import { trackClick } from "../utils/trackClick";
+
 import charlotteImage from "../assets/agents/charlotte-portrait.webp";
 import differenceEthanScreenshot from "../assets/agents/difference-charlotte.webp";
 
@@ -59,6 +61,7 @@ function AgentCharlotte() {
   const ctaButton = {
     label: "Essayer Agentova",
     href: "https://agentova.ai?fpr=selon84",
+    onClick: () => trackClick("navbar"),
   };
 
   const charlotteCards = [

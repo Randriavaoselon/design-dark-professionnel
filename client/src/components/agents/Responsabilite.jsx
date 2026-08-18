@@ -1,8 +1,10 @@
+import { trackClick } from "../../utils/trackClick"; 
 import "../../styles/agents/Responsabilite.css";
 
 function Responsabilite({
   title = "Générez des visuels et publicités qui convertissent jusqu'à 17x plus.",
   buttonLabel = "Commencer maintenant",
+  trackingSource = "section-responsabilite",
 }) {
   const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
@@ -15,9 +17,10 @@ function Responsabilite({
           <button
             type="button"
             className="responsabilite__button"
-            onClick={() =>
-              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-            }
+            onClick={() => {
+              trackClick(trackingSource);
+              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+            }}
           >
             {buttonLabel}
           </button>

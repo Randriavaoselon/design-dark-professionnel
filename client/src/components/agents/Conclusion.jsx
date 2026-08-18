@@ -1,5 +1,6 @@
 import BoutonComponent from "../Bouton";
 import Footer from "../../components/footer/Footer";
+import { trackClick } from "../../utils/trackClick";
 
 import starIcon from "../../assets/agents/star-icon.svg";
 import "../../styles/agents/Conclusion.css";
@@ -7,7 +8,7 @@ import "../../styles/agents/Conclusion.css";
 const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 const STAR_COUNT = 4;
 
-function Conclusion() {
+function Conclusion({ trackingSource = "section-conclusion" }) {
   return (
     <section className="conclusion-section">
       <div className="conclusion-container">
@@ -39,9 +40,10 @@ function Conclusion() {
 
           <BoutonComponent
             text="Commencé maintenant"
-            onClick={() =>
-              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer")
-            }
+            onClick={() => {
+              trackClick(trackingSource);
+              window.open(AGENTOVA_LINK, "_blank", "noopener,noreferrer");
+            }}
             className="conclusion__btn"
           />
         </div>
