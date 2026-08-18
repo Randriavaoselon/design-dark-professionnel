@@ -17,6 +17,8 @@ import avatar6 from "./assets/avatar-6.webp";
 import avatar7 from "./assets/avatar-7.webp";
 import avatar8 from "./assets/avatar-8.webp";
 
+import { trackClick } from "./utils/trackClick";
+
 import "./App.css";
 import AgentArthur from "./pages/AgentArthur";
 import AgentSamy from "./pages/AgentSamy";
@@ -53,6 +55,7 @@ function App() {
   const ctaButton = {
     label: "Essayer Agentova",
     href: "https://agentova.ai?fpr=selon84",
+    onClick: () => trackClick("navbar"),
   };
 
   return (
