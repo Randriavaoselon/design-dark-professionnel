@@ -14,6 +14,7 @@ import Avis from "../components/agents/Avis";
 import Question from "../components/agents/Question";
 import Conclusion from "../components/agents/Conclusion";
 import ActiviterAgent from "../components/agents/ActiviterAgents";
+import SEO from "../components/SEO";
 
 import avatar1 from "../assets/avatar-1.webp";
 import avatar2 from "../assets/avatar-2.webp";
@@ -24,7 +25,7 @@ import avatar6 from "../assets/avatar-6.webp";
 import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
-import { trackClick } from "../utils/trackClick"; 
+import { trackClick } from "../utils/trackClick";
 
 import margotImage from "../assets/agents/margot-portrait.webp";
 import differenceMargotScreenshot from "../assets/agents/differencie-margot.png";
@@ -111,8 +112,7 @@ function AgentMargot() {
     {
       icon: Inbox,
       title: "Une inbox structurée sans effort",
-      description:
-        "Margot trie, classe et organise pour vous.",
+      description: "Margot trie, classe et organise pour vous.",
     },
   ];
 
@@ -161,6 +161,11 @@ function AgentMargot() {
 
   return (
     <div className="agent-page">
+      <SEO
+        title="Agent IA Service Client & Support — Agentova"
+        description="La seule IA avec laquelle vos clients veulent (vraiment) échanger. Margot répond instantanément, résout les demandes et personnalise chaque échange à votre ton de marque. Découvrez Agentova."
+        path="/agents/agent-margot"
+      />
       <Navbar
         logo={logo}
         leftMenuItems={leftMenuItems}

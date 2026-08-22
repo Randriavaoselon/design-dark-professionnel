@@ -1,4 +1,4 @@
-import { Calculator, Scale, TrendingUp  } from "lucide-react";
+import { Calculator, Scale, TrendingUp } from "lucide-react";
 import { FileBarChart, Tag, Receipt, ScrollText } from "lucide-react";
 
 import Navbar from "../components/header/Navbar";
@@ -15,6 +15,7 @@ import Avis from "../components/agents/Avis";
 import Question from "../components/agents/Question";
 import Conclusion from "../components/agents/Conclusion";
 import ActiviterAgent from "../components/agents/ActiviterAgents";
+import SEO from "../components/SEO";
 
 import avatar1 from "../assets/avatar-1.webp";
 import avatar2 from "../assets/avatar-2.webp";
@@ -81,7 +82,6 @@ function AgentSamy() {
     onClick: () => trackClick("navbar"),
   };
 
-
   const samyCards = [
     {
       icon: FileBarChart,
@@ -105,7 +105,7 @@ function AgentSamy() {
     },
   ];
 
-const samyActivities = [
+  const samyActivities = [
     {
       icon: Calculator,
       title: "Comprend enfin tes chiffres",
@@ -161,6 +161,11 @@ const samyActivities = [
 
   return (
     <div className="agent-page">
+      <SEO
+        title="Samy — Agent IA Finance & Comptabilité"
+        description="Samy transforme tes données financières en informations claires : rapports, analyse de comptes et veille comptable automatisés."
+        path="/agents/agent-samy"
+      />
       <Navbar
         logo={logo}
         leftMenuItems={leftMenuItems}

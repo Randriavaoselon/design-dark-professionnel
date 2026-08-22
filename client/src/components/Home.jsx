@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import SEO from "./SEO";
 import BoutonComponent from "./Bouton";
 import ImageSlider from "./ImageSlider";
 import { trackClick } from "../utils/trackClick";
@@ -28,7 +29,16 @@ const HIGHLIGHT_TEXT =
   "Découvrez comment Agentova met à votre disposition des agents IA spécialisés";
 const HIGHLIGHT_LENGTH = HIGHLIGHT_TEXT.length;
 
-const HERO_IMAGES = [heroImage, heroImage2, heroImage3, heroImage4, heroImage5, heroImage6, heroImage7, heroImage8];
+const HERO_IMAGES = [
+  heroImage,
+  heroImage2,
+  heroImage3,
+  heroImage4,
+  heroImage5,
+  heroImage6,
+  heroImage7,
+  heroImage8,
+];
 
 const AGENTOVA_LINK = "https://www.agentova.ai/?fpr=selon84";
 
@@ -45,7 +55,12 @@ function useTitleBlocks() {
       { type: "plainText", text: "Vos agents IA" },
       { type: "badge", key: "badge-pro", src: professionnalBadge },
       { type: "break" },
-      { type: "prefixedWord", key: "word-co", badgeSrc: coBadge, text: "pour automatiser" },
+      {
+        type: "prefixedWord",
+        key: "word-co",
+        badgeSrc: coBadge,
+        text: "pour automatiser",
+      },
       { type: "break" },
       {
         type: "suffixedWord",
@@ -99,11 +114,7 @@ function renderTitleBlock(block, visibleSteps) {
         <span className="home__title-word" key={block.key}>
           {badgeVisible && (
             <span className="home__badge">
-              <img
-                src={block.badgeSrc}
-                alt=""
-                className="home__badge-image"
-              />
+              <img src={block.badgeSrc} alt="" className="home__badge-image" />
             </span>
           )}
           {block.text.slice(0, charsVisible)}
@@ -119,11 +130,7 @@ function renderTitleBlock(block, visibleSteps) {
           {block.text.slice(0, charsVisible)}
           {badgeVisible && (
             <span className="home__badge">
-              <img
-                src={block.badgeSrc}
-                alt=""
-                className="home__badge-image"
-              />
+              <img src={block.badgeSrc} alt="" className="home__badge-image" />
             </span>
           )}
         </span>
@@ -182,7 +189,15 @@ function useSequentialTypewriter({
     }
 
     return () => clearTimeout(timeoutId);
-  }, [phase, titleSteps, paragraphChars, titleTotalSteps, paragraphLength, typingSpeed, pauseDuration]);
+  }, [
+    phase,
+    titleSteps,
+    paragraphChars,
+    titleTotalSteps,
+    paragraphLength,
+    typingSpeed,
+    pauseDuration,
+  ]);
 
   return {
     phase,
@@ -194,11 +209,12 @@ function useSequentialTypewriter({
 
 function Home({ className }) {
   const { blocks, stepsOf, totalSteps } = useTitleBlocks();
-  const { phase, titleSteps, paragraphChars, isDone } =
-    useSequentialTypewriter({
+  const { phase, titleSteps, paragraphChars, isDone } = useSequentialTypewriter(
+    {
       titleTotalSteps: totalSteps,
       paragraphLength: PARAGRAPH_TEXT.length,
-    });
+    }
+  );
 
   const fullTitleText = "Vos agents IA pour automatiser votre entreprise";
 
@@ -224,6 +240,12 @@ function Home({ className }) {
 
   return (
     <section className={`home ${className}`.trim()}>
+      <SEO
+        title="Vos agents IA pour automatiser votre entreprise"
+        description="Agentova met à votre disposition 8 agents IA spécialisés pour le marketing, les ventes, le SEO et la relation client. Automatisez vos tâches et gagnez du temps."
+        path="/"
+        includeOrgSchema
+      />
       <div className="home__container">
         <div className="home__row">
           <div className="home__column home__column--text">
@@ -242,9 +264,7 @@ function Home({ className }) {
                     </span>
                   );
                 })}
-                {phase === PHASES.TITLE && (
-                  <span className="home__cursor" />
-                )}
+                {phase === PHASES.TITLE && <span className="home__cursor" />}
               </span>
             </h1>
 
@@ -253,7 +273,10 @@ function Home({ className }) {
                 <span className="home__paragraph-highlight">
                   {HIGHLIGHT_TEXT.slice(0, highlightVisibleChars)}
                 </span>
-                {PARAGRAPH_TEXT.slice(HIGHLIGHT_LENGTH, HIGHLIGHT_LENGTH + restVisibleChars)}
+                {PARAGRAPH_TEXT.slice(
+                  HIGHLIGHT_LENGTH,
+                  HIGHLIGHT_LENGTH + restVisibleChars
+                )}
                 {phase === PHASES.PARAGRAPH && (
                   <span className="home__cursor home__cursor--paragraph" />
                 )}

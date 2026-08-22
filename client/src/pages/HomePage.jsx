@@ -19,12 +19,18 @@ import CopyRight from "../components/footer/CopyRight";
 import BoutonUp from "../components/BoutonUp";
 import SidebarMenu from "../components/Sidebarmenu";
 import BannierInfo from "../components/Bannierinfo";
+import SEO from "../components/SEO";
 
 import iconeStat from "../assets/icone-stat.svg";
 
 function HomePage() {
   return (
     <>
+      <SEO
+        title="Agentova — Vos Agents IA pour Vendre, Créer et Répondre"
+        description="Agentova propose une équipe d'agents IA prêts à l'emploi : prospection, création de contenu, publicité et service client. Automatisez votre marketing et votre relation client avec des agents qui travaillent pour vous, 24h/24."
+        path="/"
+      />
       <Home />
       <BannierInfo />
       <Stats
