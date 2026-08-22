@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
 const SITE_NAME = "Agentova";
-const DEFAULT_IMAGE = "https://agentova-ai.vercel.app/og-image.jpg"; 
+const DEFAULT_IMAGE = "https://agentova-ai.vercel.app/og-image.png"; 
 const SITE_URL = "https://agentova-ai.vercel.app"; 
 
 function SEO({
