@@ -14,6 +14,7 @@ import Avis from "../components/agents/Avis";
 import Question from "../components/agents/Question";
 import Conclusion from "../components/agents/Conclusion";
 import ActiviterAgent from "../components/agents/ActiviterAgents";
+import SEO from "../components/SEO";
 
 import avatar1 from "../assets/avatar-1.webp";
 import avatar2 from "../assets/avatar-2.webp";
@@ -143,6 +144,11 @@ function AgentEthan() {
 
   return (
     <div className="agent-page">
+      <SEO
+        title="Agent IA Campagnes Publicitaires Rentables — Agentova"
+        description="Ethan est l'agent IA qui pilote vos campagnes publicitaires pour maximiser leur rentabilité : ciblage, optimisation budgétaire et suivi des performances en continu. Découvrez Agentova."
+        path="/agents/agent-ethan"
+      />
       <Navbar
         logo={logo}
         leftMenuItems={leftMenuItems}

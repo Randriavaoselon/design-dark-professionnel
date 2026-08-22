@@ -25,6 +25,7 @@ import avatar7 from "../assets/avatar-7.webp";
 import avatar8 from "../assets/avatar-8.webp";
 
 import { trackClick } from "../utils/trackClick";
+import SEO from "../components/SEO";
 
 import amandineImage from "../assets/agents/amandine-portrait.webp";
 import differenceAmandineScreenshot from "../assets/agents/differencie-amandine.png";
@@ -143,6 +144,11 @@ function AgentAmandine() {
 
   return (
     <div className="agent-page">
+      <SEO
+        title="Amandine — Agent IA Onboarding Client"
+        description="Amandine accueille et guide chaque nouveau client à travers un parcours d'onboarding clair, structure les étapes clés et relance au bon moment. Découvrez l'agent IA onboarding d'Agentova."
+        path="/agents/agent-amandine"
+      />
       <Navbar
         logo={logo}
         leftMenuItems={leftMenuItems}
@@ -159,6 +165,7 @@ function AgentAmandine() {
       <Responsabilite
         title="Onboarder vos clients sans y passer vos journées."
         buttonLabel="Essayer maintenant"
+        trackingSource="agent-amandine-responsabilite"
       />
       <ActiviterAgent activities={amandineActivities} />
       <Difference
@@ -166,10 +173,11 @@ function AgentAmandine() {
         image={differenceAmandineScreenshot}
         imageAlt="Aperçu du tableau de bord onboarding d'Amandine"
         buttonLabel="Essayer maintenant"
+        trackingSource="agent-amandine-difference"
       />
       <Potentiel />
       <PotentielDescription />
-      <AvisTitre />
+      <AvisTitre trackingSource="agent-amandine-avis-titre" />
       <Avis />
       <Question
         title="Les questions fréquentes"
@@ -183,7 +191,7 @@ function AgentAmandine() {
         faqItems={amandineFaqItems}
         trackingSource="agent-amandine-question"
       />
-      <Conclusion />
+      <Conclusion trackingSource="agent-amandine-conclusion" />
       <CopyRight />
       <BoutonUp />
     </div>

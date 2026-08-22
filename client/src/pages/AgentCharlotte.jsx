@@ -14,6 +14,7 @@ import AvisTitre from "../components/agents/AvisTitre";
 import Avis from "../components/agents/Avis";
 import Question from "../components/agents/Question";
 import Conclusion from "../components/agents/Conclusion";
+import SEO from "../components/SEO";
 
 import avatar1 from "../assets/avatar-1.webp";
 import avatar2 from "../assets/avatar-2.webp";
@@ -85,6 +86,11 @@ function AgentCharlotte() {
 
   return (
     <div className="agent-page">
+      <SEO
+        title="Agent IA Création de Contenu & Marketing — Agentova"
+        description="La seule IA avec laquelle vos clients veulent (vraiment) échanger. Charlotte crée du contenu qui ressemble à votre marque et qui engage vraiment. Découvrez l'agent IA créatif d'Agentova."
+        path="/agents/agent-charlotte"
+      />
       <Navbar
         logo={logo}
         leftMenuItems={leftMenuItems}

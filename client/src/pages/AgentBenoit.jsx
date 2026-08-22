@@ -14,6 +14,7 @@ import Avis from "../components/agents/Avis";
 import Question from "../components/agents/Question";
 import Conclusion from "../components/agents/Conclusion";
 import ActiviterAgent from "../components/agents/ActiviterAgents";
+import SEO from "../components/SEO";
 
 import avatar1 from "../assets/avatar-1.webp";
 import avatar2 from "../assets/avatar-2.webp";
@@ -143,6 +144,11 @@ function AgentBenoit() {
 
   return (
     <div className="agent-page">
+      <SEO
+        title="Stratégie Marketing IA pour Gagner des Parts de Marché — Agentova"
+        description="Benoit est l'agent IA d'Agentova qui conçoit votre stratégie marketing : positionnement, plan d'action et recommandations pensés pour votre croissance."
+        path="/agents/agent-benoit"
+      />
       <Navbar
         logo={logo}
         leftMenuItems={leftMenuItems}

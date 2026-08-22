@@ -14,6 +14,7 @@ import Avis from "../components/agents/Avis";
 import Question from "../components/agents/Question";
 import Conclusion from "../components/agents/Conclusion";
 import ActiviterAgent from "../components/agents/ActiviterAgents";
+import SEO from "../components/SEO";
 
 import avatar1 from "../assets/avatar-1.webp";
 import avatar2 from "../assets/avatar-2.webp";
@@ -126,39 +127,44 @@ function AgentElisa() {
 
   const elisaFaqItems = [
     {
-        question: "Que puis-je faire avec Agentova ?",
-        answer:
-          "Tout ce qui prend du temps au quotidien, Agentova peut l'automatiser. En connectant vos outils du quotidien à une équipe de 8 agents IA spécialisés, vous pouvez automatiser le service client, les appels téléphoniques, la création de contenu, la gestion des réseaux sociaux, la prospection, le suivi des leads, l'administratif et bien plus encore.",
-      },
-      {
-        question: "Avec quels outils Agentova peut-il s'intégrer ?",
-        answer:
-          "Agentova s'intègre à plus de 3 000 plateformes externes, notamment les CRM, messageries, réseaux sociaux, outils marketing, solutions de comptabilité et bien d'autres. Votre outil favori fait très certainement partie de notre catalogue d'intégrations.",
-      },
-      {
-        question: "Comment Agentova protège-t-il mes données ?",
-        answer:
-          "La sécurité de vos données est une priorité. Agentova applique des standards de sécurité stricts avec la conformité RGPD, le chiffrement SSL/TLS, des certifications comme SOC 2 Type II, CCPA et ISO 27001, une infrastructure cloud sécurisée et un contrôle d'accès avec authentification multi-facteurs (MFA). Vos données restent votre propriété.",
-      },
-      {
-        question: "Puis-je inviter mon équipe sur Agentova ?",
-        answer:
-          "Absolument. Agentova fonctionne avec un système de workspaces collaboratifs. Chaque membre peut disposer de son propre espace de travail ou rejoindre un workspace existant afin de collaborer en temps réel, automatiser des tâches en équipe, suivre les projets et centraliser les échanges.",
-      },
-      {
-        question: "Puis-je tester Agentova avant de m'engager ?",
-        answer:
-          "Oui. Agentova propose 7 jours d'essai gratuit, sans engagement et sans carte bancaire requise. Vous pouvez découvrir les fonctionnalités de la solution et annuler à tout moment si elle ne correspond pas à vos attentes.",
-      },
-      {
-        question: "Y a-t-il un programme d'affiliation ?",
-        answer:
-          "Oui. Agentova propose un programme d'affiliation avec 30 % de commission récurrente à vie sur chaque client parrainé. Vous pouvez ainsi être rémunéré durablement en recommandant Agentova aux entrepreneurs qui souhaitent automatiser leur activité grâce aux agents IA.",
-      },
+      question: "Que puis-je faire avec Agentova ?",
+      answer:
+        "Tout ce qui prend du temps au quotidien, Agentova peut l'automatiser. En connectant vos outils du quotidien à une équipe de 8 agents IA spécialisés, vous pouvez automatiser le service client, les appels téléphoniques, la création de contenu, la gestion des réseaux sociaux, la prospection, le suivi des leads, l'administratif et bien plus encore.",
+    },
+    {
+      question: "Avec quels outils Agentova peut-il s'intégrer ?",
+      answer:
+        "Agentova s'intègre à plus de 3 000 plateformes externes, notamment les CRM, messageries, réseaux sociaux, outils marketing, solutions de comptabilité et bien d'autres. Votre outil favori fait très certainement partie de notre catalogue d'intégrations.",
+    },
+    {
+      question: "Comment Agentova protège-t-il mes données ?",
+      answer:
+        "La sécurité de vos données est une priorité. Agentova applique des standards de sécurité stricts avec la conformité RGPD, le chiffrement SSL/TLS, des certifications comme SOC 2 Type II, CCPA et ISO 27001, une infrastructure cloud sécurisée et un contrôle d'accès avec authentification multi-facteurs (MFA). Vos données restent votre propriété.",
+    },
+    {
+      question: "Puis-je inviter mon équipe sur Agentova ?",
+      answer:
+        "Absolument. Agentova fonctionne avec un système de workspaces collaboratifs. Chaque membre peut disposer de son propre espace de travail ou rejoindre un workspace existant afin de collaborer en temps réel, automatiser des tâches en équipe, suivre les projets et centraliser les échanges.",
+    },
+    {
+      question: "Puis-je tester Agentova avant de m'engager ?",
+      answer:
+        "Oui. Agentova propose 7 jours d'essai gratuit, sans engagement et sans carte bancaire requise. Vous pouvez découvrir les fonctionnalités de la solution et annuler à tout moment si elle ne correspond pas à vos attentes.",
+    },
+    {
+      question: "Y a-t-il un programme d'affiliation ?",
+      answer:
+        "Oui. Agentova propose un programme d'affiliation avec 30 % de commission récurrente à vie sur chaque client parrainé. Vous pouvez ainsi être rémunéré durablement en recommandant Agentova aux entrepreneurs qui souhaitent automatiser leur activité grâce aux agents IA.",
+    },
   ];
 
   return (
     <div className="agent-page">
+      <SEO
+        title="Elisa — Agent IA Organisation & Décision"
+        description="Elisa structure ton agenda, t'aide à décider et coordonne les autres agents IA d'Agentova pour toi."
+        path="/agents/agent-elisa"
+      />
       <Navbar
         logo={logo}
         leftMenuItems={leftMenuItems}
