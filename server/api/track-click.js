@@ -1,107 +1,82 @@
 import nodemailer from "nodemailer";
 
-// =========================
-// Config
-// =========================
-
-// Liste des origines autorisées. Ajoute ici tes domaines de prod,
-// tes URLs de preview Vercel, et localhost pour le dev.
-// Tu peux aussi fournir une liste via la variable d'env ALLOWED_ORIGINS
-// (séparées par des virgules), en plus de celles codées ici.
-const DEFAULT_ALLOWED_ORIGINS = [
+// --- Origines autorisées (plus de *.vercel.app ouvert à tous) ---
+const ALLOWED_ORIGINS = [
   "http://localhost:5173",
+  "https://agentova-ai.vercel.app",
+  ...(process.env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((o) => o.trim())
+    .filter(Boolean),
 ];
 
-const envOrigins = (process.env.ALLOWED_ORIGINS || "")
-  .split(",")
-  .map((o) => o.trim())
-  .filter(Boolean);
+// --- Liste blanche des sources réellement utilisées par le frontend ---
+const STATIC_SOURCES = new Set([
+  "navbar", "cooptation", "section-activiter", "avis-titre", "question",
+  "section-conclusion", "section-difference", "section-responsabilite",
+  "home-hero", "home-onboarding-phone", "home-opportunity", "home-overview",
+  "home-overview-tree", "home-overview-two", "home-recrutement",
+  "home-revolution", "home-section-network", "home-solution", "home-works-two",
+]);
+const AGENT_SOURCE = /^agent-(charlotte|ethan|benoit|amandine|margot|arthur|elisa|samy)-(question|responsabilite|difference|avis-titre|conclusion)$/;
 
-const ALLOWED_ORIGINS = [...DEFAULT_ALLOWED_ORIGINS, ...envOrigins];
+const isValidSource = (s) =>
+  typeof s === "string" && s.length <= 50 && (STATIC_SOURCES.has(s) || AGENT_SOURCE.test(s));
 
-// Détermine l'origine à autoriser pour CETTE requête précise
-function resolveAllowedOrigin(req) {
-  const requestOrigin = req.headers.origin;
+// --- Limites (en mémoire : garde-fou, pas une garantie en serverless) ---
+const hits = new Map();
+const WINDOW_MS = 60_000;
+const MAX_PER_WINDOW = 10;
+let lastEmailAt = 0;
+const MIN_EMAIL_INTERVAL_MS = 30_000; // 1 email max / 30 s au total
 
-  if (!requestOrigin) return null;
-
-  // Autorise les domaines/sous-domaines Vercel du projet automatiquement
-  // (utile pour les URLs de preview générées à chaque déploiement)
-  const isVercelPreview = /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(requestOrigin);
-
-  if (ALLOWED_ORIGINS.includes(requestOrigin) || isVercelPreview) {
-    return requestOrigin;
-  }
-
-  return null;
+function rateLimited(ip) {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > MAX_PER_WINDOW;
 }
-
-// Variables requises pour que l'API fonctionne
-const requiredEnv = ["EMAIL_USER", "EMAIL_PASS", "NOTIFY_EMAIL"];
-
-const missingEnv = requiredEnv.filter(
-  (key) => !process.env[key] || process.env[key].trim() === ""
-);
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
+  auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
 });
 
-// =========================
-// Handler Vercel (format attendu : export default)
-// =========================
-
 export default async function handler(req, res) {
-  // CORS — origine résolue dynamiquement selon la requête entrante
-  const allowedOrigin = resolveAllowedOrigin(req);
+  const origin = req.headers.origin;
+  const allowedOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : null;
 
   if (allowedOrigin) {
     res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+    res.setHeader("Vary", "Origin");
   }
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Préflight CORS
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
+  if (req.method === "OPTIONS") return res.status(204).end();
+  if (req.method !== "POST") return res.status(405).end();
+  if (!allowedOrigin) return res.status(403).end();
+
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.NOTIFY_EMAIL) {
+    console.error("Variables d'environnement manquantes");
+    return res.status(500).end();
   }
 
-  // Route racine simple (ping)
-  if (req.method === "GET") {
-    return res.status(200).json({
-      success: true,
-      message: "Serveur Agentova opérationnel",
-    });
-  }
+  const ip = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown";
+  if (rateLimited(ip)) return res.status(429).end();
 
-  if (req.method !== "POST") {
-    return res.status(405).json({
-      success: false,
-      error: "Méthode non autorisée",
-    });
-  }
+  // Source invalide : on ignore en silence, aucun email
+  const source = req.body?.source;
+  if (!isValidSource(source)) return res.status(204).end();
 
-  // Vérification des variables d'environnement (on ne peut pas faire
-  // process.exit() en serverless : on renvoie une erreur claire à la place)
-  if (missingEnv.length > 0) {
-    console.error(
-      `❌ Variables d'environnement manquantes : ${missingEnv.join(", ")}`
-    );
-    return res.status(500).json({
-      success: false,
-      error: "Configuration serveur incomplète (variables d'environnement manquantes)",
-    });
-  }
+  // Anti-flood global
+  const now = Date.now();
+  if (now - lastEmailAt < MIN_EMAIL_INTERVAL_MS) return res.status(204).end();
+  lastEmailAt = now;
 
   try {
-    const source = req.body?.source || "inconnu";
-
-    console.log(`📩 Nouveau clic CTA : ${source}`);
-
     const currentDate = new Date().toLocaleString("fr-FR", {
       timeZone: "Indian/Antananarivo",
       dateStyle: "medium",
@@ -112,30 +87,12 @@ export default async function handler(req, res) {
       from: `"Agentova Tracker" <${process.env.EMAIL_USER}>`,
       to: process.env.NOTIFY_EMAIL,
       subject: `🔔 Nouveau clic CTA — ${source}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #1a1a1a; background-color: #ffffff;">
-          <h2 style="margin-bottom: 20px;">🔔 Nouveau clic sur le bouton CTA</h2>
-          <div style="padding: 16px; background-color: #f5f5f5; border-radius: 8px;">
-            <p style="margin: 0 0 10px;"><strong>Page source :</strong> ${source}</p>
-            <p style="margin: 0; color: #777; font-size: 13px;"><strong>Date :</strong> ${currentDate}</p>
-          </div>
-          <p style="margin-top: 24px; color: #999; font-size: 12px;">Notification automatique — Agentova Tracker</p>
-        </div>
-      `,
+      text: `Nouveau clic CTA\nPage source : ${source}\nDate : ${currentDate}`, // texte brut, plus de HTML
     });
 
-    console.log("✅ Email de tracking envoyé");
-
-    return res.status(200).json({
-      success: true,
-      message: "Tracking enregistré avec succès",
-    });
+    return res.status(200).json({ success: true });
   } catch (error) {
-    console.error("❌ Erreur tracking clic :", error);
-
-    return res.status(500).json({
-      success: false,
-      error: "Erreur lors de l'envoi de la notification",
-    });
+    console.error("Erreur tracking clic :", error.message);
+    return res.status(500).end();
   }
 }
